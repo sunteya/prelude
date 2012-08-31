@@ -1,17 +1,18 @@
 #!/usr/bin/env ruby
 
 require "active_support/all"
+IPTABLES = "/sbin/iptables"
+ROOT =  File.expand_path("../../", __FILE__)
 
-@root =  File.expand_path("../../", __FILE__)
-@input_rules = `iptables -L INPUT -n`
+INPUT_RULES = `#{IPTABLES} -L INPUT -n`
 
 def exist?(ip)
-  @input_rules =~ /ACCEPT.*#{ip}\s/
+  INPUT_RULES =~ /ACCEPT.*#{ip}\s/
 end
 
 def drop(ip)
   if exist?(ip)
-    command = "iptables -D INPUT -s #{ip} -j ACCEPT"
+    command = "#{IPTABLES} -D INPUT -s #{ip} -j ACCEPT"
     puts command
     `#{command}`
   end
@@ -19,13 +20,13 @@ end
 
 def accept(ip)
   if !exist?(ip)
-    command = "iptables -I INPUT -s #{ip} -j ACCEPT"
+    command = "#{IPTABLES} -I INPUT -s #{ip} -j ACCEPT"
     puts command
     `#{command}`
   end
 end
 
-Dir["#{@root}/allow/*"].each do |path|
+Dir["#{ROOT}/allow/*"].each do |path|
   ip = File.basename(path)
   next if ip =~ /^\./
   
