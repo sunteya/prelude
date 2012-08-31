@@ -2,7 +2,7 @@
 
 require "active_support/all"
 
-@root =  File.expand_path("../..", __FILE__)
+@root =  File.expand_path("../../", __FILE__)
 @input_rules = `iptables -L INPUT -n`
 
 def exist?(ip)
@@ -10,11 +10,19 @@ def exist?(ip)
 end
 
 def drop(ip)
-  `iptables -D INPUT -s #{ip} -j ACCEPT`
+  if exist?(ip)
+    command = "iptables -D INPUT -s #{ip} -j ACCEPT"
+    puts command
+    `#{command}`
+  end
 end
 
 def accept(ip)
-  `iptables -I INPUT -s #{ip} -j ACCEPT` if !exist?(ip)
+  if !exist?(ip)
+    command = "iptables -I INPUT -s #{ip} -j ACCEPT"
+    puts command
+    `#{command}`
+  end
 end
 
 Dir["#{@root}/allow/*"].each do |path|
