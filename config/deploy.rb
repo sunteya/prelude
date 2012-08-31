@@ -5,4 +5,5 @@ set :repository, ".git"
 
 set :shared, %w{
   allow
+  config/secret.rb
 }

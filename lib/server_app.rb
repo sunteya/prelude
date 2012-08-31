@@ -1,5 +1,6 @@
 require "fileutils"
 require 'sinatra/base'
+require File.expand_path("../../config/secret.rb", __FILE__)
 
 class ServerApp < Sinatra::Base
   set :root, File.expand_path("../../", __FILE__)
@@ -15,7 +16,7 @@ class ServerApp < Sinatra::Base
   end
   
   post '/grant' do
-    if params[:token] == "1337"
+    if SECRET.include?(params[:token])
       FileUtils.touch "#{settings.root}/allow/#{request.ip}"
       redirect to('/success')
     else
