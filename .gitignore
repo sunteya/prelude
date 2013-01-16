@@ -1,2 +1,18 @@
-Gemfile.lock
-allow/
+# Ignore bundler config
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/schema.rb
+config/mongoid.yml
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+/Gemfile.lock
+/doc
+/public/system
+/public/uploads
+.gemtags
+.tags
+config/settings.local.rb
