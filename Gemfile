@@ -9,12 +9,15 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'simple_form'
 gem 'cancan'
+gem 'pry'
 
 group :development do
   gem 'thin'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
+
+
 
 group :assets do
   gem 'compass-rails'

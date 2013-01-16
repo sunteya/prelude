@@ -1,0 +1,11 @@
+<%= simple_form_for(@user) do |f| %>
+	<div>
+		<%= f.input :email, :disabled => true %>
+		<%= f.input :password %>
+		<%= f.input :password_confirmation %>
+	</div>
+
+	<div>
+		<%= f.submit class: "btn btn-primary" %>
+	</div>
+<% end %>

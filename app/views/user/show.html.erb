@@ -1,0 +1,9 @@
+<table>
+	<tr>
+		<td>用户信息</td><td>编辑</td>
+	</tr>
+	<tr>
+		<td><%= @user.email%></td>
+		<td><%= link_to "修改密码", edit_user_path(@user) %></td>
+	</tr>
+</table>
