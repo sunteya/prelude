@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def index
     @users = User.all
   end
@@ -12,7 +12,6 @@ class UserController < ApplicationController
   end
   
   def update
-    binding.pry
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = 'User was successfully updated.'
@@ -21,4 +20,12 @@ class UserController < ApplicationController
       render action: "edit"
     end
   end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = 'User was deleted'
+    redirect_to root_url
+  end
+
 end

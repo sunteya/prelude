@@ -22,7 +22,9 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li class=""><%= link_to '个人信息', user_path(current_user) %></li>
-						<li class=""><%= link_to '用户列表', user_index_path %></li>
+						<% if can? :manage, :all %>
+							<li class=""><%= link_to '用户列表', users_path %></li>
+						<% end %>
 						<li class=""><a href="#">流量查询</a></li>
 					</ul>
 				</li>

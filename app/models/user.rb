@@ -1,5 +1,8 @@
 class User
   include Mongoid::Document
+  
+  ROLES = %w[admin banned]
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -10,6 +13,7 @@ class User
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
   
+  field :role, :type => String, :default => "banned"
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time

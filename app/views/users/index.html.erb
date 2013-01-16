@@ -1,0 +1,22 @@
+<% if can? :manage, User %>
+	<table class="table table-striped">
+		<tr>
+			<td>邮箱</td><td>操作</td>
+		</tr>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.email %></td><td><%= link_to "删除", user_path(user), :method => :delete, :confirm => "确定删除该用户?" %></td>
+		</tr>
+		<% end %>
+	</table>
+<% else %>
+	<table class="table table-striped">
+		<tr>
+			<td>用户信息</td><td>编辑</td>
+		</tr>
+		<tr>
+			<td><%= current_user.email%></td>
+			<td><%= link_to "修改密码", edit_user_path(current_user) %></td>
+		</tr>
+	</table>
+<% end %>
