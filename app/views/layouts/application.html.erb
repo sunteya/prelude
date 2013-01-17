@@ -2,13 +2,16 @@
 <html>
 <head>
 	<title>Prelude</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
-	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<%= stylesheet_link_tag "bootstrap-responsive.min", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
-
+<script type="text/javascript">
+	$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
+</script>
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
@@ -31,7 +34,7 @@
 			</ul>
 
 			<ul class="nav pull-right">
-				<li class=""><a href="#"><%= current_user.email %></a></li> 
+				<li class=""><a href="#"><%= current_user.email.slice(0, current_user.email.index("@")) %></a></li> 
 				<li class=""><%= link_to '注销', destroy_user_session_path, :method => 'delete' %></li>
 			</ul>
 			<% end %>
