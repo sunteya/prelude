@@ -11,9 +11,15 @@ class User
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
+  field :login,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
   
   field :role, :type => String, :default => "banned"
+  field :domain, :type => String, :default => ""
+  field :port, :type => Integer, :default => ""
+  
+  validates :login, :port, :uniqueness => true
+   
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -41,4 +47,11 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+  
+  after_create do |user|
+    user.domain = "#{user.login}.p.wido.me"
+    user.port = rand(10000) + 20000
+    user.save
+  end
+  
 end

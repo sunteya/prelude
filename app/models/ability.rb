@@ -28,7 +28,7 @@ class Ability
     if current_user.role == "admin"
         can :manage, :all
     else
-        can :read, User, id=current_user.id
+        can :manage, User, id = current_user.id
     end
   end
 

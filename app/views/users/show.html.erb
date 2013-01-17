@@ -1,9 +1,23 @@
-<table class="table table-striped">
+<table class="table table-hover">
+<%= simple_form_for(@user) do |f| %>
 	<tr>
-		<td>用户信息</td><td>编辑</td>
+		<td><%= f.input :email, :disabled => true %></td>
 	</tr>
 	<tr>
-		<td><%= @user.email%></td>
-		<td><%= link_to "修改密码", edit_user_path(@user) %></td>
+		<td><%= f.input :domain, :disabled => true %></td>
 	</tr>
+	<tr>
+		<td><%= f.input :port, :disabled => true %></td>
+	</tr>
+	<tr>
+		<td>
+			<div class="form-actions">
+			<% if can? :manage, :all %>
+				<%= f.button :submit, "生成新的序列好并更新", class: "btn btn-primary" %>
+			<% end %>
+				<%= return_link(root_url) %>
+			</div>
+		</td>
+	</tr>
+<% end %>
 </table>

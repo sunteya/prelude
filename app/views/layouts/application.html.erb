@@ -24,7 +24,7 @@
 						用户<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li class=""><%= link_to '个人信息', user_path(current_user) %></li>
+						<li class=""><%= link_to '个人信息', user_path(current_user, :ok_url => request.url) %></li>
 						<% if can? :manage, :all %>
 							<li class=""><%= link_to '用户列表', users_path %></li>
 						<% end %>
