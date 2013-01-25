@@ -1,0 +1,23 @@
+<div class="btn-group">
+	<%= link_to "最近两小时", user_statistics_path(@user, :query_way => "h"), :class => "btn btn-primary" %>
+	<%= link_to "当天", user_statistics_path(@user, :query_way => "h"), :class => "btn btn-primary" %>
+
+	<%= link_to "当月", user_statistics_path(@user, :query_way => "h"), :class => "btn btn-primary" %>
+
+</div>
+
+<table class="table table-striped">
+	<tr>
+		<td>时间</td><td>每日流量</td>
+	</tr>
+	<% @statistics.each do |statistic| %>
+	<tr>
+		<td><%= Time.new(statistic.year,statistic.month,statistic.day).strftime("%Y年%m月%d日") %></td>
+		<td><%= network_size(statistic.size) %></td>
+	</tr>
+	<% end %>
+</table>
+
+<nav>
+	<%= paginate(@statistics, :theme => 'twitter-bootstrap') if !@statistics.empty? %>
+</nav>

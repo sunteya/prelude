@@ -1,7 +1,6 @@
 class User
   include Mongoid::Document
-  
-  ROLES = %w[admin banned]
+  include Mongoid::Search
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -9,17 +8,16 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  has_many :cdrs
+  has_many :statistics
+  has_many :rents
+
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :login,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
-  
-  field :role, :type => String, :default => "banned"
-  field :domain, :type => String, :default => ""
-  field :port, :type => Integer, :default => ""
-  
-  validates :login, :port, :uniqueness => true
-   
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -47,11 +45,26 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  
-  after_create do |user|
-    user.domain = "#{user.login}.p.wido.me"
-    user.port = rand(10000) + 20000
-    user.save
+
+  ## Role of User
+  field :admin, :type => Boolean, :default => false
+  ## proxy domain
+  field :domain, :type => String, :default => ""
+
+  validates :login, :uniqueness => true
+
+  def find_or_initial_hour_statistic(&block)
+    statistic = self.statistics.where(:year => Time.now.year, :month => Time.now.month, :day => Time.now.day, :hour => :Time.now.hour) || self.statistics.new
+    yield(statistic) if block
+    statistic
   end
   
+  def find_the_hour_cdrs
+    cdrs = self.cdrs.where(:created_at => Time.now.hour.beginning_of_hour..Time.now.end_of_hour).all
+  end
+  
+  def the_hour_total_size
+    cdrs = self.find_last_passed_hours_cdrs
+    size = cdrs.map(&:size).inject(&:+)
+  end
 end

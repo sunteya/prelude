@@ -4,6 +4,9 @@
 		<td><%= f.input :email, :disabled => true %></td>
 	</tr>
 	<tr>
+		<td><%= f.input :login, :disabled => true %></td>
+	</tr>
+	<tr>
 		<td><%= f.input :domain, :disabled => true %></td>
 	</tr>
 	<tr>
@@ -12,7 +15,7 @@
 	<tr>
 		<td>
 			<div class="form-actions">
-			<% if can? :manage, :all %>
+			<% if current_user.admin? %>
 				<%= f.button :submit, "生成新的序列好并更新", class: "btn btn-primary" %>
 			<% end %>
 				<%= return_link(root_url) %>

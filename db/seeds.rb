@@ -13,6 +13,6 @@ User.create(
   :login => "msyesyan",
   :password => "11111111",
   :password_confirmation => "11111111",
-  :role =>  "admin",
+  :admin =>  true,
   :domain => "msyesyan.wido.me"
 )
