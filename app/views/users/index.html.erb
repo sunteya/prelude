@@ -1,23 +1,20 @@
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th>Email</th>
-			<th>Transfer Remaining</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @users.each do |user| %>
-		<tr>
-			<td><%= link_to "#{user.login} (#{user.email})", user %></td>
-			<td><%= number_to_human_size(user.transfer_remaining) %></td>
-			<td>
-				<%= link_to "编辑", edit_user_path(user, :ok_url => request.url) %>
-				<%= link_to "删除", user_path(user), :method => :delete, :confirm => "确定删除该用户?" %>
-			</td>
-		</tr>
-		<% end %>
-	</tbody>
+<table class="table table-striped">
+	<tr>
+		<td>用户名</td>
+		<td>剩余流量</td>
+		<td>操作</td>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%= user.login %></td>
+		<td><%= user.allowed_statistics - user.statistics.map(&:size).inject(&:+) %></td>
+		<td>
+			<%= link_to "详细", user_statistics_path(user) %>
+			<%= link_to "更换端口", user_path(user, :ok_url => request.url) %>
+			<%= link_to "删除", user_path(user), :method => :delete, :confirm => "确定删除该用户?" %>
+		</td>
+	</tr>
+	<% end %>
 </table>
 
 <nav>

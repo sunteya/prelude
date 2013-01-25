@@ -21,7 +21,34 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update_attributes(resource_params)
+    ## 在port表中查询未被租出的端口,并随机选择一个分配给用户
+    @user = User.find(params[:id])
+    ## 将user当前的端口好接触bind，并在port中更改状态
+    current_bind = @user.binds.where(:end_at => nil).first
+    current_bind.end_at = Time.now
+    pre_port = current_bind.port
+    
+    binding.pry
+    
+    ports = Port.where(:binded => false)
+    port_index = ports.size == 1 ? 0 : rand(ports.size)
+    
+    bind = Bind.new
+    bind.port = ports[port_index]
+    bind.user = @user
+    bind.start_at = Time.now
+    bind_save = bind.save
+    
+    ## 将分配的port的状态修改为binded=true
+    pre_port = Port.find(pre_port.id)
+    current_port = Port.find(bind.port.id)
+    
+    pre_port.binded = false
+    current_port.binded = true
+
+    port_save = current_port.save && pre_port.save
+    
+    if port_save && bind_save && current_bind.save
       flash[:notice] = 'User was successfully updated.'
       redirect_to_ok_url_or_default users_path
     else

@@ -1,31 +1,28 @@
-<div class="row-fluid">
-	<div class="span5">
-		<div class="widget">
-			<header><h3>基础信息</h3></header>
-			<h4>用户帐号</h4>
-			<p><%= @user.email %></p>
-			
-			<h4>
-				可用流量:
-				<span class="label label-important"><%= number_to_human_size(@user.transfer_remaining) %></span>
-			</h4>
-			
-			<h4>代理地址:</h4>
-			<% if (binding = @user.binding) %>
-				<% if binding.port %>
-					<p><code><%= whitelist_url(format: :pac, subdomain: subdomain(@user.login)) %></code></p>
-					<p><code><%= blacklist_url(format: :pac, subdomain: subdomain(@user.login)) %></code></p>
-					<p>
-						<code><%= "http://#{subdomain(@user.login)}.#{request.host}:" %><%= @user.binding_port if @user.binding_port %></code>
-						<%= link_to "更换端口", [@user, :binding], method: 'post', class: "btn btn-mini", confirm: '确定是否更换端口?' %>
-					</p>
-				<% else %>
-					<p>已经申请, 等待端口分配</p>
-				<% end %>
-			<% else %>
-				<p>
-					<%= link_to "申请端口", [@user, :binding], method: 'post', class: "btn" %>
-				</p>
+<table class="table table-hover">
+	<tr>
+		<th>用户邮箱</th><td><%= @user.email %></td>
+	</tr>
+	<tr>
+		<th>用户名</th></td><td><%= @user.login %></td>
+	</tr>
+	<tr>
+		<th>用户域</th> <td><%= @user.domain %></td>
+	</tr>
+	<tr>
+		<th>用户端口</th>
+		<td>
+			<%= @user.binds.where(:end_at => nil).first.port.number || 无 %>
+		</td>
+	</tr>
+</table>
+
+<table>
+	<%= simple_form_for(@user) do |f| %>
+	<tr>
+		<td>
+			<div class="form-actions">
+			<% if current_user.admin? %>
+				<%= f.button :submit, "随机更换端口号", class: "btn btn-primary" %>
 			<% end %>
 			
 		</div>
