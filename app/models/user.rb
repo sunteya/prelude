@@ -9,10 +9,13 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
 
+<<<<<<< HEAD
   has_many :cdrs
   has_many :statistics
   has_many :binds
 
+=======
+>>>>>>> 优化 subdomain 生成
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :login,              :type => String, :default => ""
@@ -46,7 +49,6 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
-  ## Role of User
   field :admin, :type => Boolean, :default => false
   ## proxy domain
   field :domain, :type => String, :default => ""
@@ -54,6 +56,9 @@ class User
   ## user's all purchased statistics
   field :allowed_statistics, :type => Integer
 
+  has_many :rents
+  # has_many :activity
+  
   validates :login, :uniqueness => true
 
   def find_or_initial_hour_statistic(&block)

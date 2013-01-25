@@ -9,10 +9,17 @@
 User.all.destroy
 
 User.create(
-  :email => "msyesyan@gmail.com",
-  :login => "msyesyan",
-  :password => "11111111",
-  :password_confirmation => "11111111",
-  :admin =>  true,
-  :domain => "msyesyan.wido.me"
+  email: "msyesyan@gmail.com",
+  login: "msyesyan",
+  password: "11111111",
+  password_confirmation: "11111111",
+  admin: true
+)
+
+User.create!(
+  email: "sunteya@gmail.com",
+  login: "sunteya",
+  password: "12345678",
+  password_confirmation: "12345678",
+  admin: true
 )

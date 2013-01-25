@@ -6,11 +6,11 @@
 	</tr>
 	<tr>
 		<th>用户域名</th>
-		<td><%= current_user.domain %></td>
+		<td><%= "#{subdomain(current_user.login)}.#{request.domain}" if request.domain %></td>
 	</tr>
 	<tr>
 		<th>用户端口</th>
-		<td><%= current_user.binds.where(end_at => nil).first.port.number %></td>
+		<td><%#= current_user.portal %></td>
 	</tr>
 	<tr>
 		<th>当月剩余流量</th>

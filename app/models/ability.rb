@@ -25,7 +25,8 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     current_user ||= User.new
-    if current_user.role == "admin"
+    
+    if current_user.admin
         can :manage, :all
     else
         can :manage, User, id = current_user.id
