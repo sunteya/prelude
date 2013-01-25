@@ -11,7 +11,7 @@ class User
 
   has_many :cdrs
   has_many :statistics
-  has_many :rents
+  has_many :binds
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -50,6 +50,9 @@ class User
   field :admin, :type => Boolean, :default => false
   ## proxy domain
   field :domain, :type => String, :default => ""
+  
+  ## user's all purchased statistics
+  field :allowed_statistics, :type => Integer
 
   validates :login, :uniqueness => true
 

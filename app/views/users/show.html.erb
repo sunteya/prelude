@@ -1,7 +1,6 @@
 <table class="table table-hover">
-<%= simple_form_for(@user) do |f| %>
 	<tr>
-		<td><%= f.input :email, :disabled => true %></td>
+		<th>用户邮箱</th><td><%= @user.email %></td>
 	</tr>
 	<tr>
 		<td><%= f.input :login, :disabled => true %></td>
@@ -10,8 +9,14 @@
 		<td><%= f.input :domain, :disabled => true %></td>
 	</tr>
 	<tr>
-		<td><%= f.input :port, :disabled => true %></td>
+		<td>
+			<%= f.input :binds, :collection => @user.rents.where(:end_at => nil) %>
+		</td>
 	</tr>
+</table>
+
+<table>
+	<%= simple_form_for(@user) do |f| %>
 	<tr>
 		<td>
 			<div class="form-actions">
@@ -22,5 +27,5 @@
 			</div>
 		</td>
 	</tr>
-<% end %>
+	<% end %>
 </table>

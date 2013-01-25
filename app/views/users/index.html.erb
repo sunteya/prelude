@@ -7,7 +7,7 @@
 	<% @users.each do |user| %>
 	<tr>
 		<td><%= user.login %></td>
-		<td>剩余流量</td>
+		<td><%= user.allowed_statistics - user.statistics.map(&:size).inject(&:+) %></td>
 		<td>
 			<%= link_to "详细", user_statistics_path(user)%>
 			<%= link_to "更换端口", user_path(user, :ok_url => request.url) %>

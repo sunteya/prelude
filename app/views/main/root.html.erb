@@ -10,10 +10,10 @@
 	</tr>
 	<tr>
 		<th>用户端口</th>
-		<td><%= current_user.portal %></td>
+		<td><%= current_user.binds.where(end_at => nil).first.port.number %></td>
 	</tr>
 	<tr>
-		<th>当月流量</th>
-		<td>100M</td>
+		<th>当月剩余流量</th>
+		<td><%= current_user.allowed_statistics - current_user.statistics.map(&:size).inject(&:+)%></td>
 	</tr>
 </table>
