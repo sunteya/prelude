@@ -8,5 +8,7 @@ class Port
   field :binded, :type => Boolean, :default => false
   
   validates :number, :uniqueness => true
-
+  
+  scope :available, ->() { where(binded: false) }
+  
 end

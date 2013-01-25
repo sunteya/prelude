@@ -1,19 +1,28 @@
-<h1>个人信息</h1>
-<table class="table table-hover">
-	<tr>
-		<th>用户邮箱</th>
-		<td><%= current_user.email %></td>
-	</tr>
-	<tr>
-		<th>用户域名</th>
-		<td><%= "#{subdomain(current_user.login)}.#{request.domain}" if request.domain %></td>
-	</tr>
-	<tr>
-		<th>用户端口</th>
-		<td><%= current_user.binds.where(end_at => nil).first.port.number %></td>
-	</tr>
-	<tr>
-		<th>当月剩余流量</th>
-		<td><%= current_user.allowed_statistics - current_user.statistics.map(&:size).inject(&:+)%></td>
-	</tr>
-</table>
+<div class="row-fluid">
+	<div class="span5">
+		<div class="widget">
+			<header><h3>基础信息</h3></header>
+			<h4>用户帐号</h4>
+			<p><%= current_user.email %></p>
+			
+			<h4>
+				可用流量:
+				<span class="label label-important"><%= number_to_human_size(current_user.transfer_remaining) %></span>
+			</h4>
+			
+			<h4>代理地址:</h4>
+			<p><code><%= whitelist_url(subdomain: subdomain(current_user.login)) %></code></p>
+			<p><code><%= blacklist_url(subdomain: subdomain(current_user.login)) %></code></p>
+			<p>
+				<code><%= "http://#{subdomain(current_user.login)}.#{request.host}:" %><%= current_user.binding_port.number if current_user.binding_port %></code>
+			</p>
+			
+		</div>
+	</div>
+	<div class="span7">
+		<div class="widget">
+			<header><h3>使用情况</h3></header>
+			
+		</div>
+	</div>
+</div>

@@ -8,4 +8,6 @@ class Bind
   field :start_at, :type => Time
   field :end_at, :type => Time
 
+  scope :using, ->() { where(end_at: nil) }
+  
 end

@@ -7,11 +7,7 @@ class User
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :cdrs
-  has_many :statistics
-  has_many :binds
-
+  
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :login,              :type => String, :default => ""
@@ -46,33 +42,33 @@ class User
   # field :authentication_token, :type => String
 
   field :admin, :type => Boolean, :default => false
-<<<<<<< HEAD
-  ## proxy domain
-  field :domain, :type => String, :default => ""
+  field :transfer_remaining, :type => Integer, :default => 0
   
-  ## user's all purchased statistics
-  field :allowed_statistics, :type => Integer
-
-=======
+  has_many :binds
   
-  has_many :rents
-  # has_many :activity
-  
->>>>>>> 6f056ddde18cb791f66d7bbd372217275914f02c
   validates :login, :uniqueness => true
-
-  def find_or_initial_hour_statistic(&block)
-    statistic = self.statistics.where(:year => Time.now.year, :month => Time.now.month, :day => Time.now.day, :hour => :Time.now.hour) || self.statistics.new
-    yield(statistic) if block
-    statistic
+  
+  
+  def binding
+    binds.using.first
   end
   
-  def find_the_hour_cdrs
-    cdrs = self.cdrs.where(:created_at => Time.now.hour.beginning_of_hour..Time.now.end_of_hour).all
+  def binding_port
+    binding.port if binding
   end
   
-  def the_hour_total_size
-    cdrs = self.find_last_passed_hours_cdrs
-    size = cdrs.map(&:size).inject(&:+)
-  end
+  # def find_or_initial_hour_statistic(&block)
+  #   statistic = self.statistics.where(:year => Time.now.year, :month => Time.now.month, :day => Time.now.day, :hour => :Time.now.hour) || self.statistics.new
+  #   yield(statistic) if block
+  #   statistic
+  # end
+  
+  # def find_the_hour_cdrs
+  #   cdrs = self.cdrs.where(:created_at => Time.now.hour.beginning_of_hour..Time.now.end_of_hour).all
+  # end
+  
+  # def the_hour_total_size
+  #   cdrs = self.find_last_passed_hours_cdrs
+  #   size = cdrs.map(&:size).inject(&:+)
+  # end
 end
