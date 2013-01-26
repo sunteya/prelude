@@ -6,20 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.all.destroy
+User.where(email: "msyesyan@gmail.com").create! do |u|
+  u.login = "msyesyan"
+  u.password = u.password_confirmation = "11111111"
+end
 
-User.create(
-  email: "msyesyan@gmail.com",
-  login: "msyesyan",
-  password: "11111111",
-  password_confirmation: "11111111",
-  admin: true
-)
-
-User.create!(
-  email: "sunteya@gmail.com",
-  login: "sunteya",
-  password: "12345678",
-  password_confirmation: "12345678",
-  admin: true
-)
+User.where(email: "sunteya@gmail.com").create! do |u|
+  u.login = "sunteya"
+  u.password = u.password_confirmation = "12345678"
+  u.superadmin = true
+end

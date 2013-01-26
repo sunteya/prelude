@@ -12,9 +12,9 @@
 		<div class="navbar-inner"> 
 	
 		<div class="container">
-			<a class="brand" href="#">Prelude</a>
+			<%= link_to "Prelude", root_path, class: 'brand' %>
 			<% if current_user %>
-				<% if current_user.admin? %>
+				<% if can? :manage, :admin %>
 				<ul class="nav">
 					<li class="">
 						<%= link_to "用户管理", users_path %>
