@@ -11,11 +11,22 @@
 			</h4>
 			
 			<h4>代理地址:</h4>
-			<p><code><%= whitelist_url(subdomain: subdomain(@user.login)) %></code></p>
-			<p><code><%= blacklist_url(subdomain: subdomain(@user.login)) %></code></p>
-			<p>
-				<code><%= "http://#{subdomain(@user.login)}.#{request.host}:" %><%= @user.binding_port.number if @user.binding_port %></code>
-			</p>
+			<% if (binding = @user.binding) %>
+				<% if binding.port %>
+					<p><code><%= whitelist_url(subdomain: subdomain(@user.login)) %></code></p>
+					<p><code><%= blacklist_url(subdomain: subdomain(@user.login)) %></code></p>
+					<p>
+						<code><%= "http://#{subdomain(@user.login)}.#{request.host}:" %><%= @user.binding_port if @user.binding_port %></code>
+						<%= link_to "更换端口", [@user, :binding], method: 'post', class: "btn btn-mini", confirm: '确定是否更换端口?' %>
+					</p>
+				<% else %>
+					<p>已经申请, 等待端口分配</p>
+				<% end %>
+			<% else %>
+				<p>
+					<%= link_to "申请端口", [@user, :binding], method: 'post', class: "btn" %>
+				</p>
+			<% end %>
 			
 		</div>
 	</div>

@@ -2,14 +2,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @users = User.all.page(params[:page]).per(5)
+    @users = User.page(params[:page]).per(5)
   end
   
   def new
   end
   
   def create
-    @user = User.new(params[:user])
     if @user.save
       flash[:notice] = 'User was successfully created.'
       redirect_to_ok_url_or_default users_path
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(resource_params)
       flash[:notice] = 'User was successfully updated.'
       redirect_to_ok_url_or_default users_path
     else
@@ -35,7 +34,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = 'User was deleted'
-    redirect_to root_url
+    redirect_to_ok_url_or_default users_path
   end
-
+  
+protected
+  def resource_params
+    user_params.permit
+  end
+  
+  def user_params
+    UserParams.new(params, current_ability)
+  end
+  helper_method :user_params
+  
 end

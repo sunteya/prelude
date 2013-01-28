@@ -1,12 +1,13 @@
 <div class="form-inputs">
-	<%= f.input :email %>
-	<%= f.input :login %>
-	<%= f.input :password %>
-	<%= f.input :password_confirmation %>
-	<%= f.input :transfer_remaining %>
+	<%= f.input :email if user_params.permit_attributes.include?(:email) %>
+	<%= f.input :login if user_params.permit_attributes.include?(:login) %>
+	<%= f.input :password if user_params.permit_attributes.include?(:password) %>
+	<%= f.input :password_confirmation if user_params.permit_attributes.include?(:password_confirmation) %>
+	<%= f.input :transfer_remaining if user_params.permit_attributes.include?(:transfer_remaining) %>
 </div>
 
 <div class="form-actions">
-	<%= f.button :submit, class: "btn btn-primary"  %>
+	<%= f.button :submit, class: "btn btn-primary" %>
+	<%= ok_url_tag %>
 	<%= cancel_link(root_url) %>
 </div>

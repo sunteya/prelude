@@ -10,6 +10,10 @@ module ApplicationHelper
     return_link(default_url, '取消')
   end
   
+  def ok_url_tag
+    hidden_field "ok_url", params[:ok_url] if params[:ok_url]
+  end
+  
   def subdomain(prefix)
     subdomains = request.subdomains
     subdomains << prefix

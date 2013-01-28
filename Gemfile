@@ -4,18 +4,21 @@ gem 'rails', '3.2.11'
 gem 'mongoid'
 
 gem 'mongoid_search'
-gem 'devise'
+gem 'strong_parameters', '~> 0.1.6'
+gem 'devise', '~> 2.2.2'
+gem 'devise-i18n', '~> 0.5.12'
+
 gem 'cancan'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'simple_form'
 
-gem 'packetfu', '1.1.6'
+gem 'packetfu', '~> 1.1.6'
 gem 'whenever'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.2.0'
   gem 'thin'
   gem 'pry-nav'
 end
