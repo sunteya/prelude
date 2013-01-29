@@ -20,27 +20,4 @@ module ApplicationHelper
     subdomains.join(".")
   end
   
-  def network_size(size)
-    result = ""
-    
-    varietyG = 0
-    if size > 1024*1024*1024
-      varietyG = size / 1024*1024*1024
-      result += "#{varietyG}G"
-    end
-    
-    varietyM = 0
-    if size > 1024*1024
-      varietyM = (size - varietyG*1024*1024*1024) / 1024*1024
-      result += "#{varietyM}M"
-    end
-    
-    varietyK = 0
-    if size > 1024
-      varietyK = (size - varietyG*1024*1024*1024 - varietyM*1024*1024) / 1024
-      result += "#{varietyK}K"
-    end
-    
-    result
-  end
 end

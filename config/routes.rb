@@ -7,7 +7,7 @@ Prelude::Application.routes.draw do
     resource :binding
   end
   
-  get "/whitelist.pac" => "main#whitelist", as: :whitelist
-  get "/blacklist.pac" => "main#blacklist", as: :blacklist
+  get "/whitelist" => "main#whitelist"
+  get "/blacklist" => "main#blacklist"
   
 end

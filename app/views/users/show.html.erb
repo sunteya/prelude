@@ -13,8 +13,8 @@
 			<h4>代理地址:</h4>
 			<% if (binding = @user.binding) %>
 				<% if binding.port %>
-					<p><code><%= whitelist_url(subdomain: subdomain(@user.login)) %></code></p>
-					<p><code><%= blacklist_url(subdomain: subdomain(@user.login)) %></code></p>
+					<p><code><%= whitelist_url(format: :pac, subdomain: subdomain(@user.login)) %></code></p>
+					<p><code><%= blacklist_url(format: :pac, subdomain: subdomain(@user.login)) %></code></p>
 					<p>
 						<code><%= "http://#{subdomain(@user.login)}.#{request.host}:" %><%= @user.binding_port if @user.binding_port %></code>
 						<%= link_to "更换端口", [@user, :binding], method: 'post', class: "btn btn-mini", confirm: '确定是否更换端口?' %>

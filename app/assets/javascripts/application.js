@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 
-$(funciton() {
+$(function() {
 	$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { 
 		e.stopPropagation();
 	});
