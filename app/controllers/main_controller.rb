@@ -1,13 +1,12 @@
 class MainController < ApplicationController
-  before_filter :authenticate_user!, only: :root
+  before_filter :authenticate_user!, only: [ :root, :whitelist ]
   
   def root
     redirect_to current_user
   end
   
   def whitelist
-    login = request.subdomains.first
-    @user = User.where(login: login).first
+    @user = current_user
   end
   
   def grant

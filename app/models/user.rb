@@ -7,7 +7,8 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :token_authenticatable
   
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -40,12 +41,14 @@ class User
   # field :locked_at,       type: Time
 
   ## Token authenticatable
-  # field :authentication_token, type: String
+  field :authentication_token, type: String
 
   field :superadmin, type: Boolean, default: false
   field :transfer_remaining, type: Integer, default: 0
   
   has_many :binds
+  
+  before_save :ensure_authentication_token
   
   scope :available, -> { where(:transfer_remaining.gt => 0) }
   
@@ -57,6 +60,10 @@ class User
   
   def binding_port
     binding.port if binding
+  end
+  
+  def password_required?
+    !persisted? || !password.blank? || !password_confirmation.blank?
   end
   
   # def find_or_initial_hour_statistic(&block)
