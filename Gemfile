@@ -3,29 +3,29 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'mongoid'
 
-gem 'mongoid_search'
+gem 'mongoid_search', '~> 0.3.0'
 gem 'strong_parameters', '~> 0.1.6'
 gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.5.12'
 
-gem 'cancan'
-gem 'kaminari'
-gem 'bootstrap-kaminari-views'
-gem 'simple_form'
+gem 'cancan', '~> 1.6.8'
+gem 'kaminari', '~> 0.14.1'
+gem 'bootstrap-kaminari-views', '~> 0.0.2'
+gem 'simple_form', '~> 2.0.4'
 
 gem 'packetfu', '~> 1.1.6'
 gem 'whenever'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.12.2'
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'thin'
   gem 'pry-nav'
 end
 
 group :assets do
-  gem 'jquery-rails'
-  gem 'bootstrap-sass'
+  gem 'jquery-rails', '~> 2.2.0'
+  gem 'bootstrap-sass', '~> 2.2.2.0'
   
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

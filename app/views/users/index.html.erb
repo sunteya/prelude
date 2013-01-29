@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>Email</th>
+			<th>Port</th>
 			<th>Transfer Remaining</th>
 			<th>Actions</th>
 		</tr>
@@ -10,6 +11,7 @@
 		<% @users.each do |user| %>
 		<tr>
 			<td><%= link_to "#{user.login} (#{user.email})", user %></td>
+			<td><%= user.binding_port %></td>
 			<td><%= number_to_human_size(user.transfer_remaining) %></td>
 			<td>
 				<%= link_to "编辑", edit_user_path(user, :ok_url => request.url) %>

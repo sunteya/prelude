@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: :root
   
   def root
     redirect_to current_user

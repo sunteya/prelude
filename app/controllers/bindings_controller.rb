@@ -4,9 +4,10 @@ class BindingsController < ApplicationController
     binding = @user.binding
     if binding && binding.port
       binding.close
-      binding = @user.binds.create
+      binding = nil
     end
     
+    binding ||= @user.binds.create
     redirect_to @user
   end
 end

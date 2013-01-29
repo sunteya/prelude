@@ -4,6 +4,5 @@ set :application, "prelude"
 set :repository, ".git"
 
 set :shared, %w{
-  allow
-  config/secret.rb
+  config/mongoid.yml
 }

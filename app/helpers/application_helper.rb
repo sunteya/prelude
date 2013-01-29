@@ -16,7 +16,7 @@ module ApplicationHelper
   
   def subdomain(prefix)
     subdomains = request.subdomains
-    subdomains << prefix
+    subdomains.unshift(prefix)
     subdomains.join(".")
   end
   

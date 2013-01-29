@@ -47,6 +47,8 @@ class User
   
   has_many :binds
   
+  scope :available, -> { where(:transfer_remaining.gt => 0) }
+  
   validates :login, uniqueness: true
   
   def binding
