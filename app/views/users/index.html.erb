@@ -10,7 +10,7 @@
 	<tbody>
 		<% @users.each do |user| %>
 		<tr>
-			<td><%= link_to "#{user.login} (#{user.email})", user %></td>
+			<td><%= link_to user.email, user %></td>
 			<td><%= user.binding_port %></td>
 			<td><%= number_to_human_size(user.transfer_remaining) %></td>
 			<td>
