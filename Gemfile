@@ -14,7 +14,7 @@ gem 'bootstrap-kaminari-views', '~> 0.0.2'
 gem 'simple_form', '~> 2.0.4'
 
 gem 'packetfu', '~> 1.1.6'
-gem 'whenever'
+gem 'whenever', '~> 0.8.2'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.12.2'

@@ -4,5 +4,6 @@ set :application, "prelude"
 set :repository, ".git"
 
 set :shared, %w{
+  allow
   config/mongoid.yml
 }
