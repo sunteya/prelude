@@ -6,7 +6,7 @@ require File.join(RAILS_ROOT, "config/environment.rb")
 
 
 SQUID_CONFIG = "/etc/squid3/squid.conf"
-SQUID_BIN = "/usr/sbin/squid3q"
+SQUID_BIN = "/usr/sbin/squid3"
 
 SQUID_LINE_START = "# ====== PRELUDE START ======"
 SQUID_LINE_END = "# ====== PRELUDE END ======"
