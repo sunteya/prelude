@@ -16,3 +16,6 @@ config/mongoid.yml
 .gemtags
 .tags
 config/settings.local.rb
+Gemfile.lock
+allow/
+pcaps/
