@@ -47,7 +47,7 @@ class TcpdumpImporter
       user = bind.user
       traffic = Traffic.new(
         start_at: access_at,
-        period: 'minutely',
+        period: :minutely,
         remote_ip: remote_ip,
         incoming_bytes: data[:incoming],
         outgoing_bytes: data[:outgoing]

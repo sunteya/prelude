@@ -47,6 +47,7 @@ class User
   field :transfer_remaining, type: Integer, default: 0
   
   has_many :binds
+  has_many :traffics
   
   before_save :ensure_authentication_token
   

@@ -1,12 +1,13 @@
 class Traffic
   include Mongoid::Document
   include Mongoid::Search
+  include Mongoid::Symbolize
 
   belongs_to :user
   belongs_to :bind
   
   field :start_at, type: Time
-  field :period, type: String
+  symbolize :period, :in => [:minutely, :hourly, :daily], :scopes => true
   field :remote_ip, type: String
   
   field :incoming_bytes, type: Integer

@@ -41,7 +41,16 @@
 	<div class="span7">
 		<div class="widget">
 			<header><h3>使用情况</h3></header>
-			
+			<table>
+				<% @user.traffics.desc(:start_at).limit(10).each do |traffic| %>
+				<tr>
+					<td><%= traffic.start_at %></td>
+					<td><%= traffic.remote_ip %></td>
+					<td><%= traffic.incoming_bytes %></td>
+					<td><%= traffic.outgoing_bytes %></td>
+				</tr>
+				<% end %>
+			</table>
 		</div>
 	</div>
 </div>

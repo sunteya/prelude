@@ -2,8 +2,8 @@
 	<thead>
 		<tr>
 			<th>Email</th>
-			<th>Port</th>
 			<th>Transfer Remaining</th>
+			<th>Port</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -11,8 +11,8 @@
 		<% @users.each do |user| %>
 		<tr>
 			<td><%= link_to user.email, user %></td>
-			<td><%= user.binding_port %></td>
 			<td><%= number_to_human_size(user.transfer_remaining) %></td>
+			<td><%= user.binding_port %></td>
 			<td>
 				<%= link_to "编辑", edit_user_path(user, :ok_url => request.url) %>
 				<%= link_to "删除", user_path(user), :method => :delete, :confirm => "确定删除该用户?" %>

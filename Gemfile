@@ -7,6 +7,8 @@ gem 'mongoid_search', '~> 0.3.0'
 gem 'strong_parameters', '~> 0.1.6'
 gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.5.12'
+gem 'mongoid_rails_migrations', '~> 1.0.0'
+gem "symbolize", "~> 4.2.0", :require => 'symbolize/mongoid'
 
 gem 'cancan', '~> 1.6.8'
 gem 'kaminari', '~> 0.14.1'
