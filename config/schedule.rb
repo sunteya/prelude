@@ -18,7 +18,7 @@
 # end
 
 every 1.minute do
-  runner "Bind.assign_ports"
+  # runner "Bind.assign_ports"
 end
 
 # Learn more: http://github.com/javan/whenever

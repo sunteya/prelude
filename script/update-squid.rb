@@ -4,6 +4,7 @@ SCRIPT_PATH = File.absolute_path $0
 RAILS_ROOT = File.expand_path "../..", SCRIPT_PATH
 require File.join(RAILS_ROOT, "config/environment.rb")
 
+Bind.assign_ports
 
 SQUID_CONFIG = "/etc/squid3/squid.conf"
 SQUID_BIN = "/usr/sbin/squid3"
