@@ -37,7 +37,7 @@ class TcpdumpImporter
   def record_traffics
     @pcap_traffics.each_pair do |minute_key, data|
       access_at, port, remote_ip = *minute_key
-      bind = Bind.where(:port => port, :start_at.lte => t).any_of({ :end_at => nil }, { :end_at.gt => t}).first
+      bind = Bind.where(:port => port, :start_at.lte => access_at).any_of({ :end_at => nil }, { :end_at.gt => access_at}).first
       if bind.nil?
         Rails.logger.info "TCPDUMP MISS: #{minute_key} => #{data}"
         next
@@ -81,6 +81,8 @@ class TcpdumpImporter
       Rails.logger.warn "TCPDUMP UNKNOW: #{line}"
       return nil
     end
+    
+    return nil if size == 0 # skip
     
     tcpdump = TcpdumpRecord.create!(
       access_at: acc_at,
