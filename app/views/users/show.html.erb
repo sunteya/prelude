@@ -64,16 +64,16 @@ $(function() {
 		<div class="widget">
 			<header><h3>使用情况</h3></header>
 			<div id="chart"></div>
-<!-- 			<table class="table table-hover table-bordered">
-				<% @user.traffics.desc(:start_at).limit(10).each do |traffic| %>
+			<table class="table table-hover table-bordered">
+				<% @user.traffics.desc(:start_at).limit(100).each do |traffic| %>
 				<tr>
-					<td><%= distance_of_time_in_words_to_now(traffic.start_at) %> ago</td>
+					<td><%= I18n.l(traffic.start_at, format: :hhmm) %></td>
 					<td><code><%= traffic.remote_ip %></code></td>
 					<td><%= number_to_human_size(traffic.incoming_bytes) %></td>
 					<td><%= number_to_human_size(traffic.outgoing_bytes) %></td>
 				</tr>
 				<% end %>
-			</table> -->
+			</table>
 		</div>
 	</div>
 </div>

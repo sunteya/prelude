@@ -6,8 +6,8 @@ class TrafficMinutelyReport
     @scope = scope
     @step = 1.minute
     
-    # @now = Time.parse("2013-02-06 13:34:26")
     @now = Time.now
+    # @now = Time.parse("2013-02-06 13:34:26")
     @end_at = @now.change(:sec => 0)
     @start_at = @end_at - 60.minutes #1.hour
   end
