@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>Email</th>
+			<th>Last Updated At</th>
 			<th>Transfer Remaining</th>
 			<th>Port</th>
 			<th>Actions</th>
@@ -11,6 +12,7 @@
 		<% @users.each do |user| %>
 		<tr>
 			<td><%= link_to user.email, user %></td>
+			<th><%= distance_of_time_in_words_to_now(user.updated_at, include_seconds: true) + "之前" if user.updated_at %></th>
 			<td><%= number_to_human_size(user.transfer_remaining) %></td>
 			<td><%= user.binding_port %></td>
 			<td>

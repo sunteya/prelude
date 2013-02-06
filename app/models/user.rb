@@ -1,8 +1,9 @@
 class User
   include Mongoid::Document
   include Mongoid::Search
+  include Mongoid::Timestamps
   include ActiveModel::ForbiddenAttributesProtection
-
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
