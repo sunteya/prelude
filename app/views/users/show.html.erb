@@ -2,7 +2,7 @@
 <script>
 $(function() {
 	Morris.Area({
-		element: 'chart',
+		element: 'area-chart',
 		data: <%=raw @report.result.to_json %>,
 		xkey: 'start_at',
 		pointSize: 0,
@@ -17,6 +17,12 @@ $(function() {
 		// 	return row.c;
 		// }
 	});
+	
+	Morris.Donut({
+		element: 'donut-chart',
+		data: <%=raw @report.total_chart.to_json %>
+	});
+	
 });
 </script>
 <% end %>
@@ -63,7 +69,8 @@ $(function() {
 	<div class="span7">
 		<div class="widget">
 			<header><h3>使用情况</h3></header>
-			<div id="chart"></div>
+			<div id="area-chart"></div>
+			<div id="donut-chart"></div>
 			<table class="table table-hover table-bordered">
 				<% @user.traffics.desc(:start_at).limit(100).each do |traffic| %>
 				<tr>

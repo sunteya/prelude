@@ -60,6 +60,25 @@ class TrafficMinutelyReport
     result
   end
   
+  def total_chart
+    total = {}
+    @data.each_pair do |issue, traffics|
+      traffics.each_pair do |remote_ip, traffic|
+        total[remote_ip] ||= 0
+        total[remote_ip] += traffic.total_transfer_bytes
+      end
+    end
+    
+    result = []
+    @remote_ips.each do |remote_ip|
+      result << {
+        label: remote_ip,
+        value: total[remote_ip] || 0
+      }
+    end
+    result
+  end
+  
 end
 
 # r = TrafficMinutelyReport.new(User.first.traffics); r.generate; 1
