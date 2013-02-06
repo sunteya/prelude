@@ -45,15 +45,11 @@ class TcpdumpImporter
       
       
       user = bind.user
-      traffic = Traffic.new(
-        start_at: access_at,
-        period: :minutely,
-        remote_ip: remote_ip,
-        incoming_bytes: data[:incoming],
-        outgoing_bytes: data[:outgoing]
-      )
-      traffic.bind = bind
-      traffic.user = user
+      scope = Traffic.where(user: user, bind: bind).where(start_at: access_at, period: :minutely, remote_ip: remote_ip)
+      traffic = scope.first || scope.new
+      
+      traffic.incoming_bytes += data[:incoming]
+      traffic.outgoing_bytes += data[:outgoing]
       traffic.save!
       
       user.transfer_remaining -= traffic.total_transfer_bytes
