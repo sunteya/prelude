@@ -4,6 +4,7 @@ $baseFontSize: 16px;
 $navbarHeight: 46px;
 @import "bootstrap";
 @import "bootstrap-responsive";
+@import "morris.css";
 
 body {
 	padding-top: $navbarHeight + 1px + 20px;

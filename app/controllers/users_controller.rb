@@ -8,6 +8,11 @@ class UsersController < ApplicationController
   def new
   end
   
+  def show
+    @report = TrafficMinutelyReport.new(@user.traffics)
+    @report.generate
+  end
+  
   def create
     if @user.save
       flash[:notice] = 'User was successfully created.'

@@ -1,3 +1,25 @@
+<% content_for :head do %>
+<script>
+$(function() {
+	Morris.Area({
+		element: 'chart',
+		data: <%=raw @report.result.to_json %>,
+		xkey: 'start_at',
+		pointSize: 0,
+		lineWidth: 1,
+		// xLabels: <%=raw @report.issues.map {|t| I18n.l(t, format: :hhmm) }.to_json %>,
+		ykeys: <%=raw @report.remote_ips.to_json %>,
+		labels:  <%=raw @report.remote_ips.to_json %>
+		
+		// hoverCallback: function (index, options) {
+		// 	var row = options.data[index];
+		// 	console.log(row.c);
+		// 	return row.c;
+		// }
+	});
+});
+</script>
+<% end %>
 <div class="row-fluid">
 	<div class="span5">
 		<div class="widget">
@@ -41,16 +63,17 @@
 	<div class="span7">
 		<div class="widget">
 			<header><h3>使用情况</h3></header>
-			<table>
+			<div id="chart"></div>
+<!-- 			<table class="table table-hover table-bordered">
 				<% @user.traffics.desc(:start_at).limit(10).each do |traffic| %>
 				<tr>
-					<td><%= traffic.start_at %></td>
-					<td><%= traffic.remote_ip %></td>
-					<td><%= traffic.incoming_bytes %></td>
-					<td><%= traffic.outgoing_bytes %></td>
+					<td><%= distance_of_time_in_words_to_now(traffic.start_at) %> ago</td>
+					<td><code><%= traffic.remote_ip %></code></td>
+					<td><%= number_to_human_size(traffic.incoming_bytes) %></td>
+					<td><%= number_to_human_size(traffic.outgoing_bytes) %></td>
 				</tr>
 				<% end %>
-			</table>
+			</table> -->
 		</div>
 	</div>
 </div>

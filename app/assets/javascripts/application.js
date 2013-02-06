@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require raphael
+//= require morris
 
 $(function() {
 	$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { 
