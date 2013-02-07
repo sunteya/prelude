@@ -1,9 +1,39 @@
 
+blacklist:
+  # google
+  - google.com
+  - googleapis.com
+  - googlecode.com
+  - appspot.com
+  - googleusercontent.com
+  - googlesyndication.com
+  - doubleclick.net
+
+  # youbute
+  - youtube.com
+  - ytimg.com
+
+  # dropbox
+  # - http://*.dropbox.com* # http://notify7.dropbox.com
+  - dropbox.com
+
+  # facebook
+  - facebook.com
+
+  # twitter
+  - twitter.com
+  - twimg.com
+  - tweetmarker.net
+
+
 whitelist:
   # sunteya's list
   - lvh.me
   - wido.me
   - 25pp.com
+  - tongbu.com
+  - leaderhero.com
+  - guoku.com
 
   # skip top Chinese sites
   # source: 

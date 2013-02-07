@@ -1,0 +1,21 @@
+
+function FindProxyForURL(url, host) {
+    var ip_address = '<%= "#{request.host}:#{@user.binding_port}" %>';
+    var proxy = 'PROXY ' + ip_address + '; DIRECT'; // PROXY SOCKS HTTPS DIRECT
+    var direct = 'DIRECT';
+    
+    // Avoid calling any functions that might invoke the DNS resoultion.
+    var url = url.toLowerCase();
+    var host = host.toLowerCase();
+    
+    if (
+    <% Project.settings.blacklist.each do |domain| %>
+        shExpMatch(host, "*<%= domain %>") ||
+    <% end %>
+    false ) {
+        return proxy;
+    }
+    
+    return direct;
+}
+

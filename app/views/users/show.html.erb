@@ -87,7 +87,7 @@ $(function() {
 			<% if binding && binding.port %>
 				<h4>PAC 代理:</h4>
 				<p><code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
-				<!-- <p><code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code></p> -->
+				<p><code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
 				<p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p>
 			<% end %>
 			
@@ -100,7 +100,7 @@ $(function() {
 			<div id="area-chart"></div>
 			<div id="donut-chart"></div>
 			<table class="table table-hover table-bordered">
-				<% @user.traffics.desc(:start_at).limit(100).each do |traffic| %>
+				<% @user.traffics.desc(:start_at).limit(20).each do |traffic| %>
 				<tr>
 					<td><%= I18n.l(traffic.start_at, format: :hhmm) %></td>
 					<td><code><%= traffic.remote_ip %></code></td>
