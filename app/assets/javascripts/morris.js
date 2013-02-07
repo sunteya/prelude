@@ -341,7 +341,7 @@
       _results = [];
       for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
         goal = _ref[i];
-        _results.push(this.drawGoal("M" + this.left + "," + (this.transY(goal)) + "H" + (this.left + this.width)));
+        _results.push(this.drawGoal("M" + this.left + "," + (this.transY(goal)) + "H" + (this.left + this.width), i));
       }
       return _results;
     };
@@ -411,8 +411,8 @@
       }
     };
 
-    Grid.prototype.drawGoal = function(path) {
-      return this.raphael.path(path).attr('stroke', this.options.goalLineColors[0 % this.options.goalLineColors.length]).attr('stroke-width', this.options.goalStrokeWidth);
+    Grid.prototype.drawGoal = function(path, i) {
+      return this.raphael.path(path).attr('stroke', this.options.goalLineColors[i % this.options.goalLineColors.length]).attr('stroke-width', this.options.goalStrokeWidth);
     };
 
     Grid.prototype.drawEvent = function(path) {

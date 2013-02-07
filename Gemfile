@@ -15,8 +15,8 @@ gem 'cancan', '~> 1.6.8'
 gem 'kaminari', '~> 0.14.1'
 gem 'bootstrap-kaminari-views', '~> 0.0.2'
 gem 'simple_form', '~> 2.0.4'
+gem 'fume-settable', '~> 0.0.2'
 
-gem 'packetfu', '~> 1.1.6'
 gem 'whenever', '~> 0.8.2'
 
 group :development, :test do
