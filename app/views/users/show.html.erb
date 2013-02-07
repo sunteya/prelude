@@ -33,6 +33,7 @@ $(function() {
 		xkey: 'start_at',
 		pointSize: 0,
 		lineWidth: 1,
+		goals: [ 2097152 ],
 		// xLabels: <%=raw @report.issues.map {|t| I18n.l(t, format: :hhmm) }.to_json %>,
 		ykeys: <%=raw @report.remote_ips.to_json %>,
 		labels:  <%=raw @report.remote_ips.to_json %>,
