@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-gem 'rails-i18n'
+gem 'fume', '~> 0.9.2'
+
 gem 'mongoid'
+gem 'mongoid_rails_migrations', '~> 1.0.0'
 
 gem 'mongoid_search', '~> 0.3.0'
-gem 'strong_parameters', '~> 0.1.6'
 gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.5.12'
-gem 'mongoid_rails_migrations', '~> 1.0.0'
+# gem 'devise_invitable', '~> 1.1.5'
+gem 'strong_parameters', '~> 0.1.6'
 gem "symbolize", "~> 4.2.0", :require => 'symbolize/mongoid'
 
 gem 'cancan', '~> 1.6.8'
@@ -20,10 +22,9 @@ gem 'fume-settable', '~> 0.0.2'
 gem 'whenever', '~> 0.8.2'
 
 group :development, :test do
+  gem 'fume-dev', '~> 0.2.1'
   gem 'rspec-rails', '~> 2.12.2'
   gem 'factory_girl_rails', '~> 4.2.0'
-  gem 'thin'
-  gem 'pry-nav'
 end
 
 group :assets do

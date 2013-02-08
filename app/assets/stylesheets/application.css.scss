@@ -18,6 +18,12 @@ body {
 	}
 }
 
+.form-actions {
+	.btn, a {
+		margin: 0 0.5em;
+	}
+}
+
 .widget {
 	position: relative;
 	margin: 0 0 1em 0;
