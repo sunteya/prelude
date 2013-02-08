@@ -8,6 +8,7 @@ blacklist:
   - googleusercontent.com
   - googlesyndication.com
   - doubleclick.net
+  - feedburner.com
 
   # youbute
   - youtube.com
