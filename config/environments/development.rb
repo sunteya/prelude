@@ -16,20 +16,10 @@ Prelude::Application.configure do
   # Don't care if the mailer can't send
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { :host => 'lvh.me:3000' }
-  
-  # config.action_mailer.default_url_options = { :host => 'lvh.me:3000' }
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   :address    => "smtp.gmail.com",
-  #   :port       => 587,
-  #   :domain     => "gmail.com",
-  #   :authentication => "plain",
-  #   :user_name  => "msyesyan@gmail.com",
-  #   :password   => "msyesyan",
-  #   :enable_starttls_auto => true
-  # }
+  mail_settings = YAML.load(Rails.root.join("config/mail.yml").read)
+  mail_settings[Rails.env].each_pair do |name, value|
+    config.action_mailer.send("#{name}=", value)
+  end
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

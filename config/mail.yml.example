@@ -1,0 +1,31 @@
+development:
+  default_url_options: 
+    :host : 'lvh.me:3000'
+  # delivery_method: :test
+  delivery_method: :smtp
+  smtp_settings:
+    :address :    "smtp.gmail.com"
+    :domain :     "gmail.com"
+    :port :       587
+    :user_name :  "p.wido.me@gmail.com"
+    :password :   "p.wido.me"
+    :authentication : "plain"
+    :enable_starttls_auto : true
+
+production:
+  default_url_options:
+    :host : 'p.wido.me'
+  delivery_method: :smtp
+  smtp_settings:
+    :address :    "smtp.gmail.com"
+    :domain :     "gmail.com"
+    :port :       587
+    :user_name :  "p.wido.me@gmail.com"
+    :password :   "p.wido.me"
+    :authentication : "plain"
+    :enable_starttls_auto : true
+
+test:
+  default_url_options:
+    :host : 'lvh.me:3000'
+  delivery_method: :test

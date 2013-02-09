@@ -50,7 +50,12 @@ Prelude::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  mail_settings = YAML.load(Rails.root.join("config/mail.yml").read)
+  mail_settings[Rails.env].each_pair do |name, value|
+    config.action_mailer.send("#{name}=", value)
+  end
+  
   # Enable threaded mode
   # config.threadsafe!
 
