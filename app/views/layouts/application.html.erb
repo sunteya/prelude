@@ -31,9 +31,9 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<%= link_to "修改密码", edit_user_path(current_user, :ok_url => request.url) %>
+							<%= link_to "修改密码", edit_user_path(current_user, ok_url: request.url) %>
 						</li>
-						<li class=""><%= link_to '注销', destroy_user_session_path, :method => 'delete' %></li>
+						<li class=""><%= link_to '注销', destroy_user_session_path, method: 'delete' %></li>
 					</ul>
 				</li> 
 			</ul>

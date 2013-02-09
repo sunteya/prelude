@@ -1,0 +1,8 @@
+<p>您好 <%= @resource.email %>!</p>
+
+<p>有人邀请您加入 <%= root_url %>, 您可以通过下方的链接接受邀请.</p>
+
+<p><%= link_to '接受邀请', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %></p>
+
+<p>如果您不想接收邀请, 请忽略本邮件.<br />
+您的帐号将不会被创建.</p>

@@ -7,7 +7,7 @@ class UserParams < Struct.new(:params, :ability)
     if ability.can? :manage, :admin
       [ :email, :login, :password, :password_confirmation, :transfer_remaining ]
     else
-      [ :password, :password_confirmation ]
+      [ :password, :password_confirmation, :invitation_token ]
     end
   end
 end
