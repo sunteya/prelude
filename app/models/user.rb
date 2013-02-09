@@ -54,15 +54,22 @@ class User
 
   field :superadmin, type: Boolean, default: false
   field :transfer_remaining, type: Integer, default: 0
+  field :monthly_transfer, type: Integer, default: 2.gigabytes
   
   has_many :binds
   has_many :traffics
   
-  before_save :ensure_authentication_token
+  after_create :apply_binding_and_transfer
   
   scope :available, -> { where(:transfer_remaining.gt => 0) }
   
-  validates :login, uniqueness: true
+  def apply_binding_and_transfer
+    if self.binding.nil?
+      self.binds.create
+      self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
+      self.save!
+    end
+  end
   
   def binding
     binds.using.first

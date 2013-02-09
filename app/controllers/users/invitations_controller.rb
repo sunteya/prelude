@@ -1,5 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController  
-  authorize_object :invitation
+  authorize_object object: :invitation, only: [ :new, :create ]
   
 protected
   def resource_params
