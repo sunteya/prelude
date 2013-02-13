@@ -7,6 +7,7 @@ blacklist:
   - appspot.com
   - googleusercontent.com
   - googlesyndication.com
+  - googletagservices.com
   - doubleclick.net
   - feedburner.com
 
