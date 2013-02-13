@@ -53,18 +53,23 @@ class Traffic
     self.map_reduce(map, reduce).out(inline: 1).map { |r| r["_id"].merge(r["value"]) }
   end
   
-  def fff()
-    now = Time.now
-    end_at = now.change(:sec => 0) # - 1.minute
-    start_at = end_at - 1.hour
-    
-    step = 1.minute
-    issues = []
-    while (start_at <= end_at)
-      issues << start_at
-      start_at += step
+  def self.generate_hourly_records!(time_at)
+    start_at = time_at.beginning_of_hour
+    self.generate_period_records!(:hourly, start_at, start_at + 1.hour)
+  end
+  
+  def self.generate_daily_records!(time_at)
+    start_at = time_at.beginning_of_day
+    self.generate_period_records!(:daily, start_at, start_at + 1.day)
+  end
+  
+  def self.generate_period_records!(period, start_at, end_at)
+    scope = Traffic.where(period: period.to_s).where(start_at: start_at)
+    scope.destroy_all
+    Traffic.minutely.where(:start_at.gte => start_at.dup, :start_at.lt => end_at.dup)
+      .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |attrs|
+      tr = scope.new(attrs)
+      tr.save!
     end
-    
-    
   end
 end
