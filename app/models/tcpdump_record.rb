@@ -14,7 +14,7 @@ class TcpdumpRecord
   field :content, type: String
   
   scope :ipaddr_is, ->(ipaddr) { any_of({src: ipaddr}, {dst: ipaddr}) }
-  scope :port_is, ->(port) { any_of({sport: ipaddr}, {dport: ipaddr}) }
+  scope :port_is, ->(port) { any_of({sport: port}, {dport: port}) }
   scope :recent, ->() { desc(:access_at) }
   
   def access_begin_minute_at
