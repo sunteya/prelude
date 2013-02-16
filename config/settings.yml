@@ -10,6 +10,8 @@ blacklist:
   - googletagservices.com
   - doubleclick.net
   - feedburner.com
+  - blogspot.com
+  - blogspot.jp
 
   # youbute
   - youtube.com
