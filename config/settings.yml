@@ -28,6 +28,7 @@ blacklist:
   - twitter.com
   - twimg.com
   - tweetmarker.net
+  - t.co
 
 
 whitelist:
