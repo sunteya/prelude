@@ -39,6 +39,7 @@ whitelist:
   - tongbu.com
   - leaderhero.com
   - guoku.com
+  - .lan
 
   # skip top Chinese sites
   # source: 
