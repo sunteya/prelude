@@ -95,11 +95,16 @@ class TcpdumpImporter
   
   # tcpdump -n -q -e -i any -s 0 -G 30 -w pcaps/%FT%T.pcap "tcp portrange 30000-50000 and not net 127.0.0.1"
   def self.import_all
-    pcap_pathnames = Rails.root.join("pcaps").children.sort
+    pcaps_dir = Rails.root.join("pcaps")
+    pcap_pathnames= Pathname.glob(pcaps_dir.join("*.pcap")).sort
     pcap_pathnames.pop # remove current caps
     
     pcap_pathnames.each do |pcap_pathname|
-      TcpdumpImporter.new(pcap_pathname).execute
+      return if !pcap_pathname.exist? # skip because another importer running
+      
+      using_pac_pathname = Pathname.new("#{pcap_pathname}.using")
+      pcap_pathname.rename(using_pac_pathname)
+      TcpdumpImporter.new(using_pac_pathname).execute
     end
   end
   
