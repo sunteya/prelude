@@ -34,10 +34,15 @@ class TcpdumpImporter
     end
   end
   
+  def find_match_bind(port, access_at)
+    Bind.where(:port => port, :start_at.lte => access_at).any_of({ :end_at => nil }, { :end_at.gt => access_at}).first
+  end
+  
   def record_traffics
     @pcap_traffics.each_pair do |minute_key, data|
       access_at, port, remote_ip = *minute_key
-      bind = Bind.where(:port => port, :start_at.lte => access_at).any_of({ :end_at => nil }, { :end_at.gt => access_at}).first
+      
+      bind = find_match_bind(port, access_at)
       if bind.nil?
         Rails.logger.info "TCPDUMP MISS: #{minute_key} => #{data}"
         next
@@ -95,14 +100,14 @@ class TcpdumpImporter
   
   # tcpdump -n -q -e -i any -s 0 -G 30 -w pcaps/%FT%T.pcap "tcp portrange 30000-50000 and not net 127.0.0.1"
   def self.import_all
-    pcaps_dir = Rails.root.join("pcaps")
-    pcap_pathnames= Pathname.glob(pcaps_dir.join("*.pcap")).sort
+    source_dir = Rails.root.join("pcaps")
+    pcap_pathnames= Pathname.glob(source_dir.join("*.pcap")).sort
     pcap_pathnames.pop # remove current caps
     
+    using_dir = source_dir.join("processing")
     pcap_pathnames.each do |pcap_pathname|
       return if !pcap_pathname.exist? # skip because another importer running
-      
-      using_pac_pathname = Pathname.new("#{pcap_pathname}.using")
+      using_pac_pathname = using_dir.join(pcap_pathname.basename)
       pcap_pathname.rename(using_pac_pathname)
       TcpdumpImporter.new(using_pac_pathname).execute
     end
