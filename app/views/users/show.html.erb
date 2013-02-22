@@ -37,6 +37,7 @@ $(function() {
 		// xLabels: <%=raw @report.issues.map {|t| I18n.l(t, format: :hhmm) }.to_json %>,
 		ykeys: <%=raw @report.remote_ips.to_json %>,
 		labels:  <%=raw @report.remote_ips.to_json %>,
+		lineColors: <%=raw @report.remote_ip_colors.to_json %>,
 		yLabelFormat: function(y) { return numberToHumanSize(y) }
 		// hoverCallback: function (index, options) {
 		// 	var row = options.data[index];
@@ -48,6 +49,7 @@ $(function() {
 	Morris.Donut({
 		element: 'donut-chart',
 		data: <%=raw @report.total_chart.to_json %>,
+		colors: <%=raw @report.remote_ip_colors.to_json %>,
 		formatter: function(y, data) { return numberToHumanSize(y) } 
 	});
 	

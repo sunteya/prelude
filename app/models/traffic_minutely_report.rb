@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class TrafficMinutelyReport
   attr_accessor :remote_ips
   
@@ -77,6 +79,10 @@ class TrafficMinutelyReport
       }
     end
     result
+  end
+  
+  def remote_ip_colors
+    @remote_ips.map { |ip| "#" + Digest::SHA1.hexdigest(ip)[0, 6] }
   end
   
 end
