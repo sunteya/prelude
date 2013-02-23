@@ -23,6 +23,7 @@ blacklist:
 
   # facebook
   - facebook.com
+  - fbcdn-*.akamaihd.net
 
   # twitter
   - twitter.com
@@ -41,6 +42,11 @@ whitelist:
   - guoku.com
   - .lan
   - .dev
+  - leiphone.com
+  - zhihu.com
+  - ifanr.com
+  - jiaren.org
+  - iapps.im
 
   # skip top Chinese sites
   # source: 
