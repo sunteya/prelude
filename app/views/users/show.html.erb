@@ -1,4 +1,9 @@
 <% content_for :head do %>
+<style>
+#area-chart, #donut-chart {
+	height: 250px;
+}
+</style>
 <script>
 
 function numberToHumanSize(bytes) {
@@ -96,21 +101,32 @@ $(function() {
 
 		</div>
 	</div>
-	<div class="span7">
-		<div class="widget">
-			<header><h3>使用情况</h3></header>
+	<div class="span6">
+	</div>
+</div>
+
+<div class="widget">
+	<header><h3>最近2小时用量</h3></header>
+	<div class="row-fluid">
+		<div class="span9">
 			<div id="area-chart"></div>
+		</div>
+		<div class="span3">
 			<div id="donut-chart"></div>
-			<table class="table table-hover table-bordered">
-				<% @user.traffics.desc(:start_at).limit(20).each do |traffic| %>
-				<tr>
-					<td><%= I18n.l(traffic.start_at, format: :hhmm) %></td>
-					<td><code><%= traffic.remote_ip %></code></td>
-					<td><%= number_to_human_size(traffic.incoming_bytes) %></td>
-					<td><%= number_to_human_size(traffic.outgoing_bytes) %></td>
-				</tr>
-				<% end %>
-			</table>
 		</div>
 	</div>
+</div>
+
+<div class="widget">
+	<header><h3>最后使用记录</h3></header>
+	<table class="table table-hover table-bordered">
+		<% @user.traffics.minutely.desc(:start_at).limit(40).each do |traffic| %>
+		<tr>
+			<td><%= I18n.l(traffic.start_at, format: :hhmm) %></td>
+			<td><code><%= traffic.remote_ip %></code></td>
+			<td><%= number_to_human_size(traffic.incoming_bytes) %></td>
+			<td><%= number_to_human_size(traffic.outgoing_bytes) %></td>
+		</tr>
+		<% end %>
+	</table>
 </div>

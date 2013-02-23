@@ -11,7 +11,7 @@ class TrafficMinutelyReport
     @now = Time.now
     # @now = Time.parse("2013-02-06 13:34:26")
     @end_at = @now.change(:sec => 0)
-    @start_at = @end_at - 60.minutes #1.hour
+    @start_at = @end_at - 2.hour
   end
   
   def time(start_at, end_at)
