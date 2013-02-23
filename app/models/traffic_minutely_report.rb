@@ -3,43 +3,32 @@ require 'digest/sha1'
 class TrafficMinutelyReport
   attr_accessor :remote_ips
   
-  def initialize(scope)
-    # @now = #Time.now
+  def initialize(scope, start_period, end_period)
     @scope = scope
-    @step = 1.minute
-    
-    @now = Time.now
-    # @now = Time.parse("2013-02-06 13:34:26")
-    @end_at = @now.change(:sec => 0)
-    @start_at = @end_at - 2.hour
+    @start_period = start_period
+    @end_period = end_period
   end
   
-  def time(start_at, end_at)
-    @start_at = start_at
-    @end_at = end_at
+  def periods
+    @start_period.to_end(@end_period)
+  end
+  
+  def issues
+    self.periods.map(&:start_at)
   end
   
   def generate
     @remote_ips = []
     @data = {}
     
-    @scope.minutely.where(:start_at.gte => @start_at.dup, :start_at.lt => @end_at.dup).each do |t|
+    @scope.minutely.where(:start_at.gte => @start_period.start_at.dup,
+                          :start_at.lt => @end_period.next.start_at.dup).each do |t|
       @data[t.start_at] ||= {}
       @remote_ips << t.remote_ip if !@remote_ips.include?(t.remote_ip)
       @data[t.start_at][t.remote_ip] = t
     end
   end
   
-  def issues
-    issues = []
-    time = @start_at
-    
-    while (time < @end_at)
-      issues << time
-      time += @step
-    end
-    issues
-  end
     
   def result
     result = []
@@ -86,5 +75,3 @@ class TrafficMinutelyReport
   end
   
 end
-
-# r = TrafficMinutelyReport.new(User.first.traffics); r.generate; 1
