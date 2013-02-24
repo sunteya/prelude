@@ -1,6 +1,6 @@
 <% content_for :head do %>
 <style>
-#area-chart, #donut-chart {
+.chart {
 	height: 250px;
 }
 </style>
@@ -32,17 +32,17 @@ function numberToHumanSize(bytes) {
 
 $(function() {
 	Morris.Area({
-		element: 'area-chart',
+		element: 'recent-area-chart',
 		hideHover: 'auto',
-		data: <%=raw @report.result.to_json %>,
+		data: <%=raw @recent_report.result.to_json %>,
 		xkey: 'start_at',
 		pointSize: 0,
 		lineWidth: 1,
-		goals: [ 2097152 ],
-		// xLabels: <%=raw @report.issues.map {|t| I18n.l(t, format: :hhmm) }.to_json %>,
-		ykeys: <%=raw @report.remote_ips.to_json %>,
-		labels:  <%=raw @report.remote_ips.to_json %>,
-		lineColors: <%=raw @report.remote_ip_colors.to_json %>,
+		goals: [ 2 * 1024 * 1024 ],
+		// xLabels: <%=raw @recent_report.issues.map {|t| I18n.l(t, format: :hhmm) }.to_json %>,
+		ykeys: <%=raw @recent_report.remote_ips.to_json %>,
+		labels:  <%=raw @recent_report.remote_ips.to_json %>,
+		lineColors: <%=raw @recent_report.remote_ip_colors.to_json %>,
 		yLabelFormat: function(y) { return numberToHumanSize(y) }
 		// hoverCallback: function (index, options) {
 		// 	var row = options.data[index];
@@ -52,9 +52,9 @@ $(function() {
 	});
 	
 	Morris.Donut({
-		element: 'donut-chart',
-		data: <%=raw @report.total_chart.to_json %>,
-		colors: <%=raw @report.remote_ip_colors.to_json %>,
+		element: 'recent-donut-chart',
+		data: <%=raw @recent_report.total_chart.to_json %>,
+		colors: <%=raw @recent_report.remote_ip_colors.to_json %>,
 		formatter: function(y, data) { return numberToHumanSize(y) } 
 	});
 	
@@ -109,10 +109,10 @@ $(function() {
 	<header><h3>最近2小时用量</h3></header>
 	<div class="row-fluid">
 		<div class="span9">
-			<div id="area-chart"></div>
+			<div id="recent-area-chart" class="chart"></div>
 		</div>
 		<div class="span3">
-			<div id="donut-chart"></div>
+			<div id="recent-donut-chart" class="chart"></div>
 		</div>
 	</div>
 </div>

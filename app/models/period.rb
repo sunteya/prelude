@@ -17,6 +17,10 @@ module Period
       self.class.new(next_time)
     end
     
+    def include?(val)
+      self.start_at <= val && val < self.next.start_at
+    end
+    
     def to_end(end_period)
       result = []
       
