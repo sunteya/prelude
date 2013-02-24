@@ -3,6 +3,10 @@
 .chart {
 	height: 250px;
 }
+
+.faq li {
+	margin: 0.5em 0;
+}
 </style>
 <script>
 
@@ -77,13 +81,13 @@ $(function() {
 <% end %>
 
 
-<div class="row-fluid">
-	<div class="span5">
-		<div class="widget">
-			<header><h3>基础信息</h3></header>
+<div class="widget">
+	<header><h3>基础信息</h3></header>
+	
+	<div class="row-fluid">
+		<div class="span7">
 			<h4>用户帐号</h4>
 			<p><%= @user.email %></p>
-			
 			<h4>
 				可用流量:
 				<span class="label label-important"><%= number_to_human_size(@user.transfer_remaining) %></span>
@@ -109,13 +113,31 @@ $(function() {
 			
 			<% if binding && binding.port %>
 				<h4>PAC 代理:</h4>
-				<p><code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
-				<p><code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
-				<p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p>
+				<p>
+					<label>白名单(whitelist):</label>
+					<code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+				</p>
+				<p>
+					<label>黑名单(blacklist):</label>
+					<code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+				</p>
+				<!-- <p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p> -->
 			<% end %>
 		</div>
-	</div>
-	<div class="span6">
+		<div class="span5 faq">
+<!--
+			<h4>FAQ</h4>
+			<ul>
+				<li><a href="#">HTTP 代理 和 PAC 代理区别.</a></li>
+				<li><a href="#">什么是白名单和黑名单, 及使用范围.</a></li>
+				<li><a href="#">如何设置 Chrome 浏览器?</a></li>
+				<li><a href="#">如何设置 Firefox 浏览器?</a></li>
+				<li><a href="#">iPhone Wifi 模式下如何设置?</a></li>
+				<li><a href="#">iPhone 3G 模式下如何设置?</a></li>
+				<li><a href="#">Android 手机如何设置?</a></li>
+			</ul>
+-->
+		</div>
 	</div>
 </div>
 
