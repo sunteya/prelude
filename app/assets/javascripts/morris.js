@@ -186,7 +186,7 @@
               if (typeof yval === 'string') {
                 yval = parseFloat(yval);
               }
-              if ((yval != null) && typeof yval !== 'number') {
+              if ((yval != null) && typeof yval != 'number') {
                 yval = null;
               }
               if (yval != null) {
@@ -289,7 +289,7 @@
       var h, maxYLabelWidth, w;
       w = this.el.width();
       h = this.el.height();
-      if (this.elementWidth !== w || this.elementHeight !== h || this.dirty) {
+      if (this.elementWidth != w || this.elementHeight != h || this.dirty) {
         this.elementWidth = w;
         this.elementHeight = h;
         this.dirty = false;
@@ -452,7 +452,7 @@
       return new Date(parseInt(o[1], 10), parseInt(o[2], 10) - 1, parseInt(o[3], 10)).getTime();
     } else if (p) {
       ret = new Date(parseInt(p[1], 10), 0, 1);
-      if (ret.getDay() !== 4) {
+      if (ret.getDay() != 4) {
         ret.setMonth(0, 1 + ((4 - ret.getDay()) + 7) % 7);
       }
       return ret.getTime() + parseInt(p[2], 10) * 604800000;
@@ -461,7 +461,7 @@
         return new Date(parseInt(q[1], 10), parseInt(q[2], 10) - 1, parseInt(q[3], 10), parseInt(q[4], 10), parseInt(q[5], 10)).getTime();
       } else {
         offsetmins = 0;
-        if (q[6] !== 'Z') {
+        if (q[6] != 'Z') {
           offsetmins = parseInt(q[8], 10) * 60 + parseInt(q[9], 10);
           if (q[7] === '+') {
             offsetmins = 0 - offsetmins;
@@ -477,7 +477,7 @@
         return new Date(parseInt(r[1], 10), parseInt(r[2], 10) - 1, parseInt(r[3], 10), parseInt(r[4], 10), parseInt(r[5], 10), isecs, msecs).getTime();
       } else {
         offsetmins = 0;
-        if (r[8] !== 'Z') {
+        if (r[8] != 'Z') {
           offsetmins = parseInt(r[10], 10) * 60 + parseInt(r[11], 10);
           if (r[9] === '+') {
             offsetmins = 0 - offsetmins;
@@ -575,7 +575,7 @@
       this.pointShrink = Raphael.animation({
         r: this.options.pointSize
       }, 25, 'linear');
-      if (this.options.hideHover !== 'always') {
+      if (this.options.hideHover != 'always') {
         this.hover = new Morris.Hover({
           parent: this.el
         });
@@ -708,7 +708,7 @@
             _results1 = [];
             for (_j = 0, _len = _ref2.length; _j < _len; _j++) {
               r = _ref2[_j];
-              if (r._y[i] !== void 0) {
+              if (r._y[i] != void 0) {
                 _results1.push({
                   x: r._x,
                   y: r._y[i]
@@ -723,7 +723,7 @@
               _results1 = [];
               for (_j = 0, _len = coords.length; _j < _len; _j++) {
                 c = coords[_j];
-                if (c.y !== null) {
+                if (c.y != null) {
                   _results1.push(c);
                 }
               }
@@ -900,16 +900,16 @@
 
     Line.prototype.hilight = function(index) {
       var i, _i, _j, _ref, _ref1;
-      if (this.prevHilight !== null && this.prevHilight !== index) {
+      if (this.prevHilight != null && this.prevHilight != index) {
         for (i = _i = 0, _ref = this.seriesPoints.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-          if (this.seriesPoints[i][this.prevHilight]) {
+          if (this.seriesPoints[i] && this.seriesPoints[i][this.prevHilight]) {
             this.seriesPoints[i][this.prevHilight].animate(this.pointShrink);
           }
         }
       }
-      if (index !== null && this.prevHilight !== index) {
+      if (index != null && this.prevHilight != index) {
         for (i = _j = 0, _ref1 = this.seriesPoints.length - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
-          if (this.seriesPoints[i][index]) {
+          if (this.seriesPoints[i] && this.seriesPoints[i][index]) {
             this.seriesPoints[i][index].animate(this.pointGrow);
           }
         }
@@ -1120,7 +1120,7 @@
       var i, path, _i, _ref;
       for (i = _i = _ref = this.options.ykeys.length - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
         path = this.paths[i];
-        if (path !== null) {
+        if (path != null) {
           path = path + ("L" + (this.transX(this.xmax)) + "," + this.bottom + "L" + (this.transX(this.xmin)) + "," + this.bottom + "Z");
           this.drawFilledPath(path, this.fillForSeries(i));
         }
@@ -1160,7 +1160,7 @@
 
     Bar.prototype.init = function() {
       this.cumulative = this.options.stacked;
-      if (this.options.hideHover !== 'always') {
+      if (this.options.hideHover != 'always') {
         this.hover = new Morris.Hover({
           parent: this.el
         });
@@ -1254,7 +1254,7 @@
             _results1 = [];
             for (sidx = _j = 0, _len1 = _ref1.length; _j < _len1; sidx = ++_j) {
               ypos = _ref1[sidx];
-              if (ypos !== null) {
+              if (ypos != null) {
                 if (zeroPos) {
                   top = Math.min(ypos, zeroPos);
                   bottom = Math.max(ypos, zeroPos);
