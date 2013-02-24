@@ -10,11 +10,8 @@ class UsersController < ApplicationController
   
   def show
     @now = Time.now
-    @recent_report = TrafficReport::Minutely.new(
-                @user.traffics,
-                Period::Minutely.new(@now - 2.hours),
-                Period::Minutely.new(@now)
-              ).generate
+    @recent_report = TrafficReport::Minutely.recent(@user.traffics)
+    @today_report = TrafficReport::Hourly.today(@user.traffics)
   end
   
   def create
