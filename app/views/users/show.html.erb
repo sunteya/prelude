@@ -7,6 +7,10 @@
 <script>
 
 function numberToHumanSize(bytes) {
+	if (bytes == null) {
+		return "-";
+	}
+	
 	var precision = 2;
 	var kilobyte = 1024;
 	var megabyte = kilobyte * 1024;
@@ -53,19 +57,14 @@ $(function() {
 		lineColors: <%=raw @recent_report.remote_ip_colors.to_json %>
 	}, defaultAreaOptions));
 	
-	// Morris.Donut($.extend({
-	// 	element: 'recent-donut-chart',
-	// 	data: <%#=raw @recent_report.total_remote_ip_chart.to_json %>,
-	// 	colors: <%#=raw @recent_report.remote_ip_colors.to_json %>
-	// }, defaultDonutOptions));
-	
 	Morris.Area($.extend({
 		element: 'today-area-chart',
 		data: <%=raw JSON.pretty_generate(@today_report.chart) %>,
-		goals: [ 20 * 1024 * 1024 ],
+		goals: [ 50 * 1024 * 1024 ],
 		ykeys: <%=raw @today_report.remote_ips.to_json %>,
 		labels:  <%=raw @today_report.remote_ips.to_json %>,
-		lineColors: <%=raw @today_report.remote_ip_colors.to_json %>
+		lineColors: <%=raw @today_report.remote_ip_colors.to_json %>,
+		events: [ <%=raw @today_report.limit.start_at.to_json %> ]
 	}, defaultAreaOptions));
 	
 	Morris.Donut($.extend({
@@ -76,6 +75,8 @@ $(function() {
 });
 </script>
 <% end %>
+
+
 <div class="row-fluid">
 	<div class="span5">
 		<div class="widget">
@@ -112,8 +113,6 @@ $(function() {
 				<p><code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
 				<p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p>
 			<% end %>
-			
-
 		</div>
 	</div>
 	<div class="span6">
@@ -135,18 +134,4 @@ $(function() {
 			<div id="today-donut-chart" class="chart"></div>
 		</div>
 	</div>
-</div>
-
-<div class="widget">
-	<header><h3>最后使用记录</h3></header>
-	<table class="table table-hover table-bordered">
-		<% @user.traffics.minutely.desc(:start_at).limit(40).each do |traffic| %>
-		<tr>
-			<td><%= I18n.l(traffic.start_at, format: :hhmm) %></td>
-			<td><code><%= traffic.remote_ip %></code></td>
-			<td><%= number_to_human_size(traffic.incoming_bytes) %></td>
-			<td><%= number_to_human_size(traffic.outgoing_bytes) %></td>
-		</tr>
-		<% end %>
-	</table>
 </div>

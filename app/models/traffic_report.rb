@@ -5,10 +5,12 @@ module TrafficReport
   class Base
     attr_accessor :remote_ips
     attr_accessor :range
+    attr_accessor :limit
     
-    def initialize(scope, range)
+    def initialize(scope, range, limit = nil)
       @scope = scope
       self.range = range
+      self.limit = limit
     end
     
     def remote_ip_colors
@@ -43,11 +45,13 @@ module TrafficReport
       self.range.map do |period|
         item = {}
         item["start_at"] = period.start_at
-        remote_ips_traffics = @data[period] || {}
         
-        @remote_ips.each do |remote_ip|
-          traffics = remote_ips_traffics[remote_ip] || []
-          item[remote_ip] = traffics.map(&:total_transfer_bytes).sum
+        if self.limit.nil? || period <= self.limit
+          remote_ips_traffics = @data[period] || {}
+          @remote_ips.each do |remote_ip|
+            traffics = remote_ips_traffics[remote_ip] || []
+            item[remote_ip] = traffics.map(&:total_transfer_bytes).sum
+          end
         end
         
         item
@@ -83,7 +87,7 @@ module TrafficReport
       end_period = build_period(now)
       start_period = build_period(now - 2.hours)
       
-      self.new(scope, (start_period ... end_period) ).generate
+      self.new(scope, (start_period ... end_period)).generate
     end
   end
   
@@ -93,10 +97,13 @@ module TrafficReport
     end
     
     def self.today(scope)
-      start_at = Time.now.beginning_of_day
+      now = Time.now
+      start_at = now.beginning_of_day
+      
+      limit_period = build_period(now)
       start_period = build_period(start_at)
       end_period = build_period(start_at + 1.day)
-      self.new(scope, (start_period ... end_period) ).generate
+      self.new(scope, (start_period ... end_period), limit_period).generate
     end
   end
   
