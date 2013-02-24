@@ -27,6 +27,7 @@ end
 
 every :day do
   runner "Traffic.generate_daily_records!(Time.now - 1.day)"
+  runner "Traffic.minutely.where(:start_at.lt => 3.days.ago).destroy_all"
 end
 
 # Learn more: http://github.com/javan/whenever
