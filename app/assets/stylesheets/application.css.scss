@@ -18,6 +18,18 @@ body {
 	}
 }
 
+form {
+	.inline {
+		input {
+			margin-right: 0.5em;
+		}
+		
+		label, input {
+			display: inline;
+		}
+	}
+}
+
 .form-actions {
 	.btn, a {
 		margin: 0 0.5em;
