@@ -53,6 +53,8 @@ class User
   field :authentication_token, type: String
 
   field :superadmin, type: Boolean, default: false
+  field :memo, type: String
+  
   field :transfer_remaining, type: Integer, default: 0
   field :monthly_transfer, type: Integer, default: 2.gigabytes
   

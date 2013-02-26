@@ -1,6 +1,6 @@
 <div class="form-inputs">
 	<%= f.input :email if user_params.permit_attributes.include?(:email) %>
-	<%= f.input :login if user_params.permit_attributes.include?(:login) %>
+	<%= f.input :memo if user_params.permit_attributes.include?(:memo) %>
 	<%= f.input :password if user_params.permit_attributes.include?(:password) %>
 	<%= f.input :password_confirmation if user_params.permit_attributes.include?(:password_confirmation) %>
 	<%= f.input :transfer_remaining if user_params.permit_attributes.include?(:transfer_remaining) %>
