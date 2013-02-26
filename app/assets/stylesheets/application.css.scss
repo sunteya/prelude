@@ -30,6 +30,13 @@ form {
 	}
 }
 
+.info {
+	p > code {
+		display: block;
+		overflow-x: auto;
+	}
+}
+
 .form-actions {
 	.btn, a {
 		margin: 0 0.5em;
@@ -74,5 +81,43 @@ form {
 @media (max-width: 979px) {
 	body {
 		padding-top: 0px;
+	}
+}
+
+
+.navbar-fixed-top {
+	.nav.pull-right {
+		.dropdown-toggle {
+			i {
+				display: none;
+			}
+		}
+	}
+}
+
+
+@media (max-width: 767px) {
+	body {
+		padding-left: 10px;
+		padding-right: 10px
+	}
+	
+	.navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	
+	.navbar-fixed-top {
+		.nav.pull-right {
+			.dropdown-toggle {
+				span, .caret {
+					display: none;
+				}
+				
+				i {
+					display: inline-block;
+				}
+			}
+		}
 	}
 }
