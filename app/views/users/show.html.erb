@@ -90,7 +90,9 @@ $(function() {
 			<p><%= @user.email %></p>
 			<h4>
 				可用流量:
-				<span class="label label-important"><%= number_to_human_size(@user.transfer_remaining) %></span>
+				<span class="label label-important">
+					<%= number_to_human_size(@user.transfer_remaining) %> / <%= number_to_human_size(@user.monthly_transfer) if @user.monthly_transfer %>
+				</span>
 			</h4>
 			
 			<h4>代理地址:</h4>

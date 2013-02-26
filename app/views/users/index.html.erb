@@ -11,7 +11,7 @@
 	<tbody>
 		<% @users.each do |user| %>
 		<tr>
-			<td><%= link_to user.email, user %><%= " (#{user.memo})" if user.memo %></td>
+			<td><%= link_to user.email, user %><%= " (#{user.memo})" if !user.memo.blank? %></td>
 			<th><%= distance_of_time_in_words_to_now(user.updated_at, include_seconds: true) + "之前" if user.updated_at %></th>
 			<td><%= number_to_human_size(user.transfer_remaining) %> / <%= number_to_human_size(user.monthly_transfer) if user.monthly_transfer %></td>
 			<td><%= user.binding_port %></td>
