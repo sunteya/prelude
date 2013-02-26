@@ -5,7 +5,7 @@ class UserParams < Struct.new(:params, :ability)
 
   def permit_attributes
     if ability.can? :manage, :admin
-      [ :email, :login, :password, :password_confirmation, :transfer_remaining ]
+      [ :email, :password, :password_confirmation, :transfer_remaining, :monthly_transfer ]
     else
       [ :password, :password_confirmation, :invitation_token ]
     end

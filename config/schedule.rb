@@ -30,4 +30,8 @@ every :day do
   runner "Traffic.minutely.where(:start_at.lt => 3.days.ago).destroy_all"
 end
 
+every :monthly do
+  runner "User.all.each(&:recharge)"
+end
+
 # Learn more: http://github.com/javan/whenever

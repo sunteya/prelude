@@ -4,6 +4,7 @@
 	<%= f.input :password if user_params.permit_attributes.include?(:password) %>
 	<%= f.input :password_confirmation if user_params.permit_attributes.include?(:password_confirmation) %>
 	<%= f.input :transfer_remaining if user_params.permit_attributes.include?(:transfer_remaining) %>
+	<%= f.input :monthly_transfer if user_params.permit_attributes.include?(:monthly_transfer) %>
 </div>
 
 <div class="form-actions">

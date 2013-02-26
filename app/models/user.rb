@@ -84,18 +84,9 @@ class User
     !persisted? || !password.blank? || !password_confirmation.blank?
   end
   
-  # def find_or_initial_hour_statistic(&block)
-  #   statistic = self.statistics.where(:year => Time.now.year, :month => Time.now.month, :day => Time.now.day, :hour => :Time.now.hour) || self.statistics.new
-  #   yield(statistic) if block
-  #   statistic
-  # end
+  def recharge
+    self.transfer_remaining = self.monthly_transfer if self.monthly_transfer
+    self.save
+  end
   
-  # def find_the_hour_cdrs
-  #   cdrs = self.cdrs.where(:created_at => Time.now.hour.beginning_of_hour..Time.now.end_of_hour).all
-  # end
-  
-  # def the_hour_total_size
-  #   cdrs = self.find_last_passed_hours_cdrs
-  #   size = cdrs.map(&:size).inject(&:+)
-  # end
 end
