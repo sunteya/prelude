@@ -47,6 +47,8 @@ whitelist:
   - ifanr.com
   - jiaren.org
   - iapps.im
+  - mzstatic.com
+  - phobos.apple.com
 
   # skip top Chinese sites
   # source: 
