@@ -49,4 +49,14 @@ module Period
       time.beginning_of_hour
     end
   end
+
+  class Daily < Base
+    def step
+      1.day
+    end
+    
+    def adjust_to_start_at(time)
+      time.beginning_of_day
+    end
+  end
 end

@@ -76,6 +76,16 @@ $(function() {
 		data: <%=raw @today_report.total_remote_ip_chart.to_json %>,
 		colors: <%=raw @today_report.remote_ip_colors.to_json %>
 	}, defaultDonutOptions));
+
+	Morris.Bar({
+		element: 'this-month-bar-chart',
+		data: <%=raw JSON.pretty_generate(@this_month_report.chart.map { |line| line["day"] = line["start_at"].to_date; line }) %>,
+		ykeys: [ "total_transfer_bytes" ],
+		labels: [ "total_transfer_bytes" ],
+		xkey: 'day',
+		hideHover: 'auto',
+		yLabelFormat: function(y) { return numberToHumanSize(y) }
+	});
 });
 </script>
 <% end %>
@@ -158,4 +168,9 @@ $(function() {
 			<div id="today-donut-chart" class="chart"></div>
 		</div>
 	</div>
+</div>
+
+<div class="widget">
+	<header><h3>当月流量</h3></header>
+	<div id="this-month-bar-chart" class="chart"></div>
 </div>

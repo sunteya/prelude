@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @now = Time.now
     @recent_report = TrafficReport::Minutely.recent(@user.traffics)
     @today_report = TrafficReport::Hourly.today(@user.traffics)
+    @this_month_report = TrafficReport::Daily.this_month(@user.traffics)
   end
   
   def create

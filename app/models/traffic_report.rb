@@ -29,7 +29,7 @@ module TrafficReport
       @remote_ips = []
       @data = {}
       
-      @scope.minutely.where(:start_at.gte => self.range.min.start_at.dup,
+      @scope.where(:start_at.gte => self.range.min.start_at.dup,
                             :start_at.lt => self.range.max.succ.start_at.dup).each do |t|
         period = build_period(t.start_at)
         @data[period] ||= {}
@@ -45,12 +45,14 @@ module TrafficReport
       self.range.map do |period|
         item = {}
         item["start_at"] = period.start_at
+        item["total_transfer_bytes"] = 0
         
         if self.limit.nil? || period <= self.limit
           remote_ips_traffics = @data[period] || {}
           @remote_ips.each do |remote_ip|
             traffics = remote_ips_traffics[remote_ip] || []
             item[remote_ip] = traffics.map(&:total_transfer_bytes).sum
+            item["total_transfer_bytes"] += item[remote_ip]
           end
         end
         
@@ -87,7 +89,7 @@ module TrafficReport
       end_period = build_period(now)
       start_period = build_period(now - 2.hours)
       
-      self.new(scope, (start_period ... end_period)).generate
+      self.new(scope.minutely, (start_period ... end_period)).generate
     end
   end
   
@@ -103,7 +105,25 @@ module TrafficReport
       limit_period = build_period(now)
       start_period = build_period(start_at)
       end_period = build_period(start_at + 1.day)
-      self.new(scope, (start_period ... end_period), limit_period).generate
+      self.new(scope.minutely, (start_period ... end_period), limit_period).generate
+    end
+  end
+
+  class Daily < Base
+
+    def self.build_period(time)
+      Period::Daily.new(time)
+    end
+
+    def self.this_month(scope)
+      now = Time.now
+      start_at = now.beginning_of_month
+      
+      limit_period = build_period(now)
+      start_period = build_period(start_at)
+
+      end_period = build_period(start_at.end_of_month + 1.day)
+      self.new(scope.daily, (start_period ... end_period), limit_period).generate
     end
   end
   
