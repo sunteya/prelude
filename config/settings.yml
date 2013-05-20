@@ -1,21 +1,31 @@
-
+# http://www.mac52ipod.cn/post/watch-youku-tudou-iqiyi-sohu-letv-movie-on-ios-ipad-iphone-in-foreign-country.php
 blacklist:
   # google
   - google.com
+  - google.com.* # google.com.hk
+  - google.cn
+  - gstatic.com
   - googleapis.com
   - googlecode.com
   - appspot.com
   - googleusercontent.com
   - googlesyndication.com
   - googletagservices.com
+  - google-analytics.com
   - doubleclick.net
   - feedburner.com
+
   - blogspot.com
   - blogspot.jp
+  - blogger.com
 
   # youbute
   - youtube.com
   - ytimg.com
+
+  # vimeo
+  - vimeo.com
+  - vimeocdn.com
 
   # dropbox
   # - http://*.dropbox.com* # http://notify7.dropbox.com
@@ -31,6 +41,9 @@ blacklist:
   - tweetmarker.net
   - t.co
 
+  - mobile01.com
+  - slideshare.net
+  - cdn.wallwiz.com
 
 whitelist:
   # sunteya's list
@@ -47,6 +60,8 @@ whitelist:
   - ifanr.com
   - jiaren.org
   - iapps.im
+  - chiphell.com
+  - dgtle.com
   - mzstatic.com
   - phobos.apple.com
 
@@ -122,7 +137,7 @@ whitelist:
   - serving-sys.com
   - legolas-media.com
   - harrenmedianetwork.com
-  - ytimg.com
+  # - ytimg.com too slow
   - google-analytics.com
 
   # Chinese cloud
