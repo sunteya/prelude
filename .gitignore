@@ -20,3 +20,4 @@ config/settings.local.rb
 Gemfile.lock
 allow/
 pcaps/
+test.js
