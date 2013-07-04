@@ -1,7 +1,10 @@
 
 function FindProxyForURL(url, host) {
     var ip_address = '<%= "#{request.host}:#{@user.binding_port}" %>';
-    var proxy = 'PROXY ' + ip_address + '; DIRECT'; // PROXY SOCKS HTTPS DIRECT
+    var proxy = 'PROXY ' + ip_address + ';' + // PROXY SOCKS HTTPS DIRECT
+                'HTTPS ' + ip_address + ';' +
+                'DIRECT'; 
+    
     var direct = 'DIRECT';
     
     // Avoid calling any functions that might invoke the DNS resoultion.

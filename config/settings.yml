@@ -34,6 +34,8 @@ blacklist:
   # facebook
   - facebook.com
   - fbcdn-*.akamaihd.net
+  - fbstatic-*.akamaihd.net
+  - fbexternal-*.akamaihd.net
 
   # twitter
   - twitter.com
@@ -44,6 +46,7 @@ blacklist:
   - mobile01.com
   - slideshare.net
   - cdn.wallwiz.com
+  - bbc.co.uk
 
 whitelist:
   # sunteya's list
@@ -64,6 +67,9 @@ whitelist:
   - dgtle.com
   - mzstatic.com
   - phobos.apple.com
+  - tencent.com
+  - 36krcnd.com
+  - fengbuy.com
 
   # skip top Chinese sites
   # source: 
@@ -170,6 +176,7 @@ whitelist:
   - pengyou.com
   - 360buyimg.com
   - 51buy.com
+  - paipaiimg.com
   - icson.com
 
   # alexa top 500 chinese sites
@@ -185,6 +192,7 @@ whitelist:
   - tmall.com
   - hao123.com
   - tudou.com
+  - jd.com
   - 360buy.com
   - chinaz.com
   - alipay.com
