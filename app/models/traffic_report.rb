@@ -29,8 +29,8 @@ module TrafficReport
       @remote_ips = []
       @data = {}
       
-      @scope.where(:start_at.gte => self.range.min.start_at.dup,
-                            :start_at.lt => self.range.max.succ.start_at.dup).each do |t|
+      @scope.where { (start_at >= self.range.min.start_at.dup) &
+                     (start_at < self.range.max.succ.start_at.dup) }.each do |t|
         period = build_period(t.start_at)
         @data[period] ||= {}
         @remote_ips << t.remote_ip if !@remote_ips.include?(t.remote_ip)

@@ -35,7 +35,7 @@ class TcpdumpImporter
   end
   
   def find_match_bind(port, access_at)
-    Bind.where(:port => port, :start_at.lte => access_at).any_of({ :end_at => nil }, { :end_at.gt => access_at}).first
+    Bind.where{ |q| (q.port == port) & (start_at <= access_at) }.where { (end_at == nil) | (end_at == access_at) }.first
   end
   
   def record_traffics

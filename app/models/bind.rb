@@ -3,8 +3,8 @@ class Bind < ActiveRecord::Base
   
   validates :port, uniqueness: { scope: :end_at }, allow_nil: true, if: :using?
   
-  scope :using, -> { where(end_at: nil) }
-  scope :pending, -> { where(port: nil) }
+  scope :using, ->() { where(end_at: nil) }
+  scope :pending, ->() { where(port: nil) }
   
   def after_initialize
     self.start_at ||= Time.now if new_record?

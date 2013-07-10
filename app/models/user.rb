@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   before_create :ensure_authentication_token
   after_create :apply_binding_and_transfer
   
-  scope :available, -> { where(:transfer_remaining.gt => 0) }
+  scope :available, ->() { where { transfer_remaining > 0 } }
   
   def apply_binding_and_transfer
     if self.binding.nil?

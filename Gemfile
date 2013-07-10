@@ -13,7 +13,8 @@ gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.8'
 gem 'devise_invitable', '~> 1.1.5'
 gem 'strong_parameters', '~> 0.2.1'
-gem "symbolize", "~> 4.3.3"#, :require => 'symbolize/mongoid'
+gem "symbolize", "~> 4.3.3"
+gem 'squeel', '~> 1.0.18'
 
 gem 'cancan', '~> 1.6.8'
 gem 'fume-cancan', '~> 0.0.1'

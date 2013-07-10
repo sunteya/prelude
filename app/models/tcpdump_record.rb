@@ -1,8 +1,8 @@
 class TcpdumpRecord < ActiveRecord::Base
-  
-  scope :ipaddr_is, ->(ipaddr) { any_of({src: ipaddr}, {dst: ipaddr}) }
-  scope :port_is, ->(port) { any_of({sport: port}, {dport: port}) }
-  scope :recent, ->() { desc(:access_at) }
+
+  scope :ipaddr_is, ->(ipaddr) { where { (src == ipaddr) | (dst == ipaddr) } }
+  scope :port_is, ->(port) { where { (sport == port) | (dport == port) } }
+  scope :recent, ->() { order("access_at DESC") }
   
   def access_begin_minute_at
     self.access_at.change(:sec => 0, :usec => 0)

@@ -56,7 +56,7 @@ class Traffic < ActiveRecord::Base
   def self.generate_period_records!(period, start_at, end_at)
     scope = Traffic.where(period: period.to_s).where(start_at: start_at)
     scope.destroy_all
-    Traffic.minutely.where(:start_at.gte => start_at.dup, :start_at.lt => end_at.dup)
+    Traffic.minutely.where { (start_at >= start_at.dup) & (start_at < end_at.dup) }
       .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |attrs|
       tr = scope.new(attrs)
       tr.save!
