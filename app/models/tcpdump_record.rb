@@ -1,17 +1,4 @@
-class TcpdumpRecord
-  include Mongoid::Document
-  include Mongoid::Search
-
-  field :access_at, type: Time
-  field :link_level, type: String # in, out
-  field :src, type: String
-  field :sport, type: Integer
-  field :dst, type: String
-  field :dport, type: Integer
-  field :size, type: Integer
-  
-  field :filename, type: String
-  field :content, type: String
+class TcpdumpRecord < ActiveRecord::Base
   
   scope :ipaddr_is, ->(ipaddr) { any_of({src: ipaddr}, {dst: ipaddr}) }
   scope :port_is, ->(port) { any_of({sport: port}, {dport: port}) }
