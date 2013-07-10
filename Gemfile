@@ -3,15 +3,17 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3.2.13'
 gem 'fume', '~> 0.9.2'
 
+gem 'pg', '~> 0.15'
+
 gem 'mongoid'
-gem 'mongoid_rails_migrations', '~> 1.0.0'
+# gem 'mongoid_rails_migrations', '~> 1.0.0'
 
 gem 'mongoid_search', '~> 0.3.0'
 gem 'devise', '~> 2.2.2'
-gem 'devise-i18n', '~> 0.6.3'
+gem 'devise-i18n', '~> 0.8'
 gem 'devise_invitable', '~> 1.1.5'
-gem 'strong_parameters', '~> 0.1.6'
-gem "symbolize", "~> 4.2.0", :require => 'symbolize/mongoid'
+gem 'strong_parameters', '~> 0.2.1'
+gem "symbolize", "~> 4.3.3", :require => 'symbolize/mongoid'
 
 gem 'cancan', '~> 1.6.8'
 gem 'fume-cancan', '~> 0.0.1'
