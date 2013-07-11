@@ -1,3 +1,6 @@
+## v2.develop
+* 升级到 rails 4
+
 ## v2.2013711 (2013-07-11)
 * 每月流量报表
 * 使用 postgresql 数据库代替 mongodb
