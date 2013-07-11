@@ -17,7 +17,7 @@
 			<td><%= user.binding_port %></td>
 			<td>
 				<%= link_to "编辑", edit_user_path(user, :ok_url => request.url) %>
-				<%= link_to "删除", user_path(user), :method => :delete, :confirm => "确定删除该用户?" %>
+				<%= link_to "删除", user_path(user), :method => :delete, data: { confirm: "确定删除该用户?" } %>
 			</td>
 		</tr>
 		<% end %>

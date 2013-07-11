@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.0'
+gem 'rails-i18n', '~> 0.7'
 gem 'pg', '~> 0.15'
 # gem 'fume', '~> 0.9.2'
 
