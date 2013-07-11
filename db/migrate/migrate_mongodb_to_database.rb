@@ -1,7 +1,6 @@
 ROOT = ::File.expand_path('../../..',  __FILE__)
 require ::File.join(ROOT, 'config/environment')
 
-
 module MongoidModel
   class Bind
     include Mongoid::Document
@@ -96,20 +95,20 @@ DatabaseModel::Traffic.delete_all
 
 MongoidModel::User.all.each do |mongo_user|
   user = DatabaseModel::User.new
-  attrs = mongo_user.attributes.to_h
+  puts "#{mongo_user.email} #{mongo_user.binds.count} #{mongo_user.traffics.count}"
+
+  attrs = mongo_user.attributes.to_hash
   attrs.delete("_id")
   attrs.delete("login")
 
   attrs["created_at"] ||= attrs["updated_at"]
 
-  # binding.pry
-  # dfsdf
-
   user.attributes = attrs
   user.save!
+  # puts "save! user #{user.email} ..."
 
   bind_mapping = {}
-  mongo_user.binds.all.each do |mongo_bind|
+  mongo_user.binds.to_a.each do |mongo_bind|
     bind = DatabaseModel::Bind.new
     bind.port = mongo_bind.port
     bind.start_at = mongo_bind.start_at
@@ -118,9 +117,10 @@ MongoidModel::User.all.each do |mongo_user|
     bind.save!
 
     bind_mapping[mongo_bind.id] == bind
+    # puts "save! bind #{user.email} #{bind.port} ..."
   end
 
-  mongo_user.traffics.all.each do |mongo_traffic|
+  mongo_user.traffics.to_a.each do |mongo_traffic|
     traffic = DatabaseModel::Traffic.new
     traffic.start_at = mongo_traffic.start_at
     traffic.period = mongo_traffic.period
@@ -132,6 +132,8 @@ MongoidModel::User.all.each do |mongo_user|
     traffic.user_id = user.id
     traffic.bind_id = bind_mapping[mongo_traffic.bind_id].try(:id)
     traffic.save!
+
+    # puts "save! traffic #{user.email} #{traffic.start_at} ..."
   end
 end
 
