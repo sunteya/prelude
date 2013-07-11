@@ -7,6 +7,5 @@ set :shared, %w{
   allow
   pcaps
   config/mail.yml
-  config/mongoid.yml
   config/database.yml
 }
