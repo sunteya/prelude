@@ -53,8 +53,8 @@ module TrafficReport
           remote_ips_traffics = @data[period] || {}
           @remote_ips.each do |remote_ip|
             traffics = remote_ips_traffics[remote_ip] || []
-            item[remote_ip] = traffics.map(&:total_transfer_bytes).sum
-            item["total_transfer_bytes"] += item[remote_ip]
+            item[remote_ip] = traffics.map(&:total_transfer_bytes).sum.to_i
+            item["total_transfer_bytes"] += item[remote_ip].to_i
           end
         end
         
@@ -71,11 +71,11 @@ module TrafficReport
           total[remote_ip] += traffics.map(&:total_transfer_bytes).sum
         end
       end
-      
+
       @remote_ips.map do |remote_ip|
         {
           label: remote_ip,
-          value: total[remote_ip] || 0
+          value: (total[remote_ip] || 0).to_i
         }
       end
     end

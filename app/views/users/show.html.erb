@@ -8,86 +8,6 @@
 	margin: 0.5em 0;
 }
 </style>
-<script>
-
-function numberToHumanSize(bytes) {
-	if (bytes == null) {
-		return "-";
-	}
-	
-	var precision = 2;
-	var kilobyte = 1024;
-	var megabyte = kilobyte * 1024;
-	var gigabyte = megabyte * 1024;
-	var terabyte = gigabyte * 1024;
-
-	if ((bytes >= kilobyte) && (bytes < megabyte)) {
-		return (bytes / kilobyte).toFixed(precision) + ' KB';
-
-	} else if ((bytes >= megabyte) && (bytes < gigabyte)) {
-		return (bytes / megabyte).toFixed(precision) + ' MB';
-
-	} else if ((bytes >= gigabyte) && (bytes < terabyte)) {
-		return (bytes / gigabyte).toFixed(precision) + ' GB';
-
-	} else if (bytes >= terabyte) {
-		return (bytes / terabyte).toFixed(precision) + ' TB';
-
-	} else {
-		return bytes + ' B';
-	}
-}
-
-$(function() {
-	
-	var defaultAreaOptions = {
-		hideHover: 'auto',
-		xkey: 'start_at',
-		pointSize: 0,
-		lineWidth: 1,
-		yLabelFormat: function(y) { return numberToHumanSize(y) }
-	}
-	
-	var defaultDonutOptions = {
-		formatter: function(y, data) { return numberToHumanSize(y) }
-	}
-	
-	Morris.Area($.extend({
-		element: 'recent-area-chart',
-		data: <%=raw JSON.pretty_generate(@recent_report.chart) %>,
-		goals: [ 2 * 1024 * 1024 ],
-		ykeys: <%=raw @recent_report.remote_ips.to_json %>,
-		labels:  <%=raw @recent_report.remote_ips.to_json %>,
-		lineColors: <%=raw @recent_report.remote_ip_colors.to_json %>
-	}, defaultAreaOptions));
-	
-	Morris.Area($.extend({
-		element: 'today-area-chart',
-		data: <%=raw JSON.pretty_generate(@today_report.chart) %>,
-		goals: [ 50 * 1024 * 1024 ],
-		ykeys: <%=raw @today_report.remote_ips.to_json %>,
-		labels:  <%=raw @today_report.remote_ips.to_json %>,
-		lineColors: <%=raw @today_report.remote_ip_colors.to_json %>,
-		events: [ <%=raw @today_report.limit.start_at.to_json %> ]
-	}, defaultAreaOptions));
-	
-	Morris.Donut($.extend({
-		element: 'today-donut-chart',
-		data: <%=raw @today_report.total_remote_ip_chart.to_json %>,
-		colors: <%=raw @today_report.remote_ip_colors.to_json %>
-	}, defaultDonutOptions));
-
-	Morris.Bar({
-		element: 'this-month-bar-chart',
-		data: <%=raw JSON.pretty_generate(@this_month_report.chart.map { |line| line["day"] = line["start_at"].to_date; line }) %>,
-		ykeys: [ "total_transfer_bytes" ],
-		labels: [ "total_transfer_bytes" ],
-		xkey: 'day',
-		hideHover: 'auto',
-		yLabelFormat: function(y) { return numberToHumanSize(y) }
-	});
-});
-</script>
 <% end %>
 
 
@@ -174,3 +94,52 @@ $(function() {
 	<header><h3>当月流量</h3></header>
 	<div id="this-month-bar-chart" class="chart"></div>
 </div>
+
+<script>
+var defaultAreaOptions = {
+	hideHover: 'auto',
+	xkey: 'start_at',
+	pointSize: 0,
+	lineWidth: 1,
+	yLabelFormat: function(y) { return numberToHumanSize(y) }
+}
+
+var defaultDonutOptions = {
+	formatter: function(y, data) { return numberToHumanSize(y) }
+}
+
+Morris.Area($.extend({
+	element: 'recent-area-chart',
+	data: <%=raw JSON.pretty_generate(@recent_report.chart) %>,
+	goals: [ 2 * 1024 * 1024 ],
+	ykeys: <%=raw @recent_report.remote_ips.to_json %>,
+	labels:  <%=raw @recent_report.remote_ips.to_json %>,
+	lineColors: <%=raw @recent_report.remote_ip_colors.to_json %>
+}, defaultAreaOptions));
+
+Morris.Area($.extend({
+	element: 'today-area-chart',
+	data: <%=raw JSON.pretty_generate(@today_report.chart) %>,
+	goals: [ 50 * 1024 * 1024 ],
+	ykeys: <%=raw @today_report.remote_ips.to_json %>,
+	labels:  <%=raw @today_report.remote_ips.to_json %>,
+	lineColors: <%=raw @today_report.remote_ip_colors.to_json %>,
+	events: [ <%=raw @today_report.limit.start_at.to_json %> ]
+}, defaultAreaOptions));
+
+Morris.Donut($.extend({
+	element: 'today-donut-chart',
+	data: <%=raw @today_report.total_remote_ip_chart.to_json %>,
+	colors: <%=raw @today_report.remote_ip_colors.to_json %>
+}, defaultDonutOptions));
+
+Morris.Bar({
+	element: 'this-month-bar-chart',
+	data: <%=raw JSON.pretty_generate(@this_month_report.chart.map { |line| line["day"] = line["start_at"].to_date; line }) %>,
+	ykeys: [ "total_transfer_bytes" ],
+	labels: [ "total_transfer_bytes" ],
+	xkey: 'day',
+	hideHover: 'auto',
+	yLabelFormat: function(y) { return numberToHumanSize(y) }
+});
+</script>
