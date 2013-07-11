@@ -8,4 +8,5 @@ set :shared, %w{
   pcaps
   config/mail.yml
   config/mongoid.yml
+  config/database.yml
 }
