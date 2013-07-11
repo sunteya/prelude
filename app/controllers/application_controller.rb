@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def access_denied
+  def redirect_to_ok_url_or_default(default)
+    redirect_to params[:ok_url] || default
   end
 end
