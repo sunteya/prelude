@@ -14,7 +14,12 @@ Prelude::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  mail_settings = YAML.load(Rails.root.join("config/mail.yml").read)
+  mail_settings[Rails.env].each_pair do |name, value|
+    config.action_mailer.send("#{name}=", value)
+  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
