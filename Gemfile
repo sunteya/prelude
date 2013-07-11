@@ -5,10 +5,8 @@ gem 'fume', '~> 0.9.2'
 
 gem 'pg', '~> 0.15'
 
-# gem 'mongoid'
-# gem 'mongoid_rails_migrations', '~> 1.0.0'
+gem 'mongoid'
 
-# gem 'mongoid_search', '~> 0.3.0'
 gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.8'
 gem 'devise_invitable', '~> 1.1.5'
