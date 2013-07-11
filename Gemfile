@@ -4,34 +4,36 @@ gem 'rails', '~> 4.0.0'
 gem 'pg', '~> 0.15'
 # gem 'fume', '~> 0.9.2'
 
+# Core
+gem 'cancan', '~> 1.6.10'
+gem 'fume-cancan', '~> 0.0.1'
+gem 'devise', '~> 3.0.0.rc'
+gem 'devise-i18n', '~> 0.8'
+gem 'devise_invitable', git: 'https://github.com/scambra/devise_invitable.git', branch: 'rails4'
 
-# gem 'devise', '~> 2.2.2'
-# gem 'devise-i18n', '~> 0.8'
-# gem 'devise_invitable', '~> 1.1.5'
-# gem 'strong_parameters', '~> 0.2.1'
-# gem "symbolize", "~> 4.3.3"
-# gem 'squeel', '~> 1.0.18'
+# Model
+gem "symbolize", "~> 4.3.3"
+gem 'squeel', git: 'https://github.com/ernie/squeel.git'
 
-# gem 'cancan', '~> 1.6.8'
-# gem 'fume-cancan', '~> 0.0.1'
-# gem 'kaminari', '~> 0.14.1'
-# gem 'bootstrap-kaminari-views', '~> 0.0.2'
-# gem 'simple_form', '~> 2.0.4'
-# gem 'fume-settable', '~> 0.0.2'
+# View
+gem 'kaminari', '~> 0.14.1'
+gem 'bootstrap-kaminari-views', '~> 0.0.2'
+gem 'simple_form', '~> 3.0.0.rc'
 
-# gem 'whenever', '~> 0.8.2'
 
-# group :development, :test do
-#   gem 'fume-dev', '~> 0.2.1'
-#   gem 'rspec-rails', '~> 2.12.2'
-#   gem 'factory_girl_rails', '~> 4.2.0'
-# end
+# Utils
+gem 'fume-settable', '~> 0.0.2'
+gem 'whenever', '~> 0.8.2'
+
+group :development, :test do
+  gem 'fume-dev', '~> 0.2.1'
+end
 
 # Assets
-# gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.0'
 # gem 'turbolinks'
-# gem 'bootstrap-sass', '~> 2.2.2.0'
-# gem 'compass-rails', '~> 1.0.3'
+gem 'bootstrap-sass', '~> 2.3.2'
+gem 'compass-rails', git: 'https://github.com/milgner/compass-rails.git', branch: 'rails4'
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
