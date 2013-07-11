@@ -24,7 +24,7 @@ gem 'simple_form', '~> 3.0.0.rc'
 
 # Utils
 gem 'fume-settable', '~> 0.0.2'
-gem 'whenever', '~> 0.8.2'
+gem 'whenever', require: false, git: 'https://github.com/christophermanning/whenever.git', branch: 'rails4_bin_path'
 
 group :development, :test do
   gem 'fume-dev', '~> 0.2.1'
