@@ -2,10 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.13'
 gem 'fume', '~> 0.9.2'
-
 gem 'pg', '~> 0.15'
 
-gem 'mongoid'
 
 gem 'devise', '~> 2.2.2'
 gem 'devise-i18n', '~> 0.8'
