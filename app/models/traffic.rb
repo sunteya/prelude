@@ -2,7 +2,7 @@ class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind
   
-  symbolize :period, :in => [:minutely, :hourly, :daily], :scopes => true
+  symbolize :period, in: [:minutely, :hourly, :daily], scopes: :shallow
 
   before_save :build_total_transfer_bytes
   
