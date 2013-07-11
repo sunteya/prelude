@@ -1,19 +1,9 @@
-class Traffic
-  include Mongoid::Document
-  include Mongoid::Search
-  include Mongoid::Symbolize
-
+class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind
   
-  field :start_at, type: Time
-  symbolize :period, :in => [:minutely, :hourly, :daily], :scopes => true
-  field :remote_ip, type: String
-  
-  field :incoming_bytes, type: Integer, default: 0
-  field :outgoing_bytes, type: Integer, default: 0
-  field :total_transfer_bytes, type: Integer
-  
+  symbolize :period, in: [:minutely, :hourly, :daily], scopes: :shallow
+
   before_save :build_total_transfer_bytes
   
   def build_total_transfer_bytes
@@ -21,36 +11,14 @@ class Traffic
   end
   
   def self.sum_transfer_bytes(groups = [])
-    mappings = groups.map { |column| "          #{column}: this.#{column}" }.join(",\n")
-    
-    map = %Q{
-      function() {
-        emit({ 
-          #{mappings}
-        }, {
-          incoming_bytes: this.incoming_bytes,
-          outgoing_bytes: this.outgoing_bytes
-        })
-      }
-    }
+    select_columns = [
+      "SUM(total_transfer_bytes) AS total_transfer_bytes",
+      "SUM(incoming_bytes) AS incoming_bytes",
+      "SUM(outgoing_bytes) AS outgoing_bytes"
+    ]
+    select_columns += groups
 
-    reduce = %Q{
-      function(key,values) {
-        var result = { 
-          total_transfer_bytes: 0,
-          incoming_bytes: 0,
-          outgoing_bytes: 0
-        }
-        values.forEach(function(value) {
-          result.incoming_bytes += value.incoming_bytes;
-          result.outgoing_bytes += value.outgoing_bytes;
-        });
-        result.total_transfer_bytes = result.incoming_bytes + result.outgoing_bytes;
-        return result;
-      }
-    }
-    
-    self.map_reduce(map, reduce).out(inline: 1).map { |r| r["_id"].merge(r["value"]) }
+    group(groups).select(select_columns.join(", "))
   end
   
   def self.generate_hourly_records!(time_at)
@@ -66,9 +34,10 @@ class Traffic
   def self.generate_period_records!(period, start_at, end_at)
     scope = Traffic.where(period: period.to_s).where(start_at: start_at)
     scope.destroy_all
-    Traffic.minutely.where(:start_at.gte => start_at.dup, :start_at.lt => end_at.dup)
-      .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |attrs|
-      tr = scope.new(attrs)
+    
+    Traffic.minutely.where { |q| (q.start_at >= start_at.dup) & (q.start_at < end_at.dup) }
+      .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |grouped_traffic|
+      tr = scope.new(grouped_traffic.attributes)
       tr.save!
     end
   end

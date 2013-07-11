@@ -1,21 +1,8 @@
-class TcpdumpRecord
-  include Mongoid::Document
-  include Mongoid::Search
+class TcpdumpRecord < ActiveRecord::Base
 
-  field :access_at, type: Time
-  field :link_level, type: String # in, out
-  field :src, type: String
-  field :sport, type: Integer
-  field :dst, type: String
-  field :dport, type: Integer
-  field :size, type: Integer
-  
-  field :filename, type: String
-  field :content, type: String
-  
-  scope :ipaddr_is, ->(ipaddr) { any_of({src: ipaddr}, {dst: ipaddr}) }
-  scope :port_is, ->(port) { any_of({sport: port}, {dport: port}) }
-  scope :recent, ->() { desc(:access_at) }
+  scope :ipaddr_is, ->(ipaddr) { where { (src == ipaddr) | (dst == ipaddr) } }
+  scope :port_is, ->(port) { where { (sport == port) | (dport == port) } }
+  scope :recent, ->() { order("access_at DESC") }
   
   def access_begin_minute_at
     self.access_at.change(:sec => 0, :usec => 0)

@@ -35,7 +35,7 @@ class TcpdumpImporter
   end
   
   def find_match_bind(port, access_at)
-    Bind.where(:port => port, :start_at.lte => access_at).any_of({ :end_at => nil }, { :end_at.gt => access_at}).first
+    Bind.where{ |q| (q.port == port) & (q.start_at <= access_at) }.where { (end_at == nil) | (end_at == access_at) }.first
   end
   
   def record_traffics
@@ -50,7 +50,7 @@ class TcpdumpImporter
       
       
       user = bind.user
-      scope = Traffic.where(user: user, bind: bind).where(start_at: access_at, period: :minutely, remote_ip: remote_ip)
+      scope = Traffic.where(user_id: user, bind_id: bind).where(start_at: access_at, period: 'minutely', remote_ip: remote_ip)
       traffic = scope.first || scope.new
       
       traffic.incoming_bytes += data[:incoming]

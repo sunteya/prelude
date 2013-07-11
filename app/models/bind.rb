@@ -1,17 +1,16 @@
-class Bind
-  include Mongoid::Document
-  include Mongoid::Search
-
+class Bind < ActiveRecord::Base
   belongs_to :user
-  field :port, type: Integer
-  field :start_at, type: Time, default: -> { Time.now } 
-  field :end_at, :type => Time
   
   validates :port, uniqueness: { scope: :end_at }, allow_nil: true, if: :using?
   
-  scope :using, -> { where(end_at: nil) }
-  scope :pending, -> { where(port: nil) }
+  scope :using, ->() { where(end_at: nil) }
+  scope :pending, ->() { where(port: nil) }
   
+  def after_initialize
+    self.start_at ||= Time.now if new_record?
+  end
+
+
   def close
     self.end_at = Time.now if self.end_at.nil?
     save
