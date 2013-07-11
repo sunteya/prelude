@@ -2,7 +2,7 @@ class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind
   
-  symbolize :period, in: [:minutely, :hourly, :daily], scopes: :shallow
+  symbolize :period, in: [:minutely, :hourly, :daily], scopes: true
 
   before_save :build_total_transfer_bytes
   
@@ -35,7 +35,7 @@ class Traffic < ActiveRecord::Base
     scope = Traffic.where(period: period.to_s).where(start_at: start_at)
     scope.destroy_all
     
-    Traffic.minutely.where { |q| (q.start_at >= start_at.dup) & (q.start_at < end_at.dup) }
+    Traffic.period('minutely').where { |q| (q.start_at >= start_at.dup) & (q.start_at < end_at.dup) }
       .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |grouped_traffic|
       tr = scope.new(grouped_traffic.attributes)
       tr.save!

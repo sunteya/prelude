@@ -91,7 +91,7 @@ module TrafficReport
       end_period = build_period(now)
       start_period = build_period(now - 2.hours)
       
-      self.new(scope.minutely, (start_period ... end_period)).generate
+      self.new(scope.period('minutely'), (start_period ... end_period)).generate
     end
   end
   
@@ -107,7 +107,7 @@ module TrafficReport
       limit_period = build_period(now)
       start_period = build_period(start_at)
       end_period = build_period(start_at + 1.day)
-      self.new(scope.minutely, (start_period ... end_period), limit_period).generate
+      self.new(scope.period('minutely'), (start_period ... end_period), limit_period).generate
     end
   end
 
@@ -125,7 +125,7 @@ module TrafficReport
       start_period = build_period(start_at)
 
       end_period = build_period(start_at.end_of_month + 1.day)
-      self.new(scope.daily, (start_period ... end_period), limit_period).generate
+      self.new(scope.period('daily'), (start_period ... end_period), limit_period).generate
     end
   end
   
