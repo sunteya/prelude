@@ -9,6 +9,6 @@ Prelude::Application.routes.draw do
   
   get "/whitelist" => "main#whitelist"
   get "/blacklist" => "main#blacklist"
-  match "/grant" => "main#grant"
+  post "/grant" => "main#grant"
   
 end
