@@ -20,6 +20,7 @@ gem 'squeel', git: 'https://github.com/ernie/squeel.git'
 gem 'kaminari', '~> 0.14.1'
 gem 'bootstrap-kaminari-views', '~> 0.0.2'
 gem 'simple_form', '~> 3.0.0.rc'
+gem 'jbuilder', '~> 1.2.0'
 
 
 # Utils

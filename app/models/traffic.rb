@@ -1,10 +1,36 @@
+# == Schema Information
+#
+# Table name: traffics
+#
+#  id                           :integer          not null, primary key
+#  user_id                      :integer
+#  bind_id                      :integer
+#  start_at                     :datetime
+#  period                       :string(255)
+#  remote_ip                    :string(255)
+#  incoming_bytes               :integer          default(0)
+#  outgoing_bytes               :integer          default(0)
+#  total_transfer_bytes         :integer          default(0)
+#  calculate_transfer_remaining :boolean          default(FALSE)
+#  upcode                       :string(255)
+#
+
 class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind
   
-  symbolize :period, in: [:minutely, :hourly, :daily], scopes: true
+  symbolize :period, in: [:minutely, :hourly, :daily], scopes: true # immediate, realtime
+  validates :upcode, uniqueness: true, allow_blank: true
 
   before_save :build_total_transfer_bytes
+  after_save :cascade_user_transfer_remaining, if: :calculate_transfer_remaining
+
+  def cascade_user_transfer_remaining
+    if total_transfer_bytes_changed?
+      transfer_bytes = total_transfer_bytes - total_transfer_bytes_was
+      user.consume(transfer_bytes)
+    end
+  end
   
   def build_total_transfer_bytes
     self.total_transfer_bytes = self.incoming_bytes + self.outgoing_bytes

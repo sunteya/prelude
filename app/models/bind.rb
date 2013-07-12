@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: binds
+#
+#  id       :integer          not null, primary key
+#  user_id  :integer
+#  port     :integer
+#  start_at :datetime
+#  end_at   :datetime
+#
+
 class Bind < ActiveRecord::Base
   belongs_to :user
   
