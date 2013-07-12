@@ -12,5 +12,14 @@ Prelude::Application.routes.draw do
   get "/whitelist" => "main#whitelist"
   get "/blacklist" => "main#blacklist"
   post "/grant" => "main#grant"
+
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: :index do
+        patch :batch_update, on: :collection
+      end
+    end
+  end
   
 end
