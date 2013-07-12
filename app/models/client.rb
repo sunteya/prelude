@@ -18,7 +18,7 @@ class Client < ActiveRecord::Base
   validates :access_token, presence: true, uniqueness: true
 
   def ensure_access_token
-    self.access_token = SecureRandom.hex(32) if access_token.blank?
+    self.access_token = SecureRandom.hex(16) if access_token.blank?
   end
 
 end
