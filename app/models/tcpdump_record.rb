@@ -9,7 +9,7 @@
 #  sport      :integer
 #  dst        :string(255)
 #  dport      :integer
-#  size       :decimal(, )
+#  size       :integer
 #  filename   :string(255)
 #  content    :string(255)
 #

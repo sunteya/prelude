@@ -16,8 +16,8 @@ Prelude::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: :index do
-        patch :batch_update, on: :collection
+      resources :users do
+        resources :traffics
       end
     end
   end

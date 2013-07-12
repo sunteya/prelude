@@ -18,14 +18,15 @@
 #  updated_at             :datetime         not null
 #  superadmin             :boolean          default(FALSE)
 #  memo                   :string(255)
-#  transfer_remaining     :decimal(, )      default(0.0)
-#  monthly_transfer       :decimal(, )      default(2147483648.0)
+#  transfer_remaining     :integer          default(0)
+#  monthly_transfer       :integer          default(2147483648)
 #  invitation_token       :string(60)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  lock_version           :integer          default(0)
 #
 
 class User < ActiveRecord::Base
@@ -65,6 +66,11 @@ class User < ActiveRecord::Base
   
   def recharge
     self.transfer_remaining = self.monthly_transfer if self.monthly_transfer
+    self.save
+  end
+
+  def consume(bytes)
+    self.transfer_remaining -= bytes
     self.save
   end
   

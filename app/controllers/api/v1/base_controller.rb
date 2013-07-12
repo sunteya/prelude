@@ -5,7 +5,15 @@ class Api::V1::BaseController < ApplicationController
 protected
   def current_client
     return @current_client if defined?(@current_client)
-    @current_client = Client.where(access_token: params[:access_token]).first
+    @current_client = Client.where(access_token: from_access_token_param || from_access_token_header).first
+  end
+
+  def from_access_token_param
+     request.parameters[:access_token]
+  end
+
+  def from_access_token_header
+    request.headers['X-Access-Token']
   end
 
   def verify_client_access_token
