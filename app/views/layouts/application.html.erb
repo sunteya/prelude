@@ -18,9 +18,8 @@
 			<% if current_user %>
 				<% if can? :manage, :admin %>
 				<ul class="nav">
-					<li class="">
-						<%= link_to "用户管理", users_path %>
-					</li>
+					<li class=""><%= link_to "用户管理", users_path %></li>
+					<li class=""><%= link_to "客户端管理", clients_path %></li>
 				</ul>
 				<% end %>
 			<ul class="nav pull-right">
