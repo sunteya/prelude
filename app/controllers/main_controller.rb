@@ -1,5 +1,6 @@
 class MainController < ApplicationController
   before_filter :authenticate_user!, except: :grant
+  skip_before_action :verify_authenticity_token, only: :grant
   
   def root
     redirect_to current_user
