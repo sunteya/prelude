@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: traffics
+#
+#  id                   :integer          not null, primary key
+#  user_id              :integer
+#  bind_id              :integer
+#  start_at             :datetime
+#  period               :string(255)
+#  remote_ip            :string(255)
+#  incoming_bytes       :decimal(, )      default(0.0)
+#  outgoing_bytes       :decimal(, )      default(0.0)
+#  total_transfer_bytes :decimal(, )
+#
+
 class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind

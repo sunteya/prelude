@@ -47,6 +47,7 @@ blacklist:
   - slideshare.net
   - cdn.wallwiz.com
   - bbc.co.uk
+  - xsellize.com
 
 whitelist:
   # sunteya's list
