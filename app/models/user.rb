@@ -67,11 +67,17 @@ class User < ActiveRecord::Base
   def recharge
     self.transfer_remaining = self.monthly_transfer if self.monthly_transfer
     self.save
+  rescue ActiveRecord::StaleObjectError
+    self.reload
+    retry
   end
 
   def consume(bytes)
     self.transfer_remaining -= bytes
     self.save
+  rescue ActiveRecord::StaleObjectError
+    self.reload
+    retry
   end
   
 end

@@ -19,23 +19,39 @@ class Traffic < ActiveRecord::Base
   belongs_to :user
   belongs_to :bind
   
-  symbolize :period, in: [:minutely, :hourly, :daily], scopes: true # immediate, realtime
+  symbolize :period, in: [:minutely, :hourly, :daily, :immediate], scopes: true
   validates :upcode, uniqueness: true, allow_blank: true
 
   before_save :build_total_transfer_bytes
-  after_save :cascade_user_transfer_remaining, if: :calculate_transfer_remaining
-
-  def cascade_user_transfer_remaining
-    if total_transfer_bytes_changed?
-      transfer_bytes = total_transfer_bytes - total_transfer_bytes_was
-      user.consume(transfer_bytes)
-    end
-  end
+  after_save :cascade_calculate_transfer, if: :require_calculate_transfer?
   
   def build_total_transfer_bytes
     self.total_transfer_bytes = self.incoming_bytes + self.outgoing_bytes
   end
-  
+
+  def require_calculate_transfer?
+    self.period == :immediate
+  end
+
+  def cascade_calculate_transfer
+    if self.incoming_bytes_changed? || self.outgoing_bytes_changed?
+      transfer_bytes = self.total_transfer_bytes - self.total_transfer_bytes_was
+      self.user.consume(transfer_bytes) if transfer_bytes != 0
+      self.cascade_calculate_traffic_report
+    end
+  end
+
+  def cascade_calculate_traffic_report
+    access_at = self.start_at.change(:sec => 0, :usec => 0)
+    traffic = Traffic.where(period: 'minutely', user_id: self.user_id, 
+                            start_at: access_at, remote_ip: self.remote_ip).first_or_create
+
+    traffic.incoming_bytes += self.incoming_bytes_bytes - self.incoming_bytes_was
+    traffic.outgoing_bytes += self.outgoing_bytes_bytes - self.outgoing_bytes_was
+  rescue ActiveRecord::StaleObjectError
+    retry
+  end
+
   def self.sum_transfer_bytes(groups = [])
     select_columns = [
       "SUM(total_transfer_bytes) AS total_transfer_bytes",
