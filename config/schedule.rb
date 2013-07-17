@@ -29,5 +29,3 @@ end
 every :monthly do
   runner "User.all.each(&:recharge)"
 end
-
-# Learn more: http://github.com/javan/whenever

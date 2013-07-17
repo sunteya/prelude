@@ -11,7 +11,6 @@ Prelude::Application.routes.draw do
   
   get "/whitelist" => "main#whitelist"
   get "/blacklist" => "main#blacklist"
-  post "/grant" => "main#grant"
 
 
   namespace :api do
