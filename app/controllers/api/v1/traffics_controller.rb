@@ -5,7 +5,7 @@ class Api::V1::TrafficsController < Api::V1::BaseController
       return render status: :not_found, json: { error_code: 'user_not_found' }
     end
 
-    upcode = params[:traffic][:upcode]
+    upcode = params[:traffic].delete(:upcode)
     @traffic = @user.traffics.where(upcode: upcode).first_or_initialize
     @traffic.attributes = traffic_params
 

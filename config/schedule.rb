@@ -17,10 +17,6 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.minute do
-  runner "TcpdumpImporter.import_all"
-end
-
 every :hour do
   runner "Traffic.generate_hourly_records!(Time.now - 1.hour)"
 end
