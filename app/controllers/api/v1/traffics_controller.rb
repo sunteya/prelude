@@ -4,10 +4,9 @@ class Api::V1::TrafficsController < Api::V1::BaseController
     upcode = params[:traffic][:upcode]
     @traffic = @user.traffics.where(upcode: upcode).first_or_initialize
     @traffic.attributes = traffic_params
-    @traffic.calculate_transfer_remaining = true
 
     if @traffic.save
-      render status: :created, json: {}
+      render status: :created
     else
       render status: :unprocessable_entity, json: { message: @traffic.errors.full_messages }
     end
