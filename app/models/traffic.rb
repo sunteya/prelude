@@ -46,8 +46,9 @@ class Traffic < ActiveRecord::Base
     traffic = Traffic.where(period: 'minutely', user_id: self.user_id, 
                             start_at: access_at, remote_ip: self.remote_ip).first_or_create
 
-    traffic.incoming_bytes += self.incoming_bytes_bytes - self.incoming_bytes_was
-    traffic.outgoing_bytes += self.outgoing_bytes_bytes - self.outgoing_bytes_was
+    traffic.incoming_bytes += self.incoming_bytes - self.incoming_bytes_was
+    traffic.outgoing_bytes += self.outgoing_bytes - self.outgoing_bytes_was
+    traffic.save!
   rescue ActiveRecord::StaleObjectError
     retry
   end
