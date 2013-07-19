@@ -36,15 +36,15 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable
-  
-  has_many :binds
+
   has_many :traffics
 
   before_create :ensure_authentication_token
   before_create :ensure_binding_port
   after_create :apply_binding_and_transfer
   
-  scope :available, ->() { where { transfer_remaining > 0 } }
+  scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
+  scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
   
   def apply_binding_and_transfer
     if self.binding.nil?
