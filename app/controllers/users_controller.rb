@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params.permit)
       flash[:notice] = 'User was successfully updated.'
-      redirect_to_ok_url_or_default users_path
+      redirect_to_ok_url_or_default user_path(@user)
     else
       render :edit
     end

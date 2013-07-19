@@ -27,6 +27,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  lock_version           :integer          default(0)
+#  binding_port           :integer
 #
 
 class User < ActiveRecord::Base
@@ -35,31 +36,29 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable
-  
-  has_many :binds
+
   has_many :traffics
-  
+
   before_create :ensure_authentication_token
-  after_create :apply_binding_and_transfer
+  before_create :ensure_monthly_transfer_on_create
+  before_save   :ensure_binding_port
   
-  scope :available, ->() { where { transfer_remaining > 0 } }
+  scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
+  scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
   
-  def apply_binding_and_transfer
-    if self.binding.nil?
-      self.binds.create
-      self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
-      self.save!
+  def ensure_monthly_transfer_on_create
+    self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
+  end
+  
+  def ensure_binding_port
+    if binding_port.nil?
+      begin
+        port = rand(30000..50000)
+      end while User.where(binding_port: port).exists?
+      self.binding_port = port
     end
   end
-  
-  def binding
-    binds.using.first
-  end
-  
-  def binding_port
-    binding.port if binding
-  end
-  
+
   def password_required?
     !persisted? || !password.blank? || !password_confirmation.blank?
   end

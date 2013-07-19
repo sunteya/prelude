@@ -13,6 +13,7 @@
 #  total_transfer_bytes         :integer          default(0)
 #  calculate_transfer_remaining :boolean          default(FALSE)
 #  upcode                       :string(255)
+#  lock_version                 :integer          default(0)
 #
 
 class Traffic < ActiveRecord::Base

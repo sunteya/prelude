@@ -25,36 +25,22 @@
 				</span>
 			</h4>
 			
-			<h4>代理地址:</h4>
-			<% if (binding = @user.binding) %>
-				<% if binding.port %>
-					<p><code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
-					<p><code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code></p>
-					<p>
-						<code><%= "http://#{Client.first.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
-						<%= link_to "更换端口", [@user, :binding], method: 'post', class: "btn btn-mini", confirm: '确定是否更换端口?' %>
-					</p>
-				<% else %>
-					<p>已经申请, 等待端口分配</p>
-				<% end %>
-			<% else %>
-				<p>
-					<%= link_to "申请端口", [@user, :binding], method: 'post', class: "btn" %>
-				</p>
-			<% end %>
+			<h4>HTTP 代理:</h4>
+			<p>
+				<code><%= "http://#{Client.first.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
+				<%= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-mini", confirm: '确定是否更换端口?' %>
+			</p>
 			
-			<% if binding && binding.port %>
-				<h4>PAC 代理:</h4>
-				<p>
-					<label>白名单(whitelist):</label>
-					<code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code>
-				</p>
-				<p>
-					<label>黑名单(blacklist):</label>
-					<code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code>
-				</p>
-				<!-- <p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p> -->
-			<% end %>
+			<h4>PAC 代理:</h4>
+			<p>
+				<label>白名单(whitelist):</label>
+				<code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+			</p>
+			<p>
+				<label>黑名单(blacklist):</label>
+				<code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+			</p>
+			<!-- <p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p> -->
 		</div>
 		<div class="span5 faq">
 <!--
