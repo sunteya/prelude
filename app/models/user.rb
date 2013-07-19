@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     if binding_port.nil?
       begin
         port = rand(30000..50000)
-      end User.where(binding_port: port).exists?
+      end while User.where(binding_port: port).exists?
       self.binding_port = port
     end
   end
