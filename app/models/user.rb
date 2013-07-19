@@ -27,6 +27,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  lock_version           :integer          default(0)
+#  binding_port           :integer
 #
 
 class User < ActiveRecord::Base
@@ -38,8 +39,9 @@ class User < ActiveRecord::Base
   
   has_many :binds
   has_many :traffics
-  
+
   before_create :ensure_authentication_token
+  before_create :ensure_binding_port
   after_create :apply_binding_and_transfer
   
   scope :available, ->() { where { transfer_remaining > 0 } }
@@ -60,6 +62,15 @@ class User < ActiveRecord::Base
     binding.port if binding
   end
   
+  def ensure_binding_port
+    if binding_port.nil?
+      begin
+        port = rand(30000..50000)
+      end User.where(binding_port: port).exists?
+      self.binding_port = port
+    end
+  end
+
   def password_required?
     !persisted? || !password.blank? || !password_confirmation.blank?
   end
