@@ -40,26 +40,14 @@ class User < ActiveRecord::Base
   has_many :traffics
 
   before_create :ensure_authentication_token
-  before_create :ensure_binding_port
-  after_create :apply_binding_and_transfer
+  before_create :ensure_monthly_transfer_on_create
+  before_save   :ensure_binding_port
   
   scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
   scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
   
-  def apply_binding_and_transfer
-    if self.binding.nil?
-      self.binds.create
-      self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
-      self.save!
-    end
-  end
-  
-  def binding
-    binds.using.first
-  end
-  
-  def binding_port
-    binding.port if binding
+  def ensure_monthly_transfer_on_create
+    self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
   end
   
   def ensure_binding_port
