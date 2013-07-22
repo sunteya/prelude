@@ -11,6 +11,7 @@ gem 'fume-cancan', '~> 0.0.1'
 gem 'devise', '~> 3.0.0.rc'
 gem 'devise-i18n', '~> 0.8'
 gem 'devise_invitable', git: 'https://github.com/scambra/devise_invitable.git', branch: 'rails4'
+gem "ransack", git: "https://github.com/ernie/ransack.git", branch: "rails-4"
 
 # Model
 gem "symbolize", "~> 4.3.3"

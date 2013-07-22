@@ -19,5 +19,11 @@ module ApplicationHelper
     subdomains.unshift(prefix)
     subdomains.join(".")
   end
+
+  def number_to_human_size_with_negative(size, options = {})
+    positive_string = number_to_human_size(size.abs, options)
+    sign = size < 0 ? '-' : ''
+    "#{sign}#{positive_string}".html_safe
+  end
   
 end
