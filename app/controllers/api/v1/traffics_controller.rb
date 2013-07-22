@@ -6,7 +6,7 @@ class Api::V1::TrafficsController < Api::V1::BaseController
     end
 
     upcode = params[:traffic].delete(:upcode)
-    @traffic = @user.traffics.where(upcode: upcode).first_or_initialize
+    @traffic = @user.traffics.where(client_id: current_client, upcode: upcode).first_or_initialize
     @traffic.attributes = traffic_params
 
     if @traffic.save

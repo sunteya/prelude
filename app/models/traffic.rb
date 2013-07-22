@@ -21,7 +21,7 @@ class Traffic < ActiveRecord::Base
   belongs_to :bind
   
   symbolize :period, in: [:minutely, :hourly, :daily, :immediate], scopes: true
-  validates :upcode, uniqueness: true, allow_blank: true
+  validates :upcode, uniqueness: { scope: :client_id }, allow_blank: true
 
   before_save :build_total_transfer_bytes
   after_save :cascade_calculate_transfer, if: :require_calculate_transfer?
