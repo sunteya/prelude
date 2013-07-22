@@ -37,7 +37,7 @@ class ClientsController < ApplicationController
 
 protected
   def client_params
-    params[:client].permit(:access_token, :hostname) if params[:client]
+    params[:client].permit(:access_token, :hostname, :disabled) if params[:client]
   end
 
   def resource_params
