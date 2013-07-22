@@ -1,6 +1,6 @@
 
 function FindProxyForURL(url, host) {
-    var ip_address = '<%= "#{Client.first.hostname}:#{@user.binding_port}" %>';
+    var ip_address = '<%= "#{Client.available.first.hostname}:#{@user.binding_port}" %>';
     var proxy = 'PROXY ' + ip_address + ';' + // PROXY SOCKS HTTPS DIRECT
                 'DIRECT';
 

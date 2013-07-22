@@ -27,7 +27,9 @@
 			
 			<h4>HTTP 代理:</h4>
 			<p>
-				<code><%= "http://#{Client.first.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
+				<% Client.available.each do |client| %>
+				<code><%= "http://#{client.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
+				<% end %>
 				<%= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-mini", confirm: '确定是否更换端口?' %>
 			</p>
 			

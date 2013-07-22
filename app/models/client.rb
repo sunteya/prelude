@@ -17,6 +17,8 @@ class Client < ActiveRecord::Base
   validates :hostname, presence: true
   validates :access_token, presence: true, uniqueness: true
 
+  scope :available, -> { where(disabled: false) }
+
   def ensure_access_token
     self.access_token = SecureRandom.hex(16) if access_token.blank?
   end
