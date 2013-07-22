@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @users = @users.page(params[:page]).per(30)
+    @q = User.search(params[:q])
+    @q.sorts = 'email asc' if @q.sorts.empty?
+    @users = @q.result.page(params[:page]).per(30)
   end
   
   def new

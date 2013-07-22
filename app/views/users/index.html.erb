@@ -1,10 +1,10 @@
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
-			<th>Email</th>
-			<th>Last Updated At</th>
-			<th>Transfer Remaining</th>
-			<th>Port</th>
+			<th><%= sort_link @q, :email %></th>
+			<th><%= sort_link @q, :updated_at %></th>
+			<th><%= sort_link @q, :transfer_remaining %></th>
+			<th><%= sort_link @q, :binding_port %></th>
 			<th>Actions</th>
 		</tr>
 	</thead>
