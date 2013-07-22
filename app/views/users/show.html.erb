@@ -21,7 +21,7 @@
 			<h4>
 				可用流量:
 				<span class="label label-important">
-					<%= number_to_human_size(@user.transfer_remaining) %> / <%= number_to_human_size(@user.monthly_transfer) if @user.monthly_transfer %>
+					<%= number_to_human_size_with_negative(@user.transfer_remaining) %> / <%= number_to_human_size_with_negative(@user.monthly_transfer) if @user.monthly_transfer %>
 				</span>
 			</h4>
 			
