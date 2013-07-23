@@ -18,11 +18,11 @@
 # end
 
 every :hour do
-  runner "Traffic.generate_hourly_records!(Time.now - 1.hour)"
+  runner "Traffic.generate_hourly_records!(Time.zone.now - 1.hour)"
 end
 
 every :day do
-  runner "Traffic.generate_daily_records!(Time.now - 1.day)"
+  runner "Traffic.generate_daily_records!(Time.zone.now - 1.day)"
   runner "Traffic.period('minutely').where { start_at < 3.days.ago }.destroy_all"
 end
 

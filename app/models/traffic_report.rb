@@ -87,7 +87,7 @@ module TrafficReport
     end
     
     def self.recent(scope)
-      now = Time.now
+      now = Time.zone.now
       end_period = build_period(now)
       start_period = build_period(now - 2.hours)
       
@@ -101,7 +101,7 @@ module TrafficReport
     end
     
     def self.today(scope)
-      now = Time.now
+      now = Time.zone.now
       start_at = now.beginning_of_day
       
       limit_period = build_period(now)
@@ -118,7 +118,7 @@ module TrafficReport
     end
 
     def self.this_month(scope)
-      now = Time.now
+      now = Time.zone.now
       start_at = now.beginning_of_month
       
       limit_period = build_period(now)

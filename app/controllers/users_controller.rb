@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @now = Time.now
+    @now = Time.zone.now
     @recent_report = TrafficReport::Minutely.recent(@user.traffics)
     @today_report = TrafficReport::Hourly.today(@user.traffics)
     @this_month_report = TrafficReport::Daily.this_month(@user.traffics)
