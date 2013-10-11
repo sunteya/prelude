@@ -1,14 +1,13 @@
 
 function FindProxyForURL(url, host) {
-    var ip_address = '<%= "#{Client.available.first.hostname}:#{@user.binding_port}" %>';
-    var proxy = 'PROXY ' + ip_address + ';' + // PROXY SOCKS HTTPS DIRECT
-                'DIRECT';
-
+    var ip_address = 'p.wido.me';
+    var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
     
     // Avoid calling any functions that might invoke the DNS resoultion.
     var url = url.toLowerCase();
     var host = host.toLowerCase();
+    host = host.split(":")[0]; // safari host with port, ignore it
     
     // skip local hosts
     if (isPlainHostName(host)) return 'DIRECT';
