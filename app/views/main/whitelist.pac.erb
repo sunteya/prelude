@@ -1,6 +1,6 @@
 
 function FindProxyForURL(url, host) {
-    var ip_address = 'p.wido.me';
+    var ip_address = '<%= "p.wido.me:#{@user.binding_port}" %>';
     var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
     
