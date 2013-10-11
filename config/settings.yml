@@ -2,7 +2,7 @@
 blacklist:
   # google
   - google.com
-  - google.com.* # google.com.hk
+  - google.com.hk
   - google.cn
   - gstatic.com
   - googleapis.com
@@ -48,6 +48,10 @@ blacklist:
   - cdn.wallwiz.com
   - bbc.co.uk
   - xsellize.com
+  - wordpress.com
+
+  # slowly
+  - staticinstapaper.s3.amazonaws.com
 
 whitelist:
   # sunteya's list
