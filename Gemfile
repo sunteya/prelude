@@ -10,8 +10,8 @@ gem 'cancan', '~> 1.6.10'
 gem 'fume-cancan', '~> 0.0.1'
 gem 'devise', '~> 3.0.0.rc'
 gem 'devise-i18n', '~> 0.8'
-gem 'devise_invitable', git: 'https://github.com/scambra/devise_invitable.git', branch: 'rails4'
-gem "ransack", git: "https://github.com/ernie/ransack.git", branch: "rails-4"
+gem 'devise_invitable', '~> 1.2.1'
+gem "ransack", '~> 1.0.0'
 
 # Model
 gem "symbolize", "~> 4.3.3"
@@ -36,7 +36,7 @@ end
 gem 'jquery-rails', '~> 3.0'
 gem 'turbolinks', '~> 1.2'
 gem 'bootstrap-sass', '~> 2.3.2'
-gem 'compass-rails', git: 'https://github.com/milgner/compass-rails.git', branch: 'rails4'
+gem 'compass-rails', '~> 2.0.alpha.0'
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
