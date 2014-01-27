@@ -22,6 +22,7 @@ blacklist:
   # youbute
   - youtube.com
   - ytimg.com
+  - googlevideo.com
 
   # vimeo
   - vimeo.com
@@ -49,6 +50,8 @@ blacklist:
   - bbc.co.uk
   - xsellize.com
   - wordpress.com
+  - gitlab.com
+  - pastie.org
 
   # slowly
   - staticinstapaper.s3.amazonaws.com
@@ -75,6 +78,10 @@ whitelist:
   - tencent.com
   - 36krcnd.com
   - fengbuy.com
+  - hiwifi.com
+  - vmall.com
+  - yixun.com
+  - images-amazon.com
 
   # skip top Chinese sites
   # source: 
