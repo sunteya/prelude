@@ -21,12 +21,36 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update_attributes(resource_params)
+    @user = User.find(params[:id])
+    begin
+      ## 找到用户当前使用端口绑定，并终止该绑定
+      c_bind = @user.binds.where(:end_at => nil).first
+      c_bind.update_attributes(:end_at => Time.now)
+      c_port = c_bind.port
+      
+      ## 在port表中查询未被租出的端口,并随机选择一个分配给用户
+      ports = Port.where(:binded => false)
+      c_port.update_attributes(:binded => false)
+      
+      port_index = ports.size == 1 ? 0 : rand(ports.size)
+      t_port = Port.find(ports[port_index].id)
+      
+      bind = Bind.new
+      bind.port = t_port
+      bind.user = @user
+      bind.start_at = Time.now
+      bind.save
+
+      t_port.update_attributes(:binded => true)
+      c_port.update_attributes(:binded => false)
+      flash[:notice] = 'User was successfully updated.'
+      redirect_to_ok_url_or_default(root_url)
+    rescue Exception => e
       flash[:notice] = 'User was successfully updated.'
       redirect_to_ok_url_or_default users_path
     else
       flash[:notice] = "Wrong,Please Try Again"
-      render :edit
+      redirect_to_ok_url_or_default users_path
     end
   end
 

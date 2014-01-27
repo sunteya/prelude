@@ -49,7 +49,6 @@ class User
   
   validates :login, uniqueness: true
   
-  
   def binding
     binds.using.first
   end
