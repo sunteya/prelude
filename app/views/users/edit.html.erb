@@ -1,0 +1,15 @@
+<h2>Change your password</h2>
+
+<%= simple_form_for(@user) do |f| %>
+
+	<div class="form-inputs">
+		<%= f.input :email, :disable => true %>
+		<%= f.input :password, :label => "New password", :required => true, :autofocus => true %>
+		<%= f.input :password_confirmation, :label => "Confirm your new password", :required => true %>
+	</div>
+
+	<div class="form-actions">
+		<%= f.button :submit, "Change my password", class: "btn btn-primary"  %>
+		<%= cancel_link(root_url) %>
+	</div>
+<% end %>
