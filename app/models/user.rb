@@ -8,14 +8,10 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
-<<<<<<< HEAD
   has_many :cdrs
   has_many :statistics
   has_many :binds
 
-=======
->>>>>>> 优化 subdomain 生成
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :login,              :type => String, :default => ""
@@ -50,15 +46,19 @@ class User
   # field :authentication_token, :type => String
 
   field :admin, :type => Boolean, :default => false
+<<<<<<< HEAD
   ## proxy domain
   field :domain, :type => String, :default => ""
   
   ## user's all purchased statistics
   field :allowed_statistics, :type => Integer
 
+=======
+  
   has_many :rents
   # has_many :activity
   
+>>>>>>> 6f056ddde18cb791f66d7bbd372217275914f02c
   validates :login, :uniqueness => true
 
   def find_or_initial_hour_statistic(&block)

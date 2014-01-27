@@ -12,7 +12,6 @@
 		<td>
 			<%= f.input :binds, :collection => @user.rents.where(:end_at => nil) %>
 		</td>
-		<td><%= f.input :portal, :disabled => true %></td>
 	</tr>
 </table>
 
