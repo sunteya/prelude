@@ -46,8 +46,11 @@ class UsersController < ApplicationController
       flash[:notice] = 'User was successfully updated.'
       redirect_to_ok_url_or_default(root_url)
     rescue Exception => e
+      flash[:notice] = 'User was successfully updated.'
+      redirect_to_ok_url_or_default users_path
+    else
       flash[:notice] = "Wrong,Please Try Again"
-      render :edit
+      redirect_to_ok_url_or_default users_path
     end
   end
 

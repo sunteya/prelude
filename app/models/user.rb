@@ -49,21 +49,6 @@ class User
   
   validates :login, uniqueness: true
   
-  field :admin, :type => Boolean, :default => false
-  ## proxy domain
-  field :domain, :type => String, :default => ""
-  
-  ## user's all purchased statistics
-  field :allowed_statistics, :type => Integer
-
-  validates :login, :uniqueness => true
-
-  def find_or_initial_hour_statistic(&block)
-    statistic = self.statistics.where(:year => Time.now.year, :month => Time.now.month, :day => Time.now.day, :hour => :Time.now.hour) || self.statistics.new
-    yield(statistic) if block
-    statistic
-  end
-  
   def binding
     binds.using.first
   end
