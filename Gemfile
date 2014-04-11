@@ -42,6 +42,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'fume-dev', '~> 0.2.1'
   gem 'rspec-rails', '~> 2.14.2'
+  gem 'factory_girl_rails', '~> 4.4.1'
 end
 
 group :test do
