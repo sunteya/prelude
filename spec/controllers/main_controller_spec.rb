@@ -39,8 +39,4 @@ describe MainController do
       action { get :blacklist, format: :pac }
     end
   end
-
-  def token_auth(token)
-    request.env["HTTP_AUTHORIZATION"] = "Token #{token}"
-  end
 end
