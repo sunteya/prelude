@@ -82,6 +82,13 @@ whitelist:
   - vmall.com
   - yixun.com
   - images-amazon.com
+  - shipin8.com
+
+  - chdbits.org
+  - hdwing.com
+  - open.cd
+  - m-team.cc
+  - miwifi.com
 
   # skip top Chinese sites
   # source: 
