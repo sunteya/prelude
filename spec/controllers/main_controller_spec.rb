@@ -14,4 +14,33 @@ describe MainController do
       it { should redirect_to(user_path(current_user)) }
     end
   end
+
+  shared_examples "pac action" do
+    let(:user) { create :user }
+
+    context "without auth token" do
+      it { should respond_with(:unauthorized) }
+    end
+
+    context "with auth token" do
+      before { token_auth(user.authentication_token) }
+      it { should respond_with(:success) }
+    end
+  end
+
+  describe "GET whitelist" do
+    it_should_behave_like "pac action" do
+      action { get :whitelist, format: :pac }
+    end
+  end
+
+  describe "GET blacklist" do
+    it_should_behave_like "pac action" do
+      action { get :blacklist, format: :pac }
+    end
+  end
+
+  def token_auth(token)
+    request.env["HTTP_AUTHORIZATION"] = "Token #{token}"
+  end
 end
