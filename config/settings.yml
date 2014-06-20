@@ -55,6 +55,7 @@ blacklist:
 
   # slowly
   - staticinstapaper.s3.amazonaws.com
+  - libsyn.com
 
 whitelist:
   # sunteya's list
@@ -66,6 +67,7 @@ whitelist:
   - guoku.com
   - .lan
   - .dev
+  - .local
   - leiphone.com
   - zhihu.com
   - ifanr.com
@@ -89,6 +91,7 @@ whitelist:
   - open.cd
   - m-team.cc
   - miwifi.com
+  - bigbata.com
 
   # skip top Chinese sites
   # source: 

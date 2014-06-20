@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
   def password_required?
     !persisted? || !password.blank? || !password_confirmation.blank?
   end
+
+  def transfer_using
+    self.monthly_transfer - self.transfer_remaining
+  end
   
   def recharge
     self.transfer_remaining = self.monthly_transfer if self.monthly_transfer

@@ -28,10 +28,6 @@ gem 'jbuilder', '~> 1.2.0'
 gem 'fume-settable', '~> 0.0.2'
 gem 'whenever', require: false, git: 'https://github.com/christophermanning/whenever.git', branch: 'rails4_bin_path'
 
-group :development, :test do
-  gem 'fume-dev', '~> 0.2.1'
-end
-
 # Assets
 gem 'jquery-rails', '~> 3.0'
 gem 'turbolinks', '~> 1.2'
@@ -43,6 +39,14 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
-group :doc do
-  gem 'sdoc', require: false
+group :development, :test do
+  gem 'fume-dev', '~> 0.2.1'
+  gem 'rspec-rails', '~> 2.14.2'
+  gem 'factory_girl_rails', '~> 4.4.1'
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 2.5.0"
+  gem "rspec-do_action", "~> 0.0.3"
+  gem "simplecov", require: false
 end
