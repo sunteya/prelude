@@ -24,5 +24,7 @@ begin
 rescue LoadError
 end
 
-Rake::Task[:default].prerequisites.delete('spec')
-task :default => "spec:rcov"
+if Rails.env.development?
+  Rake::Task[:default].prerequisites.delete('spec')
+  task default: "spec:rcov"
+end
