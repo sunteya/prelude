@@ -30,7 +30,6 @@ gem 'whenever', require: false, git: 'https://github.com/christophermanning/when
 
 # Assets
 gem 'jquery-rails', '~> 3.0'
-gem 'turbolinks', '~> 1.2'
 gem 'bootstrap-sass', '~> 2.3.2'
 gem 'compass-rails', '~> 1.1.3'
 
