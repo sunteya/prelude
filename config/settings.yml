@@ -3,7 +3,7 @@ blacklist:
   # google
   - google.com
   - google.com.hk
-  - google.cn
+  - google.
   - gstatic.com
   - googleapis.com
   - googlecode.com
@@ -359,6 +359,7 @@ whitelist:
   - pcpop.com
   - linkedin.com
   - weiphone.com
+  - feng.com
   - doc88.com
   - adobe.com
   - shangdu.com
