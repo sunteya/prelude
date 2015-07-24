@@ -13,32 +13,32 @@ gem 'devise-i18n', '0.12.1'
 gem 'devise_invitable', '1.5.2'
 
 # Model
-gem "ransack", '1.0.0'
-gem "symbolize", "4.3.4"
-gem 'squeel', "1.1.1"
+gem 'ransack', '1.6.5'
+gem 'symbolize', '4.5.2'
+gem 'squeel', '1.2.3'
 
 # View
-gem 'kaminari', '0.14.1'
+gem 'kaminari', '0.16.3'
 gem 'bootstrap-kaminari-views', '0.0.5'
 gem 'simple_form', '3.1.0'
-gem 'jbuilder', '1.2.1'
+gem 'jbuilder', '2.3.1'
 
 
 # Utils
 gem 'fume-settable', '0.0.3'
-gem 'whenever', "0.9.4"
+gem 'whenever', '0.9.4'
 
 # Assets
 gem 'jquery-rails', '3.1.3'
-gem 'bootstrap-sass', '3.2.0'
+gem 'bootstrap-sass', '3.3.5.1'
 
-gem 'sass-rails', '4.0.5'
-gem 'coffee-rails', '4.0.1'
-# gem 'therubyracer', platforms: :ruby
+gem 'sass-rails', '5.0.3'
+gem 'coffee-rails', '4.1.0'
+gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem "pry-byebug"
+  gem 'pry-byebug'
 
   # gem 'fume-dev', '~> 0.2.1'
   gem 'rspec-rails', '3.3.3'
@@ -46,7 +46,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "shoulda-matchers", "2.5.0"
-  gem "rspec-do_action", "0.0.4"
-  gem "simplecov", require: false
+  gem 'shoulda-matchers', '2.8.0'
+  gem 'rspec-do_action', '0.0.4'
+  gem 'simplecov', require: false
 end
