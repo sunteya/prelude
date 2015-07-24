@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.0'
-gem 'rails-i18n', '~> 0.7'
+gem 'rails-i18n', '4.0.4'
 gem 'pg', '~> 0.15'
 # gem 'fume', '~> 0.9.2'
 
@@ -15,7 +15,7 @@ gem "ransack", '~> 1.0.0'
 
 # Model
 gem "symbolize", "~> 4.3.3"
-gem 'squeel', git: 'https://github.com/ernie/squeel.git'
+gem 'squeel', "1.1.1"
 
 # View
 gem 'kaminari', '~> 0.14.1'
@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 1.2.0'
 
 # Utils
 gem 'fume-settable', '~> 0.0.2'
-gem 'whenever', require: false, git: 'https://github.com/christophermanning/whenever.git', branch: 'rails4_bin_path'
+gem 'whenever', "0.9.4"
 
 # Assets
 gem 'jquery-rails', '~> 3.0'
@@ -35,12 +35,13 @@ gem 'compass-rails', '~> 1.1.3'
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'fume-dev', '~> 0.2.1'
-  gem 'rspec-rails', '~> 2.14.2'
+  # gem 'fume-dev', '~> 0.2.1'
+  gem 'rspec-rails', '2.99.0'
+  gem 'test-unit'
   gem 'factory_girl_rails', '~> 4.4.1'
 end
 

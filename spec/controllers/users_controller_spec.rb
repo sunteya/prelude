@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+RSpec.describe UsersController, type: :controller do
   it_should_behave_like "a resources controller" do
     login_superadmin
 

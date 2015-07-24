@@ -1,4 +1,4 @@
-shared_examples "a resources controller" do |options|
+RSpec.shared_examples "a resources controller" do |options|
   options ||= {}
 
   collection_actions = options[:collection] || [ :index, :new, :create ]
