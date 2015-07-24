@@ -21,6 +21,7 @@
 /allow/
 /pcaps/
 /coverage/
-test.js
-test.rb
-docker-compose.yml
+/test.js
+/test.rb
+/docker-compose.yml
+/config/secrets.yml

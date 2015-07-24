@@ -5,7 +5,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :hostname
       t.datetime :last_access_at
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

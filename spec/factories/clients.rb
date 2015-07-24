@@ -8,6 +8,7 @@
 #  last_access_at :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
+#  disabled       :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

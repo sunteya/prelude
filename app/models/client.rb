@@ -8,6 +8,7 @@
 #  last_access_at :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
+#  disabled       :boolean          default(FALSE)
 #
 
 class Client < ActiveRecord::Base

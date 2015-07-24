@@ -14,8 +14,8 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  superadmin             :boolean          default(FALSE)
 #  memo                   :string(255)
 #  transfer_remaining     :integer          default(0)
@@ -28,6 +28,7 @@
 #  invited_by_type        :string(255)
 #  lock_version           :integer          default(0)
 #  binding_port           :integer
+#  invitation_created_at  :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -1,4 +1,9 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -11,8 +16,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def redirect_to_ok_url_or_default(default)
-    redirect_to params[:ok_url] || default
+  def redirect_to_ok_url_or_default(default_url)
+    redirect_to ok_url_or_default(default_url)
+  end
+
+  def ok_url_or_default(default_url)
+    params[:ok_url] || default_url
   end
 
   def authenticate_user_from_token!

@@ -9,24 +9,16 @@ class ClientsController < ApplicationController
   end
 
   def create
-    if @client.save
-      flash[:notice] = 'Client was successfully created.'
-      redirect_to_ok_url_or_default clients_path
-    else
-      render 'new'
-    end
+    @client.save
+    respond_with @client, location: -> { ok_url_or_default clients_path }
   end
 
   def edit
   end
 
   def update
-    if @client.update_attributes(client_params)
-      flash[:notice] = 'Client was successfully updated.'
-      redirect_to_ok_url_or_default clients_path
-    else
-      render 'edit'
-    end
+    @client.update(client_params)
+    respond_with @client, location: -> { ok_url_or_default clients_path }
   end
 
   def destroy
