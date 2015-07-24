@@ -1,5 +1,2 @@
-set :deploy_to, "/var/www/wido.prelude/apps/#{application}"
-
-set :rails_env, "production"
-set :user, "www-data"
-server "prelude.wido.me", :app, :web, :db, whenever: true, primary: true
+set :deploy_to, -> { "/var/www/wido.prelude/apps/#{fetch(:application)}" }
+server "www-data@prelude.wido.me", roles: %w[web app db], whenever: true, primary: true

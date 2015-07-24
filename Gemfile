@@ -42,6 +42,8 @@ group :development do
   gem 'spring'
   gem 'web-console', '~> 2.0'
   gem 'annotate'
+
+  gem 'capsum', '1.0.3', require: false
 end
 
 group :development, :test do
