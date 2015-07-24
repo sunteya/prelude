@@ -25,7 +25,7 @@
 </table>
 
 <nav>
-	<%= paginate(@users, :theme => 'twitter-bootstrap') if !@users.empty? %>
+	<%= paginate(@users) if !@users.empty? %>
 </nav>
 
 <div class="actions">

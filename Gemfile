@@ -19,7 +19,7 @@ gem 'squeel', '1.2.3'
 
 # View
 gem 'kaminari', '0.16.3'
-gem 'bootstrap-kaminari-views', '0.0.5'
+gem 'kaminari-bootstrap', '3.0.1'
 gem 'simple_form', '3.1.0'
 gem 'jbuilder', '2.3.1'
 gem 'responders', '2.1.0'
