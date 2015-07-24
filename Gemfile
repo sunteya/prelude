@@ -20,7 +20,7 @@ gem 'squeel', "1.1.1"
 # View
 gem 'kaminari', '0.14.1'
 gem 'bootstrap-kaminari-views', '0.0.5'
-gem 'simple_form', '3.0.3'
+gem 'simple_form', '3.1.0'
 gem 'jbuilder', '1.2.1'
 
 

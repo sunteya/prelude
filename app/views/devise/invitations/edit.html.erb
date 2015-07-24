@@ -4,8 +4,14 @@
   <%= devise_error_messages! %>
   <%= f.hidden_field :invitation_token %>
 
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+    </div>
+  </div>
 
-  <%= f.submit t("devise.invitations.edit.submit_button") %>
+  <div class="actions">
+    <%= f.submit t("devise.invitations.edit.submit_button") %>
+  </div>
 <% end %>
