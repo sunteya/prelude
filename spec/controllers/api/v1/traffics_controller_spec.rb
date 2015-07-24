@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-RSpec.describe Api::V1::TrafficsController, type: :controller do
+RSpec.describe Api::V1::TrafficsController do
   describe "POST create" do
     include_context "require access token"
 

@@ -40,7 +40,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   # gem 'fume-dev', '~> 0.2.1'
-  gem 'rspec-rails', '2.99.0'
+  gem 'rspec-rails', '3.3.3'
   gem 'test-unit'
   gem 'factory_girl_rails', '~> 4.4.1'
 end

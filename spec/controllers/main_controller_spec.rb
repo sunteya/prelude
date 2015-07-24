@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-RSpec.describe MainController, type: :controller do
+RSpec.describe MainController do
   describe "GET root" do
     action { get :root }
 

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-RSpec.describe Api::V1::UsersController, type: :controller do
+RSpec.describe Api::V1::UsersController do
   describe "GET index" do
     include_context "require access token"
 
