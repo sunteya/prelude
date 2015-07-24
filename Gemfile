@@ -8,9 +8,9 @@ gem 'pg', '0.18.2'
 # Core
 gem 'cancan', '1.6.10'
 gem 'fume-cancan', '0.0.4'
-gem 'devise', '3.0.4'
+gem 'devise', '3.5.1'
 gem 'devise-i18n', '0.12.1'
-gem 'devise_invitable', '1.2.1'
+gem 'devise_invitable', '1.5.2'
 
 # Model
 gem "ransack", '1.0.0'
@@ -39,9 +39,11 @@ gem 'coffee-rails', '4.0.1'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem "pry-byebug"
+
   # gem 'fume-dev', '~> 0.2.1'
   gem 'rspec-rails', '3.3.3'
-  gem 'factory_girl_rails', '4.4.1'
+  gem 'factory_girl_rails', '4.5.0'
 end
 
 group :test do

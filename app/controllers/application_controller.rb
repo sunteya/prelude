@@ -14,4 +14,13 @@ class ApplicationController < ActionController::Base
   def redirect_to_ok_url_or_default(default)
     redirect_to params[:ok_url] || default
   end
+
+  def authenticate_user_from_token!
+    auth_token = params[:auth_token].presence
+    user = auth_token && User.find_by_authentication_token(auth_token.to_s)
+
+    if user
+      sign_in user, store: false
+    end
+  end
 end

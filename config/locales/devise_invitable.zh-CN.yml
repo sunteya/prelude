@@ -1,9 +1,13 @@
 zh-CN:
   devise:
+    failure:
+      invited: "You have a pending invitation, accept it to finish creating your account."
     invitations:
       send_instructions: '一份邀请邮件已经发送给 %{email}.'
-      invitation_token_invalid: 'The invitation token provided is not valid!'
-      updated: 'Your password was set successfully. You are now signed in.'
+      invitation_token_invalid: "The invitation token provided is not valid!"
+      updated: "Your password was set successfully. You are now signed in."
+      updated_not_active: "Your password was set successfully."
+      invitation_removed: "Your invitation was removed."
       no_invitations_remaining: "没有剩余的邀请"
       new:
         header: "发送邀请"
@@ -13,4 +17,8 @@ zh-CN:
         submit_button: "设置密码"
     mailer:
       invitation_instructions:
-        subject: 'Invitation instructions'
+        subject: "Invitation instructions"
+        hello: "Hello %{email}"
+        someone_invited_you: "Someone has invited you to %{url}, you can accept it through the link below."
+        accept: "Accept invitation"
+        ignore: "If you don't want to accept the invitation, please ignore this email.<br />Your account won't be created until you access the link above and set your password."

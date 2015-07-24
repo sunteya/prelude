@@ -34,22 +34,25 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, # :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :token_authenticatable
+         :recoverable, :rememberable, :trackable, :validatable
 
   has_many :traffics
 
   before_create :ensure_authentication_token
   before_create :ensure_monthly_transfer_on_create
   before_save   :ensure_binding_port
-  
+
   scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
   scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
-  
+
   def ensure_monthly_transfer_on_create
     self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
   end
-  
+
+  def ensure_authentication_token
+    self.authentication_token ||= SecureRandom.hex(16)
+  end
+
   def ensure_binding_port
     if binding_port.nil?
       begin
@@ -66,7 +69,7 @@ class User < ActiveRecord::Base
   def transfer_using
     self.monthly_transfer - self.transfer_remaining
   end
-  
+
   def recharge
     self.transfer_remaining = self.monthly_transfer if self.monthly_transfer
     self.save
@@ -82,5 +85,5 @@ class User < ActiveRecord::Base
     self.reload
     retry
   end
-  
+
 end
