@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-describe UsersController do
+RSpec.describe UsersController do
   it_should_behave_like "a resources controller" do
     login_superadmin
 

@@ -1,13 +1,15 @@
-<div class="form-inputs">
-	<%= f.input :email if user_params.permit_attributes.include?(:email) %>
-	<%= f.input :memo if user_params.permit_attributes.include?(:memo) %>
-	<%= f.input :password if user_params.permit_attributes.include?(:password) %>
-	<%= f.input :password_confirmation if user_params.permit_attributes.include?(:password_confirmation) %>
-	<%= f.input :transfer_remaining if user_params.permit_attributes.include?(:transfer_remaining) %>
-	<%= f.input :monthly_transfer if user_params.permit_attributes.include?(:monthly_transfer) %>
+<div class="row">
+  <div class="col-md-5">
+    <%= f.input :email if user_params.permit_attributes.include?(:email) %>
+    <%= f.input :memo if user_params.permit_attributes.include?(:memo) %>
+    <%= f.input :password if user_params.permit_attributes.include?(:password) %>
+    <%= f.input :password_confirmation if user_params.permit_attributes.include?(:password_confirmation) %>
+    <%= f.input :transfer_remaining if user_params.permit_attributes.include?(:transfer_remaining) %>
+    <%= f.input :monthly_transfer if user_params.permit_attributes.include?(:monthly_transfer) %>
+  </div>
 </div>
 
-<div class="form-actions">
+<div class="actions">
 	<%= f.button :submit, class: "btn btn-primary" %>
 	<%= ok_url_tag %>
 	<%= cancel_link(root_url) %>

@@ -1,10 +1,12 @@
-<div class="form-inputs">
-	<%= f.input :hostname %>
-	<%= f.input :access_token %>
-	<%= f.input :disabled %>
+<div class="row">
+  <div class="col-md-5">
+    <%= f.input :hostname %>
+    <%= f.input :access_token %>
+    <%= f.input :disabled %>
+  </div>
 </div>
 
-<div class="form-actions">
+<div class="actions">
 	<%= f.button :submit, class: "btn btn-primary" %>
 	<%= ok_url_tag %>
 	<%= cancel_link(root_url) %>

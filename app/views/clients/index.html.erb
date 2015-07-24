@@ -25,9 +25,9 @@
 </table>
 
 <nav>
-	<%= paginate(@clients, :theme => 'twitter-bootstrap') if !@clients.empty? %>
+	<%= paginate(@clients) if !@clients.empty? %>
 </nav>
 
-<div class="well">
+<div class="actions">
 	<%= link_to "添加客户端", new_client_path(:ok_url => request.url), class: 'btn btn-primary' %>
 </div>

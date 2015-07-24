@@ -14,6 +14,7 @@
 #  calculate_transfer_remaining :boolean          default(FALSE)
 #  upcode                       :string(255)
 #  lock_version                 :integer          default(0)
+#  client_id                    :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

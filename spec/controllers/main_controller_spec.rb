@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-describe MainController do
+RSpec.describe MainController do
   describe "GET root" do
     action { get :root }
 
@@ -16,6 +16,7 @@ describe MainController do
   end
 
   shared_examples "pac action" do
+    let(:base_params) { Hash.new }
     let(:user) { create :user }
 
     context "without auth token" do
@@ -23,20 +24,20 @@ describe MainController do
     end
 
     context "with auth token" do
-      before { token_auth(user.authentication_token) }
+      before { base_params[:auth_token] = user.authentication_token }
       it { should respond_with(:success) }
     end
   end
 
   describe "GET whitelist" do
     it_should_behave_like "pac action" do
-      action { get :whitelist, format: :pac }
+      action { get :whitelist, base_params.merge(format: :pac) }
     end
   end
 
   describe "GET blacklist" do
     it_should_behave_like "pac action" do
-      action { get :blacklist, format: :pac }
+      action { get :blacklist, base_params.merge(format: :pac) }
     end
   end
 end

@@ -13,9 +13,9 @@
 
 <div class="widget">
 	<header><h3>基础信息</h3></header>
-	
-	<div class="row-fluid">
-		<div class="span7 info">
+
+	<div class="row">
+		<div class="col-md-7 info">
 			<h4>用户帐号</h4>
 			<p><%= @user.email %></p>
 			<h4>
@@ -24,15 +24,15 @@
 					<%= number_to_human_size_with_negative(@user.transfer_remaining) %> / <%= number_to_human_size_with_negative(@user.monthly_transfer) if @user.monthly_transfer %>
 				</span>
 			</h4>
-			
+
 			<h4>HTTP 代理:</h4>
 			<p>
 				<% Client.available.each do |client| %>
 				<code><%= "http://#{client.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
 				<% end %>
-				<%= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-mini", data: { confirm: '确定是否更换端口?' } %>
+				<%= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-default btn-xs", data: { confirm: '确定是否更换端口?' } %>
 			</p>
-			
+
 			<h4>PAC 代理:</h4>
 			<p>
 				<label>白名单(whitelist):</label>
@@ -42,9 +42,9 @@
 				<label>黑名单(blacklist):</label>
 				<code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code>
 			</p>
-			<!-- <p><%= link_to "更换密钥", "#", class: "btn btn-mini" %></p> -->
+			<!-- <p><%= link_to "更换密钥", "#", class: "btn btn-default btn-xs" %></p> -->
 		</div>
-		<div class="span5 faq">
+		<div class="col-md-5 faq">
 <!--
 			<h4>FAQ</h4>
 			<ul>
@@ -68,11 +68,11 @@
 
 <div class="widget">
 	<header><h3>当天流量</h3></header>
-	<div class="row-fluid">
-		<div class="span9">
+	<div class="row">
+		<div class="col-md-9">
 			<div id="today-area-chart" class="chart"></div>
 		</div>
-		<div class="span3">
+		<div class="col-md-3">
 			<div id="today-donut-chart" class="chart"></div>
 		</div>
 	</div>

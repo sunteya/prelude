@@ -1,16 +1,14 @@
 /*
  *= require morris
  */
-@import "compass";
 
-$baseFontSize: 16px;
-$navbarHeight: 46px;
+$font-size-base: 16px;
+// $navbarHeight: 46px;
 @import "bootstrap";
-@import "bootstrap-responsive";
 
 body {
-	padding-top: $navbarHeight + 1px + 20px;
-	
+	padding-top: $navbar-height + 1px + 20px;
+
 	> .container {
 		footer {
 			// margin-bottom: 20;
@@ -23,7 +21,7 @@ form {
 		input {
 			margin-right: 0.5em;
 		}
-		
+
 		label, input {
 			display: inline;
 		}
@@ -37,9 +35,13 @@ form {
 	}
 }
 
-.form-actions {
+.actions {
+  border-top: 1px solid #e5e5e5;
+  background-color: whitesmoke;
+  padding: 19px 20px 20px;
+
 	.btn, a {
-		margin: 0 0.5em;
+		margin: 0 0.3em;
 	}
 }
 
@@ -49,29 +51,29 @@ form {
 	padding: 1em;
 	background-color: #fff;
 	border: 1px solid #ddd;
-	@include border-radius(4px);
-	
+	border-radius: 4px;
+
 	> header {
 		margin: -1em -1em 1em -1em;
-		
+
 		padding: 0.5em 1em;
 		font-weight: bold;
 		background-color: #f5f5f5;
 		border-bottom: 1px solid #ddd;
 		color: #9da0a4;
 		border-radius: 4px 4px 0 0;
-		
+
 		h3 {
 			margin: 0;
 			font-size: 1.45em;
 			line-height: 1.45em;
 		}
 	}
-	
+
 	h4 {
 		margin: 1em 0 0.5em;
 	}
-	
+
 	p {
 		margin-left: 1em;
 	}
@@ -101,19 +103,19 @@ form {
 		padding-left: 10px;
 		padding-right: 10px
 	}
-	
+
 	.navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
 		margin-left: -10px;
 		margin-right: -10px;
 	}
-	
+
 	.navbar-fixed-top {
 		.nav.pull-right {
 			.dropdown-toggle {
 				span, .caret {
 					display: none;
 				}
-				
+
 				i {
 					display: inline-block;
 				}

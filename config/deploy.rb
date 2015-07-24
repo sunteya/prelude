@@ -1,10 +1,12 @@
-require "capsum/typical"
-
 set :application, "prelude"
-set :repository, ".git"
-set(:bundle_dir) { File.join(fetch(:shared_path), 'bundle') }
 
-set :shared, %w{
+fetch(:linked_files).concat %w{
   config/mail.yml
   config/database.yml
+  config/secrets.yml
+  tmp/restart.txt
+}
+
+fetch(:linked_dirs).concat %w{
+  public/uploads
 }

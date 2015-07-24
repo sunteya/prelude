@@ -1,14 +1,13 @@
-Prelude::Application.routes.draw do
-  devise_for :users, :controllers => { :invitations => 'users/invitations' }
-  root :to => 'main#root'
-  
-  resource :profile
-  resources :users
-  resources :clients
-  
+Rails.application.routes.draw do
+  devise_for :users, controllers: { :invitations => 'users/invitations' }
+
+  root to: 'main#root'
   get "/whitelist" => "main#whitelist"
   get "/blacklist" => "main#blacklist"
 
+  resource :profile
+  resources :users
+  resources :clients
 
   namespace :api do
     namespace :v1 do
@@ -17,5 +16,5 @@ Prelude::Application.routes.draw do
       end
     end
   end
-  
+
 end

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "rails_helper"
 
-describe ClientsController do
+RSpec.describe ClientsController do
   it_should_behave_like "a resources controller", except: [ :show ] do
     login_superadmin
 
