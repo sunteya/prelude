@@ -47,6 +47,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
@@ -55,5 +56,6 @@ end
 group :test do
   gem 'shoulda-matchers', '2.8.0'
   gem 'rspec-do_action', '0.0.4'
+  gem 'rspec-its', '1.2.0'
   gem 'simplecov', require: false
 end
