@@ -1,22 +1,24 @@
 
 function FindProxyForURL(url, host) {
     var ip_address = '<%= "p.wido.me:#{@user.binding_port}" %>';
-    var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT    
+    var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
-    
+
     // Avoid calling any functions that might invoke the DNS resoultion.
     var url = url.toLowerCase();
     var host = host.toLowerCase();
     host = host.split(":")[0]; // safari host with port, ignore it
-    
+
     if (
-    <% Project.settings.blacklist.each do |domain| %>
-        shExpMatch(host, "*<%= domain %>") ||
-    <% end %>
+      <% DomainSet.family(:blocked).each do |domain_set| %>
+        <% domain_set.domains.each do |domain| %>
+          shExpMatch(host, "*<%= domain %>") ||
+        <% end %>
+      <% end %>
     false ) {
         return proxy;
     }
-    
+
     return direct;
 }
 

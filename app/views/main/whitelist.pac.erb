@@ -3,33 +3,35 @@ function FindProxyForURL(url, host) {
     var ip_address = '<%= "p.wido.me:#{@user.binding_port}" %>';
     var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
-    
+
     // Avoid calling any functions that might invoke the DNS resoultion.
     var url = url.toLowerCase();
     var host = host.toLowerCase();
     host = host.split(":")[0]; // safari host with port, ignore it
-    
+
     // skip local hosts
     if (isPlainHostName(host)) return 'DIRECT';
-    
+
     // skip cn domains
     if (shExpMatch(host,"*.cn")) return 'DIRECT';
-    
+
     // check if the ipv4 format (TODO: ipv6)
     //   http://home.deds.nl/~aeron/regex/
     var re_ipv4 = /^\d+\.\d+\.\d+\.\d+$/g;
     if (re_ipv4.test(host)) {
         return direct;
-    } 
-    
+    }
+
     if (
-    <% Project.settings.whitelist.each do |domain| %>
-        shExpMatch(host, "*<%= domain %>") ||
-    <% end %>
+      <% DomainSet.family(:local).each do |domain_set| %>
+        <% domain_set.domains.each do |domain| %>
+          shExpMatch(host, "*<%= domain %>") ||
+        <% end %>
+      <% end %>
     false ) {
         return direct;
     }
-    
+
     return proxy;
 }
 
