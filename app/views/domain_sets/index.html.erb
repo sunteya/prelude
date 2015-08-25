@@ -24,7 +24,9 @@
     <tr>
       <td><%= domain_set.title %></td>
       <td><%= domain_set.family %></td>
-      <th><%= domain_set.content %></th>
+      <td>
+        <pre class="small"><%= domain_set.content %></pre>
+      </td>
       <td>
         <%= link_to "编辑", edit_domain_set_path(domain_set, :ok_url => request.url) %>
         <%= link_to "删除", domain_set_path(domain_set), :method => :delete, data: { confirm: "确定删除该?" } %>
