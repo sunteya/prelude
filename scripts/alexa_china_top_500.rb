@@ -19,5 +19,10 @@ sites = []
   end
 end
 
+blacklist = %w(
+  github.com
+  youtube.com
+)
+
 puts "# Alieax Top 500 Sites in China without '.cn' (#{Time.now.strftime('%Y%m%d')})"
-puts sites.find_all { |site| !site.end_with?(".cn") }
+puts sites.find_all { |site| !site.end_with?(".cn") } - blacklist
