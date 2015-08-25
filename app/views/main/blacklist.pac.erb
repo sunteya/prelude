@@ -1,6 +1,7 @@
 
 function FindProxyForURL(url, host) {
-    var ip_address = '<%= "p.wido.me:#{@user.binding_port}" %>';
+    <% proxy_address = params[:proxy].presence || "p.wido.me:#{@user.binding_port}" %>
+    var ip_address = '<%= proxy_address %>';
     var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
 
