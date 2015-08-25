@@ -1,3 +1,15 @@
+
+<%= fume_nav @q.family_eq do |n| %>
+<ul class="nav nav-tabs">
+  <%= n.li_tag nil, role: "presentation" do %><%= link_to "全部", domain_sets_path %><% end %>
+  <% DomainSet.family_enum.each do |name, value| %>
+    <%= n.li_tag value, role: "presentation" do %><%= link_to name, domain_sets_path(q: { family_eq: value }) %><% end %>
+  <% end %>
+</ul>
+<% end %>
+
+<br>
+
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -15,7 +27,7 @@
       <th><%= domain_set.content %></th>
       <td>
         <%= link_to "编辑", edit_domain_set_path(domain_set, :ok_url => request.url) %>
-        <%= link_to "删除", domain_set_path(domain_set), :method => :delete, data: { confirm: "确定删除该客户端?" } %>
+        <%= link_to "删除", domain_set_path(domain_set), :method => :delete, data: { confirm: "确定删除该?" } %>
       </td>
     </tr>
     <% end %>

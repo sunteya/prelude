@@ -32,8 +32,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    flash[:notice] = 'User was deleted'
-    redirect_to_ok_url_or_default users_path
+    respond_with @user, location: -> { ok_url_or_default users_path }
   end
 
 protected

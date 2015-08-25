@@ -23,6 +23,7 @@ gem 'kaminari-bootstrap', '3.0.1'
 gem 'simple_form', '3.1.0'
 gem 'jbuilder', '2.3.1'
 gem 'responders', '2.1.0'
+gem 'fume-nav', '0.0.3'
 
 # Utils
 gem 'fume-settable', '0.0.3'

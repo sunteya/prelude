@@ -2,7 +2,8 @@ class DomainSetsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @domain_sets = @domain_sets.page(params[:page])
+    @q = @domain_sets.search(params[:q])
+    @domain_sets = @q.result.page(params[:page])
   end
 
   def new
@@ -23,8 +24,7 @@ class DomainSetsController < ApplicationController
 
   def destroy
     @domain_set.destroy
-    flash[:notice] = 'Domain set was deleted'
-    redirect_to_ok_url_or_default domain_sets_path
+    respond_with @domain_set, location: -> { ok_url_or_default domain_sets_path }
   end
 
 protected
