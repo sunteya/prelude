@@ -1,0 +1,31 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>family</th>
+      <th>Content</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @domain_sets.each do |domain_set| %>
+    <tr>
+      <td><%= domain_set.title %></td>
+      <td><%= domain_set.family %></td>
+      <th><%= domain_set.content %></th>
+      <td>
+        <%= link_to "编辑", edit_domain_set_path(domain_set, :ok_url => request.url) %>
+        <%= link_to "删除", domain_set_path(domain_set), :method => :delete, data: { confirm: "确定删除该客户端?" } %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<nav>
+  <%= paginate(@domain_sets) if !@domain_sets.empty? %>
+</nav>
+
+<div class="actions">
+  <%= link_to "添加域名组", new_domain_set_path(:ok_url => request.url), class: 'btn btn-primary' %>
+</div>

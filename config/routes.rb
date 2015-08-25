@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resource :profile
   resources :users
   resources :clients
+  resources :domain_sets
 
   namespace :api do
     namespace :v1 do

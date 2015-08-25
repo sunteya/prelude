@@ -13,6 +13,8 @@
 class DomainSet < ActiveRecord::Base
   symbolize :family, in: [ :blocked, :local, :lag ], scopes: true
 
+  validates :title, :content, presence: true
+
   def domains
     (content || "").split("\n").map do |line|
       line.sub(/#.*\z/, "").strip.presence
