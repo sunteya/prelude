@@ -31,9 +31,4 @@ protected
   def client_params
     params[:client].permit(:access_token, :hostname, :disabled) if params[:client]
   end
-
-  def resource_params
-    client_params
-  end
-
 end

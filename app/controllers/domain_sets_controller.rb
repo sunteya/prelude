@@ -31,8 +31,4 @@ protected
   def domain_set_params
     params[:domain_set].permit(:title, :content, :family) if params[:domain_set]
   end
-
-  def resource_params
-    domain_set_params
-  end
 end
