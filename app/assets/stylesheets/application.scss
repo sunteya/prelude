@@ -1,0 +1,49 @@
+/*
+ *= require morris
+ */
+
+@import "bootstrap";
+@import "./font-awesome";
+
+.bd-navbar {
+  margin-bottom: 2rem;
+
+  @include media-breakpoint-down(xs) {
+    .navbar-brand {
+      float: none;
+    }
+
+    .nav-item {
+      float: none;
+
+      + .nav-item {
+        margin-left: 0;
+      }
+    }
+  }
+
+}
+
+.table {
+  td pre {
+    margin-bottom: 0;
+  }
+}
+
+.table-action, .form-actions {
+  border: 0.0625rem solid $table-border-color;
+  border-left: none;
+  border-right: none;
+
+  background-color: $gray-lightest;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group.boolean {
+  .checkbox label {
+    input {
+      margin-right: 0.3rem;
+    }
+  }
+}
