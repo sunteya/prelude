@@ -30,7 +30,7 @@
   }
 }
 
-.table-action {
+.table-action, .form-actions {
   border: 0.0625rem solid $table-border-color;
   border-left: none;
   border-right: none;
@@ -40,6 +40,13 @@
   margin-bottom: 1rem;
 }
 
+.form-group.boolean {
+  .checkbox label {
+    input {
+      margin-right: 0.3rem;
+    }
+  }
+}
 
 // body {
 // 	padding-top: $navbar-height + 1px + 20px;
