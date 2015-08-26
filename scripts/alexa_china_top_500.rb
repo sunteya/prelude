@@ -22,6 +22,7 @@ end
 blacklist = %w(
   github.com
   youtube.com
+  google.co.jp
 )
 
 puts "# Alieax Top 500 Sites in China without '.cn' (#{Time.now.strftime('%Y%m%d')})"
