@@ -28,6 +28,6 @@
 	<%= paginate(@clients) if !@clients.empty? %>
 </nav>
 
-<div class="actions">
+<div class="table-action">
 	<%= link_to "添加客户端", new_client_path(:ok_url => request.url), class: 'btn btn-primary' %>
 </div>
