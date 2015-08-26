@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 gem 'rails-i18n', '4.0.4'
 gem 'pg', '0.18.2'
-# gem 'fume', '~> 0.9.2'
 
 # Core
 gem 'cancancan', '1.12.0'
@@ -30,13 +29,17 @@ gem 'fume-settable', '0.0.3'
 gem 'whenever', '0.9.4'
 
 # Assets
-gem 'jquery-rails', '4.0.4'
-gem 'bootstrap-sass', '3.3.5.1'
-
 gem 'sass-rails', '5.0.3'
 gem 'coffee-rails', '4.1.0'
 gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery', '2.1.4'
+  gem 'rails-assets-jquery-ujs', '1.0.4'
+  gem 'rails-assets-bootstrap', '4.0.0.alpha'
+  gem 'rails-assets-font-awesome', '4.4.0'
+end
 
 group :development do
   gem 'spring'
