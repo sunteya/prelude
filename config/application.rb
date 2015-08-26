@@ -33,5 +33,10 @@ module Prelude
     end
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    mail_settings = YAML.load(Rails.root.join("config/mail.yml").read)
+    mail_settings[Rails.env].each_pair do |name, value|
+      config.action_mailer.send("#{name}=", value)
+    end
   end
 end
