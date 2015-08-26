@@ -46,7 +46,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'annotate'
 
-  gem 'capsum', '1.0.3', require: false
+  gem 'capsum', '1.0.4', require: false
 end
 
 group :development, :test do
