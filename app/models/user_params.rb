@@ -1,5 +1,5 @@
-class UserParams < Struct.new(:params, :ability)
-  def permit
+class UserParams < Struct.new(:ability)
+  def permit(params)
     params[:user].permit(*permit_attributes) if params[:user]
   end
 

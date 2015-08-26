@@ -1,0 +1,10 @@
+zh-CN:
+  activerecord:
+    models:
+      domain_set: 域名组
+    symbolizes:
+      domain_set:
+        family:
+          blocked: 被墙
+          local: 国内
+          lag: 龟速

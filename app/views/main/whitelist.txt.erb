@@ -1,0 +1,12 @@
+# Whitelist
+# Date: <%= Time.now %>
+
+.cn
+
+<% DomainSet.family(:local).each do |domain_set| %>
+# <%= domain_set.title %>
+<% domain_set.domains.each do |domain| %>
+<%= domain %>
+<% end %>
+
+<% end %>

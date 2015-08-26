@@ -26,24 +26,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params.permit)
+    @user.update(user_params)
     respond_with @user, location: -> { ok_url_or_default users_path }
   end
 
   def destroy
     @user.destroy
-    flash[:notice] = 'User was deleted'
-    redirect_to_ok_url_or_default users_path
+    respond_with @user, location: -> { ok_url_or_default users_path }
   end
 
 protected
-  def resource_params
-    user_params.permit
-  end
-
   def user_params
-    @user_params ||= UserParams.new(params, current_ability)
+    UserParams.new(current_ability).permit(params)
   end
-  helper_method :user_params
-
 end

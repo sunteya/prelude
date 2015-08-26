@@ -1,0 +1,14 @@
+[SwitchyOmega Conditions]
+; Require: SwitchyOmega >= 2.3.2
+; Date: <%= Time.now %>
+
+; skip cn domains
+*.cn
+
+<% DomainSet.family(:local).each do |domain_set| %>
+
+; <%= domain_set.title %>
+<% domain_set.domains.each do |domain| %>
+*<%= domain %>
+<% end %>
+<% end %>

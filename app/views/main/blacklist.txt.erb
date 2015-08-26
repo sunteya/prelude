@@ -1,0 +1,10 @@
+# Blacklit
+# Date: <%= Time.now %>
+
+<% DomainSet.family(:blocked).each do |domain_set| %>
+# <%= domain_set.title %>
+<% domain_set.domains.each do |domain| %>
+<%= domain %>
+<% end %>
+
+<% end %>

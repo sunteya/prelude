@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 gem 'rails-i18n', '4.0.4'
 gem 'pg', '0.18.2'
 # gem 'fume', '~> 0.9.2'
 
 # Core
-gem 'cancan', '1.6.10'
+gem 'cancancan', '1.12.0'
 gem 'fume-cancan', '0.0.4'
-gem 'devise', '3.5.1'
+gem 'devise', '3.5.2'
 gem 'devise-i18n', '0.12.1'
 gem 'devise_invitable', '1.5.2'
 
@@ -23,7 +23,7 @@ gem 'kaminari-bootstrap', '3.0.1'
 gem 'simple_form', '3.1.0'
 gem 'jbuilder', '2.3.1'
 gem 'responders', '2.1.0'
-
+gem 'fume-nav', '0.0.3'
 
 # Utils
 gem 'fume-settable', '0.0.3'
@@ -47,7 +47,9 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'pry-byebug'
+
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
 end
@@ -55,5 +57,6 @@ end
 group :test do
   gem 'shoulda-matchers', '2.8.0'
   gem 'rspec-do_action', '0.0.4'
+  gem 'rspec-its', '1.2.0'
   gem 'simplecov', require: false
 end

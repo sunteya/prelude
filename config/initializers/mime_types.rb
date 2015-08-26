@@ -4,3 +4,5 @@
 # Mime::Type.register "text/richtext", :rtf
 
 Mime::Type.register "application/x-ns-proxy-autoconfig", :pac
+Mime::Type.register "text/plain", :txt
+Mime::Type.register "text/plain", :sorl

@@ -23,17 +23,11 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy
-    flash[:notice] = 'Client was deleted'
-    redirect_to_ok_url_or_default clients_path
+    respond_with @client, location: -> { ok_url_or_default clients_path }
   end
 
 protected
   def client_params
     params[:client].permit(:access_token, :hostname, :disabled) if params[:client]
   end
-
-  def resource_params
-    client_params
-  end
-
 end

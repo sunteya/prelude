@@ -1,0 +1,45 @@
+
+<%= fume_nav @q.family_eq do |n| %>
+<ul class="nav nav-tabs">
+  <%= n.li_tag nil, role: "presentation" do %><%= link_to "全部", domain_sets_path %><% end %>
+  <% DomainSet.family_enum.each do |name, value| %>
+    <%= n.li_tag value, role: "presentation" do %><%= link_to name, domain_sets_path(q: { family_eq: value }) %><% end %>
+  <% end %>
+</ul>
+<% end %>
+
+<br>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>family</th>
+      <th>Content</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @domain_sets.each do |domain_set| %>
+    <tr>
+      <td><%= domain_set.title %></td>
+      <td><%= domain_set.family %></td>
+      <td>
+        <pre class="small"><%= domain_set.content %></pre>
+      </td>
+      <td>
+        <%= link_to "编辑", edit_domain_set_path(domain_set, :ok_url => request.url) %>
+        <%= link_to "删除", domain_set_path(domain_set), :method => :delete, data: { confirm: "确定删除该?" } %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<nav>
+  <%= paginate(@domain_sets) if !@domain_sets.empty? %>
+</nav>
+
+<div class="actions">
+  <%= link_to "添加域名组", new_domain_set_path(:ok_url => request.url), class: 'btn btn-primary' %>
+</div>
