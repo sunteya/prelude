@@ -2,7 +2,10 @@
 ; Require: SwitchyOmega >= 2.3.2
 ; Date: <%= Time.now %>
 
-; skip cn domains
+; Skip IP Address
+HostRegex: \d+\.\d+\.\d+\.\d+
+
+; Skip .cn Domains
 *.cn
 
 <% DomainSet.family(:local).each do |domain_set| %>
