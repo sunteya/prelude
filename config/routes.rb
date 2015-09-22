@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :clients
   resources :domain_sets
+  resources :host_lists
 
   namespace :api do
     namespace :v1 do

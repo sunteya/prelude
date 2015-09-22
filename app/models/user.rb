@@ -14,13 +14,13 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  superadmin             :boolean          default(FALSE)
 #  memo                   :string(255)
 #  transfer_remaining     :integer          default(0)
 #  monthly_transfer       :integer          default(2147483648)
-#  invitation_token       :string(60)
+#  invitation_token       :string(255)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  invitation_limit       :integer
@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, # :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :traffics
+  has_many :traffics, dependent: :delete_all
+  has_many :host_lists, dependent: :delete_all
 
   before_create :ensure_authentication_token
   before_create :ensure_monthly_transfer_on_create
@@ -45,6 +46,10 @@ class User < ActiveRecord::Base
 
   scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
   scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
+
+  def host_list(policy)
+    host_lists.policy(policy).first_or_create
+  end
 
   def ensure_monthly_transfer_on_create
     self.transfer_remaining = self.monthly_transfer if self.transfer_remaining <= 0
