@@ -14,13 +14,13 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  authentication_token   :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  superadmin             :boolean          default(FALSE)
 #  memo                   :string(255)
 #  transfer_remaining     :integer          default(0)
 #  monthly_transfer       :integer          default(2147483648)
-#  invitation_token       :string(60)
+#  invitation_token       :string(255)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  invitation_limit       :integer

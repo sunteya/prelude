@@ -29,19 +29,23 @@
         <h4>HTTP 代理:</h4>
         <p>
           <% Client.available.each do |client| %>
-          <code><%= "http://#{client.hostname}:" %><%= @user.binding_port if @user.binding_port %></code>
+          <code><%= Project.default_proxy_address %></code>
           <% end %>
-          <%= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-warning-outline btn-sm", data: { confirm: '确定是否更换端口?' } %>
+          <%#= link_to "更换端口", user_path(user: { binding_port: nil }), method: 'put', class: "btn btn-warning-outline btn-sm", data: { confirm: '确定是否更换端口?' } %>
         </p>
 
         <h4>PAC 代理:</h4>
         <p>
           <label>白名单(whitelist):</label>
-          <code><%= whitelist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+          <code><%= host_list_url(@user.host_list(:white), :pac) %></code>
         </p>
         <p>
           <label>黑名单(blacklist):</label>
-          <code><%= blacklist_url(format: :pac, auth_token: @user.authentication_token) %></code>
+          <code><%= host_list_url(@user.host_list(:black), :pac) %></code>
+        </p>
+        <p>
+          <label>加速单(speedlist):</label>
+          <code><%= host_list_url(@user.host_list(:speed), :pac) %></code>
         </p>
       </div>
     </div>
