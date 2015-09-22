@@ -1,6 +1,6 @@
 
 function FindProxyForURL(url, host) {
-    <% proxy_address = params[:proxy].presence || "p.wido.me:#{@user.binding_port}" %>
+    <% proxy_address = params[:proxy].presence || Project.default_proxy_address %>
     var ip_address = '<%= proxy_address %>';
     var proxy = 'PROXY ' + ip_address; // PROXY SOCKS HTTPS DIRECT
     var direct = 'DIRECT';
@@ -11,7 +11,8 @@ function FindProxyForURL(url, host) {
     host = host.split(":")[0]; // safari host with port, ignore it
 
     if (
-      <% DomainSet.family(:blocked).each do |domain_set| %>
+      <% addons_domain_sets = addons_domain_sets || [] %>
+      <% (DomainSet.family(:blocked) + addons_domain_sets).each do |domain_set| %>
         <% domain_set.domains.each do |domain| %>
           shExpMatch(host, "*<%= domain %>") ||
         <% end %>

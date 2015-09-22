@@ -25,3 +25,4 @@
 /test.rb
 /docker-compose.yml
 /config/secrets.yml
+/spec/examples.txt

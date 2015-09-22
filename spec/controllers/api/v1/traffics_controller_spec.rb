@@ -16,7 +16,6 @@ RSpec.describe Api::V1::TrafficsController do
 
     context "new traffic" do
       let(:attributes) { attributes_for :traffic, :immediate }
-      it { expect(response.body).to eq "" }
       it { should respond_with(:created)
            expect(user.reload.transfer_using).to eq(attributes[:incoming_bytes] + attributes[:outgoing_bytes]) }
     end
