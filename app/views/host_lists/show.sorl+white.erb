@@ -8,7 +8,7 @@ HostRegex: \d+\.\d+\.\d+\.\d+
 ; Skip .cn Domains
 *.cn
 
-<% DomainSet.family(:local).each do |domain_set| %>
+<% DomainSet.with_family(:local).each do |domain_set| %>
 
 ; <%= domain_set.title %>
 <% domain_set.domains.each do |domain| %>

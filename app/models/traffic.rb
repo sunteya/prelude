@@ -18,10 +18,11 @@
 #
 
 class Traffic < ActiveRecord::Base
+  extend Enumerize
   belongs_to :user
   belongs_to :bind
 
-  symbolize :period, in: [:minutely, :hourly, :daily, :immediate], scopes: true
+  enumerize :period, in: [:minutely, :hourly, :daily, :immediate], scope: true
   validates :upcode, uniqueness: { scope: :client_id }, allow_blank: true
 
   before_save :build_total_transfer_bytes
@@ -80,7 +81,7 @@ class Traffic < ActiveRecord::Base
     scope = Traffic.where(period: period.to_s).where(start_at: start_at)
     scope.destroy_all
 
-    Traffic.period('minutely').where(start_at: start_at.dup...end_at.dup)
+    Traffic.with_period('minutely').where(start_at: start_at.dup...end_at.dup)
       .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |grouped_traffic|
       tr = scope.new(grouped_traffic.attributes)
       tr.save!

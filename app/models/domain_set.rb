@@ -11,7 +11,8 @@
 #
 
 class DomainSet < ActiveRecord::Base
-  symbolize :family, in: [ :blocked, :local, :lag ], scopes: true
+  extend Enumerize
+  enumerize :family, in: [ :blocked, :local, :lag ], scope: true
 
   validates :title, :content, presence: true
 

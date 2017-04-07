@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   scope :available, ->() { without_invitation_not_accepted.where('transfer_remaining > ?', 0) }
 
   def host_list(policy)
-    host_lists.policy(policy).first_or_create
+    host_lists.with_policy(policy).first_or_create
   end
 
   def ensure_monthly_transfer_on_create

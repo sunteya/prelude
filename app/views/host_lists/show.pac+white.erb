@@ -24,7 +24,7 @@ function FindProxyForURL(url, host) {
     }
 
     if (
-      <% DomainSet.family(:local).each do |domain_set| %>
+      <% DomainSet.with_family(:local).each do |domain_set| %>
         <% domain_set.domains.each do |domain| %>
           shExpMatch(host, "*<%= domain %>") ||
         <% end %>
@@ -35,4 +35,3 @@ function FindProxyForURL(url, host) {
 
     return proxy;
 }
-

@@ -11,8 +11,9 @@
 #
 
 class HostList < ActiveRecord::Base
+  extend Enumerize
   belongs_to :user
-  symbolize :policy, in: [ :black, :white, :speed ], scopes: true
+  enumerize :policy, in: [ :black, :white, :speed ], scope: true
 
   before_save :ensure_token
 

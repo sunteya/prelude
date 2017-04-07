@@ -2,7 +2,7 @@
 # Date: <%= Time.now %>
 
 <% addons_domain_sets = addons_domain_sets || [] %>
-<% (DomainSet.family(:blocked) + addons_domain_sets).each do |domain_set| %>
+<% (DomainSet.with_family(:blocked) + addons_domain_sets).each do |domain_set| %>
 # <%= domain_set.title %>
 <% domain_set.domains.each do |domain| %>
 <%= domain %>

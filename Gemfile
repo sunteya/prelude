@@ -13,7 +13,7 @@ gem 'devise_invitable', '1.7.2'
 
 # Model
 gem 'ransack', '1.8.2'
-gem 'symbolize', '4.5.2'
+gem 'enumerize', '2.1.0'
 
 # View
 gem 'kaminari', '1.0.1'

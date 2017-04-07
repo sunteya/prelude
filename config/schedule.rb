@@ -23,8 +23,8 @@ end
 
 every :day do
   runner "Traffic.generate_daily_records!(Time.zone.now - 1.day)"
-  runner "Traffic.period('minutely').where('start_at < ?', 3.days.ago).destroy_all"
-  runner "Traffic.period('immediate').where('start_at < ?',  3.days.ago).destroy_all"
+  runner "Traffic.with_period('minutely').where('start_at < ?', 3.days.ago).destroy_all"
+  runner "Traffic.with_period('immediate').where('start_at < ?',  3.days.ago).destroy_all"
 end
 
 every :monthly do
