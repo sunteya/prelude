@@ -7,9 +7,9 @@ gem 'pg'
 # Core
 gem 'cancancan', '1.16.0'
 gem 'fume-cancan', '0.1.0'
-gem 'devise', '3.5.2'
-gem 'devise-i18n', '0.12.1'
-gem 'devise_invitable', '1.5.2'
+gem 'devise', '4.2.1'
+gem 'devise-i18n', '1.1.2'
+gem 'devise_invitable', '1.7.2'
 
 # Model
 gem 'ransack', '1.6.5'
