@@ -12,9 +12,8 @@ gem 'devise-i18n', '1.1.2'
 gem 'devise_invitable', '1.7.2'
 
 # Model
-gem 'ransack', '1.6.5'
+gem 'ransack', '1.8.2'
 gem 'symbolize', '4.5.2'
-gem 'squeel', '1.2.3'
 
 # View
 gem 'kaminari', '1.0.1'

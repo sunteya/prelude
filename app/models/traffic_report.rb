@@ -31,8 +31,7 @@ module TrafficReport
 
       min_start_at = self.range.min.start_at.dup
       max_start_at = self.range.max.succ.start_at.dup
-      @scope.where { (start_at >= min_start_at) &
-                     (start_at < max_start_at) }.each do |t|
+      @scope.where(start_at: min_start_at...max_start_at).each do |t|
         period = build_period(t.start_at)
         @data[period] ||= {}
         @remote_ips << t.remote_ip if !@remote_ips.include?(t.remote_ip)
@@ -130,4 +129,3 @@ module TrafficReport
   end
 
 end
-
