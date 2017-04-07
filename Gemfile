@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
 gem 'rails-i18n', '4.0.5'
-gem 'pg', '0.18.3'
+gem 'pg'
 
 # Core
-gem 'cancancan', '1.12.0'
-gem 'fume-cancan', '0.0.4'
+gem 'cancancan', '1.16.0'
+gem 'fume-cancan', '0.1.0'
 gem 'devise', '3.5.2'
 gem 'devise-i18n', '0.12.1'
 gem 'devise_invitable', '1.5.2'
@@ -17,16 +17,16 @@ gem 'symbolize', '4.5.2'
 gem 'squeel', '1.2.3'
 
 # View
-gem 'kaminari', '0.16.3'
+gem 'kaminari', '1.0.1'
 gem 'kaminari-bootstrap', '3.0.1'
-gem 'simple_form', '3.2.0'
+gem 'simple_form', '3.4.0'
 gem 'jbuilder', '2.3.1'
-gem 'responders', '2.1.0'
+gem 'responders', '2.3.0'
 gem 'fume-nav', '0.0.3'
 
 # Utils
 gem 'fume-settable', '0.0.3'
-gem 'whenever', '0.9.4'
+gem 'whenever', '0.9.7'
 
 # Assets
 gem 'sass-rails', '5.0.4'
@@ -46,19 +46,19 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'annotate'
 
-  gem 'capsum', '1.0.4', require: false
+  gem 'capsum', '>= 1.0.7', require: false
 end
 
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
 
-  gem 'rspec-rails', '3.3.3'
-  gem 'factory_girl_rails', '4.5.0'
+  gem 'rspec-rails', '3.5.2'
+  gem 'factory_girl_rails', '4.8.0'
 end
 
 group :test do
-  gem 'shoulda-matchers', '2.8.0'
+  gem 'shoulda-matchers', '3.1.1'
   gem 'rspec-do_action', '0.0.4'
   gem 'rspec-its', '1.2.0'
   gem 'simplecov', require: false
