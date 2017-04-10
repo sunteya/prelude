@@ -10,8 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class DomainSet < ActiveRecord::Base
-  extend Enumerize
+class DomainSet < ApplicationRecord
   enumerize :family, in: [ :blocked, :local, :lag ], scope: true
 
   validates :title, :content, presence: true

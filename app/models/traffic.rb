@@ -17,12 +17,11 @@
 #  client_id                    :integer
 #
 
-class Traffic < ActiveRecord::Base
-  extend Enumerize
+class Traffic < ApplicationRecord
+  enumerize :period, in: [:minutely, :hourly, :daily, :immediate], scope: true
   belongs_to :user
   belongs_to :bind
 
-  enumerize :period, in: [:minutely, :hourly, :daily, :immediate], scope: true
   validates :upcode, uniqueness: { scope: :client_id }, allow_blank: true
 
   before_save :build_total_transfer_bytes
