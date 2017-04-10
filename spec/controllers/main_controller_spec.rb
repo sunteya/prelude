@@ -18,7 +18,7 @@ RSpec.describe MainController do
   describe "GET whitelist" do
     let(:base_params) { Hash.new }
     let(:user) { create :user }
-    action { get :whitelist, base_params.merge(format: :pac) }
+    action { get :whitelist, params: base_params.merge(format: :pac) }
 
     context "without auth token" do
       it { is_expected.to respond_with(:unauthorized) }
@@ -33,7 +33,7 @@ RSpec.describe MainController do
   describe "GET blacklist" do
     let(:base_params) { Hash.new }
     let(:user) { create :user }
-    action { get :blacklist, base_params.merge(format: :pac) }
+    action { get :blacklist, params: base_params.merge(format: :pac) }
 
     context "without auth token" do
       it { is_expected.to respond_with(:unauthorized) }

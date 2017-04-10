@@ -7,7 +7,7 @@ RSpec.describe Api::V1::TrafficsController do
     let(:user) { create :user }
     let(:params) { Hash.new }
     let(:attributes) { Hash.new }
-    action { post :create, { format: :json, user_id: user.id, traffic: attributes }.merge(params) }
+    action { post :create, params: { format: :json, user_id: user.id, traffic: attributes }.merge(params) }
 
     context 'user not found' do
       before { params[:user_id] = 1231231231 }

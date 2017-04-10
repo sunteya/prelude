@@ -14,7 +14,7 @@ RSpec.describe HostListsController do
 
   describe "GET show" do
     let(:base_params) { { format: :pac } }
-    action { get :show, base_params.merge(id: host_list.to_param) }
+    action { get :show, params: base_params.merge(id: host_list.to_param) }
 
     context 'blacklist' do
       let(:host_list) { create :host_list, policy: :black }

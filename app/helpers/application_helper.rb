@@ -1,4 +1,3 @@
-#encoding: utf-8
 module ApplicationHelper
 
   def return_link(default_url, label = "返回")

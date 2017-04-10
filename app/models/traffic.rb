@@ -17,16 +17,16 @@
 #  client_id                    :integer
 #
 
-class Traffic < ActiveRecord::Base
+class Traffic < ApplicationRecord
+  enumerize :period, in: [:minutely, :hourly, :daily, :immediate], scope: true
   belongs_to :user
   belongs_to :bind
-  
-  symbolize :period, in: [:minutely, :hourly, :daily, :immediate], scopes: true
+
   validates :upcode, uniqueness: { scope: :client_id }, allow_blank: true
 
   before_save :build_total_transfer_bytes
   after_save :cascade_calculate_transfer, if: :require_calculate_transfer?
-  
+
   def build_total_transfer_bytes
     self.total_transfer_bytes = self.incoming_bytes + self.outgoing_bytes
   end
@@ -45,7 +45,7 @@ class Traffic < ActiveRecord::Base
 
   def cascade_calculate_traffic_report
     access_at = self.start_at.change(:sec => 0, :usec => 0)
-    traffic = Traffic.where(period: 'minutely', user_id: self.user_id, 
+    traffic = Traffic.where(period: 'minutely', user_id: self.user_id,
                             start_at: access_at, remote_ip: self.remote_ip).first_or_create
 
     traffic.incoming_bytes += self.incoming_bytes - self.incoming_bytes_was
@@ -65,22 +65,22 @@ class Traffic < ActiveRecord::Base
 
     group(groups).select(select_columns.join(", "))
   end
-  
+
   def self.generate_hourly_records!(time_at)
     start_at = time_at.beginning_of_hour
     self.generate_period_records!(:hourly, start_at, start_at + 1.hour)
   end
-  
+
   def self.generate_daily_records!(time_at)
     start_at = time_at.beginning_of_day
     self.generate_period_records!(:daily, start_at, start_at + 1.day)
   end
-  
+
   def self.generate_period_records!(period, start_at, end_at)
     scope = Traffic.where(period: period.to_s).where(start_at: start_at)
     scope.destroy_all
-    
-    Traffic.period('minutely').where { |q| (q.start_at >= start_at.dup) & (q.start_at < end_at.dup) }
+
+    Traffic.with_period('minutely').where(start_at: start_at.dup...end_at.dup)
       .sum_transfer_bytes([ :user_id, :remote_ip ]).each do |grouped_traffic|
       tr = scope.new(grouped_traffic.attributes)
       tr.save!

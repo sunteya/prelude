@@ -6,7 +6,7 @@
 <ul class="nav nav-tabs">
   <li class="nav-item"><%= n.content_tag nil, :a, href: domain_sets_path, class: "nav-link" do %>全部<% end %></li>
 
-  <% DomainSet.family_enum.each do |name, value| %>
+  <% DomainSet.family.options.each do |name, value| %>
     <li class="nav-item"><%= n.content_tag value, :a, href: domain_sets_path(q: { family_eq: value }), class: "nav-link" do %><%= name %><% end %></li>
   <% end %>
 </ul>

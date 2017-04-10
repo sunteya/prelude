@@ -10,9 +10,9 @@
 #  updated_at :datetime         not null
 #
 
-class HostList < ActiveRecord::Base
+class HostList < ApplicationRecord
+  enumerize :policy, in: [ :black, :white, :speed ], scope: true
   belongs_to :user
-  symbolize :policy, in: [ :black, :white, :speed ], scopes: true
 
   before_save :ensure_token
 

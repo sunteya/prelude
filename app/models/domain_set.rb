@@ -10,8 +10,8 @@
 #  updated_at :datetime         not null
 #
 
-class DomainSet < ActiveRecord::Base
-  symbolize :family, in: [ :blocked, :local, :lag ], scopes: true
+class DomainSet < ApplicationRecord
+  enumerize :family, in: [ :blocked, :local, :lag ], scope: true
 
   validates :title, :content, presence: true
 

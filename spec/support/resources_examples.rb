@@ -14,14 +14,14 @@ RSpec.shared_examples "a resources controller" do |options|
 
   if collection_actions.include?(:index)
     describe "GET 'index'" do
-      before { get :index, base_params }
+      before { get :index, params: base_params }
       it { should respond_with(:success) }
     end
   end
 
   if collection_actions.include?(:new)
     describe "GET 'new'" do
-      before { get :new, base_params }
+      before { get :new, params: base_params }
       it { should respond_with(:success) }
     end
   end
@@ -32,13 +32,13 @@ RSpec.shared_examples "a resources controller" do |options|
 
     describe "POST 'create'" do
       context "with valid attributes" do
-        before { post :create, base_params.merge(resource_name => valid_attributes) }
+        before { post :create, params: base_params.merge(resource_name => valid_attributes) }
         it { should respond_with(:redirect) }
       end
 
       context "with invalid attributes" do
         around { |example| example.run if respond_to?(:invalid_attributes) }
-        before { post :create, base_params.merge(resource_name => invalid_attributes) }
+        before { post :create, params: base_params.merge(resource_name => invalid_attributes) }
 
         it { should respond_with(:success) if respond_to?(:invalid_attributes)
              should render_template(:new) if respond_to?(:invalid_attributes) }
@@ -50,11 +50,10 @@ RSpec.shared_examples "a resources controller" do |options|
     let(:member_params) { base_params.merge(id: resource.id) }
     let(:resource_name) { resource.to_model.class.model_name.param_key }
 
-
     if member_actions.include?(:show)
       let(:show_params) { member_params }
       describe "GET 'show'" do
-        before { get :show, show_params }
+        before { get :show, params: show_params }
         it { should render_template(:show)
              should respond_with(:success) }
       end
@@ -64,7 +63,7 @@ RSpec.shared_examples "a resources controller" do |options|
       let(:edit_params) { member_params }
 
       describe "GET 'edit'" do
-        before { get :edit, edit_params }
+        before { get :edit, params: edit_params }
         it { should render_template(:edit)
              should respond_with(:success) }
       end
@@ -76,13 +75,13 @@ RSpec.shared_examples "a resources controller" do |options|
 
       describe "PUT 'update'" do
         context "with valid attributes" do
-          before { put :update, update_params.merge(resource_name => valid_attributes) }
+          before { put :update, params: update_params.merge(resource_name => valid_attributes) }
           it { should respond_with(:redirect) }
         end
 
         context "with invalid attributes" do
           around { |example| example.run if respond_to?(:invalid_attributes) }
-          before { put :update, update_params.merge(resource_name => invalid_attributes) }
+          before { put :update, params: update_params.merge(resource_name => invalid_attributes) }
 
           it { should render_template(:edit) if respond_to?(:invalid_attributes)
                should respond_with(:success) if respond_to?(:invalid_attributes) }
@@ -93,7 +92,7 @@ RSpec.shared_examples "a resources controller" do |options|
     if member_actions.include?(:destroy)
       let(:destroy_params) { member_params }
       describe "DELETE 'destroy'" do
-        before { delete :destroy, destroy_params }
+        before { delete :destroy, params: destroy_params }
         it { should respond_with(:redirect) }
       end
     end

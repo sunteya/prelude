@@ -31,8 +31,7 @@ module TrafficReport
 
       min_start_at = self.range.min.start_at.dup
       max_start_at = self.range.max.succ.start_at.dup
-      @scope.where { (start_at >= min_start_at) &
-                     (start_at < max_start_at) }.each do |t|
+      @scope.where(start_at: min_start_at...max_start_at).each do |t|
         period = build_period(t.start_at)
         @data[period] ||= {}
         @remote_ips << t.remote_ip if !@remote_ips.include?(t.remote_ip)
@@ -91,7 +90,7 @@ module TrafficReport
       end_period = build_period(now)
       start_period = build_period(now - 2.hours)
 
-      self.new(scope.period('minutely'), (start_period ... end_period)).generate
+      self.new(scope.with_period('minutely'), (start_period ... end_period)).generate
     end
   end
 
@@ -107,7 +106,7 @@ module TrafficReport
       limit_period = build_period(now)
       start_period = build_period(start_at)
       end_period = build_period(start_at + 1.day)
-      self.new(scope.period('minutely'), (start_period ... end_period), limit_period).generate
+      self.new(scope.with_period('minutely'), (start_period ... end_period), limit_period).generate
     end
   end
 
@@ -125,9 +124,8 @@ module TrafficReport
       start_period = build_period(start_at)
 
       end_period = build_period(start_at.end_of_month + 1.day)
-      self.new(scope.period('daily'), (start_period ... end_period), limit_period).generate
+      self.new(scope.with_period('daily'), (start_period ... end_period), limit_period).generate
     end
   end
 
 end
-

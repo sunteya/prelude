@@ -11,7 +11,7 @@
 #  disabled       :boolean          default(FALSE)
 #
 
-class Client < ActiveRecord::Base
+class Client < ApplicationRecord
 
   before_validation :ensure_access_token
 

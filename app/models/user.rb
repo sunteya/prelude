@@ -31,7 +31,7 @@
 #  invitation_created_at  :datetime
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, # :registerable,
@@ -45,10 +45,10 @@ class User < ActiveRecord::Base
   before_save   :ensure_binding_port
 
   scope :without_invitation_not_accepted, ->() { where("invitation_accepted_at IS NOT NULL OR (invitation_accepted_at IS NULL AND invitation_token IS NULL)") }
-  scope :available, ->() { without_invitation_not_accepted.where { transfer_remaining > 0 } }
+  scope :available, ->() { without_invitation_not_accepted.where('transfer_remaining > ?', 0) }
 
   def host_list(policy)
-    host_lists.policy(policy).first_or_create
+    host_lists.with_policy(policy).first_or_create
   end
 
   def ensure_monthly_transfer_on_create
