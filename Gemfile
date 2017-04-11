@@ -34,18 +34,7 @@ gem 'fume-settable', '0.0.3'
 gem 'whenever', '0.9.7'
 
 # Assets
-gem 'sass-rails', '~> 5.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'therubyracer', platforms: :ruby
-gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', github: 'rails/webpacker', ref: "7b83822"
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery', '2.1.4'
-  gem 'rails-assets-jquery-ujs', '1.1.0'
-  gem 'rails-assets-bootstrap', '4.0.0.alpha'
-  gem 'rails-assets-font-awesome', '4.4.0'
-end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -45,7 +45,7 @@ module TrafficReport
     def chart
       self.range.map do |period|
         item = {}
-        item["start_at"] = period.start_at
+        item["start_at"] = period.start_at.iso8601
         item["total_transfer_bytes"] = 0
 
         if self.limit.nil? || period <= self.limit

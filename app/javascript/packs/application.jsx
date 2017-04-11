@@ -6,5 +6,18 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+import $ from 'jquery'
+import 'jquery-ujs'
 
-console.log('Hello World from Webpacker')
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+
+import 'font-awesome/css/font-awesome.css'
+
+import 'raphael'
+import 'morris.js/morris.js'
+
+window.$ = $
+window.jQuery = $
+
+import '../frontend'
