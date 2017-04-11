@@ -20,6 +20,10 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Webpacker
+/public/packs
+/node_modules
+
 /db/schema.rb
 /config/mail.yml
 /config/database.yml
@@ -39,3 +43,4 @@
 /docker-compose.yml
 /config/secrets.yml
 /spec/examples.txt
+
